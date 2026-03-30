@@ -44,9 +44,9 @@
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -86,14 +86,15 @@
 
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 20px;
             list-style: none;
+            white-space: nowrap;
         }
 
         .nav-links a {
             text-decoration: none;
             color: #1a1a1a;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             transition: color 0.3s ease;
         }
@@ -768,15 +769,15 @@
                 </div>
             </a>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#seller-quiz">Seller Quiz</a></li>
-                <li><a href="#home-score">Home Score</a></li>
-                <li><a href="#neighborhoods">Neighborhoods</a></li>
-                <li><a href="#compare">Compare Areas</a></li>
-                <li><a href="#market-data">Market Data</a></li>
-                <li><a href="#bonuses">Bonuses</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/quiz">Seller Quiz</a></li>
+                <li><a href="/home-selling-score">Home Score</a></li>
+                <li><a href="/neighborhoods">Neighborhoods</a></li>
+                <li><a href="/compare">Compare Areas</a></li>
+                <li><a href="/market-heatmap">Market Data</a></li>
+                <li><a href="/thank-you">Bonuses</a></li>
             </ul>
-            <a href="#get-started" class="nav-cta">Get Started</a>
+            <a href="/home-selling-score" class="nav-cta">Get Started</a>
         </div>
     </nav>
 
@@ -1087,7 +1088,7 @@
                 </div>
                 <div class="property-card">
                     <div class="property-address">147 Willow Road</div>
-                    <div class="property-city">Charlotte, NC 28208</div>
+                    <div class="property-city">Charlotte, NC 28204</div>
                     <div class="property-details">
                         <div class="property-detail-row">
                             <span class="property-label">💰 Sale Price:</span>
