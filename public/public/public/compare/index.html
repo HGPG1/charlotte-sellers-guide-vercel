@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Areas - 2026 Charlotte Seller's Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sansita:wght@400;700;900&family=Cooper+Hewitt:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cooper Hewitt', system-ui, -apple-system, sans-serif;
+            color: #333;
+            background-color: #f7f7f7;
+            line-height: 1.6;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: sticky;
+            top: 0;
+            background-color: #1e2a3a;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        nav .logo {
+            font-family: 'Sansita', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            flex: 1;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #E8725C;
+        }
+
+        .nav-cta {
+            background-color: #E8725C;
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .nav-cta:hover {
+            background-color: #d15a43;
+        }
+
+        @media (max-width: 768px) {
+            nav .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+            }
+
+            nav a {
+                display: block;
+                padding: 0.5rem 0;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: #1e2a3a;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: left;
+        }
+
+        .hero .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #E8725C;
+            text-decoration: none;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: #d15a43;
+        }
+
+        .hero h1 {
+            font-family: 'Sansita', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #ccc;
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .controls-left {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .add-area-btn {
+            background-color: #E8725C;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            position: relative;
+        }
+
+        .add-area-btn:hover {
+            background-color: #d15a43;
+        }
+
+        .clear-all-btn {
+            background-color: transparent;
+            color: #E8725C;
+            border: 1px solid #E8725C;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .clear-all-btn:hover {
+            background-color: #E8725C;
+            color: white;
+        }
+
+        .clear-all-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            z-index: 50;
+            min-width: 250px;
+            display: none;
+        }
+
+        .dropdown.active {
+            display: block;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-bottom: 1px solid #ddd;
+            font-size: 0.95rem;
+            font-family: 'Cooper Hewitt', system-ui, sans-serif;
+        }
+
+        .search-input:focus {
+            outline: none;
+            background-color: #f9f9f9;
+        }
+
+        .dropdown-list {
+            max-height: 300px;
+            overflow-y: auto;
+            list-style: none;
+        }
+
+        .dropdown-item {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            font-family: 'Cooper Hewitt', system-ui, sans-serif;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        .dropdown-item.selected {
+            background-color: #E8725C;
+            color: white;
+        }
+
+        .dropdown-item:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Placeholder */
+        .placeholder {
+            text-align: center;
+            padding: 4rem 2rem;
+            background-color: white;
+            border-radius: 8px;
+            color: #999;
+            font-size: 1.1rem;
+        }
+
+        /* Comparison Container */
+        .comparison-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .comparison-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            animation: slideIn 0.4s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card-header {
+            background-color: #1e2a3a;
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-header h3 {
+            font-family: 'Sansita', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .remove-btn {
+            background-color: #E8725C;
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+            flex-shrink: 0;
+        }
+
+        .remove-btn:hover {
+            background-color: #d15a43;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .data-row:last-child {
+            border-bottom: none;
+        }
+
+        .data-label {
+            font-weight: 600;
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .data-value {
+            color: #1e2a3a;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-align: center;
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+
+        .badge.hot {
+            background-color: #ff6b6b;
+            color: white;
+        }
+
+        .badge.warm {
+            background-color: #ffa500;
+            color: white;
+        }
+
+        .badge.moderate {
+            background-color: #4ecdc4;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1e2a3a;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        footer .copyright {
+            font-size: 0.9rem;
+            color: #999;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-container {
+                grid-template-columns: 1fr;
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .controls-left {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .add-area-btn,
+            .clear-all-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="container">
+            <a href="/" class="logo">Home Grown Property Group</a>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/quiz">Seller Quiz</a></li>
+                <li><a href="/home-selling-score">Home Score</a></li>
+                <li><a href="/neighborhoods">Neighborhoods</a></li>
+                <li><a href="/compare">Compare Areas</a></li>
+                <li><a href="/market-heatmap">Market Data</a></li>
+                <li><a href="/thank-you">Bonuses</a></li>
+            </ul>
+            <a href="/home-selling-score" class="nav-cta">Get Started</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <a href="/neighborhoods" class="back-link">← Back to All Areas</a>
+            <h1>Compare Areas</h1>
+            <p>Select up to 3 neighborhoods to compare side-by-side market data.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Controls -->
+        <div class="controls">
+            <div class="controls-left">
+                <div style="position: relative;">
+                    <button class="add-area-btn" id="addAreaBtn">+ Add Area</button>
+                    <div class="dropdown" id="dropdown">
+                        <input type="text" class="search-input" id="searchInput" placeholder="Search neighborhoods...">
+                        <ul class="dropdown-list" id="dropdownList"></ul>
+                    </div>
+                </div>
+            </div>
+            <button class="clear-all-btn" id="clearAllBtn" disabled>Clear All</button>
+        </div>
+
+        <!-- Comparison Container -->
+        <div id="comparisonContent">
+            <div class="placeholder">Click 'Add Area' above to start comparing neighborhoods side by side.</div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>2026 Charlotte Seller's Guide</strong></p>
+        <p>Home Grown Property Group</p>
+        <p class="copyright">&copy; 2026 Home Grown Property Group. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Neighborhood data
+        const neighborhoods = [
+            { name: 'Dilworth', medianPrice: '$725K', daysOnMarket: 18, activeListings: 45, pricePerSqft: '$285/sqft', yoyChange: '+5.2%', schoolRating: '8/10', walkScore: 82, temperature: 'HOT' },
+            { name: 'Myers Park', medianPrice: '$1,250K', daysOnMarket: 22, activeListings: 32, pricePerSqft: '$340/sqft', yoyChange: '+3.8%', schoolRating: '9/10', walkScore: 75, temperature: 'HOT' },
+            { name: 'South End', medianPrice: '$485K', daysOnMarket: 12, activeListings: 78, pricePerSqft: '$310/sqft', yoyChange: '+7.1%', schoolRating: '7/10', walkScore: 91, temperature: 'HOT' },
+            { name: 'Plaza Midwood', medianPrice: '$425K', daysOnMarket: 15, activeListings: 56, pricePerSqft: '$265/sqft', yoyChange: '+4.5%', schoolRating: '7/10', walkScore: 78, temperature: 'WARM' },
+            { name: 'NoDa', medianPrice: '$395K', daysOnMarket: 14, activeListings: 41, pricePerSqft: '$250/sqft', yoyChange: '+6.3%', schoolRating: '6/10', walkScore: 76, temperature: 'WARM' },
+            { name: 'Ballantyne', medianPrice: '$625K', daysOnMarket: 20, activeListings: 67, pricePerSqft: '$220/sqft', yoyChange: '+3.2%', schoolRating: '9/10', walkScore: 45, temperature: 'WARM' },
+            { name: 'Fort Mill', medianPrice: '$475K', daysOnMarket: 16, activeListings: 89, pricePerSqft: '$195/sqft', yoyChange: '+4.8%', schoolRating: '9/10', walkScore: 35, temperature: 'WARM' },
+            { name: 'Indian Land', medianPrice: '$425K', daysOnMarket: 14, activeListings: 72, pricePerSqft: '$180/sqft', yoyChange: '+5.5%', schoolRating: '8/10', walkScore: 25, temperature: 'WARM' },
+            { name: 'Huntersville', medianPrice: '$475K', daysOnMarket: 16, activeListings: 55, pricePerSqft: '$200/sqft', yoyChange: '+3.9%', schoolRating: '8/10', walkScore: 32, temperature: 'MODERATE' },
+            { name: 'Concord', medianPrice: '$395K', daysOnMarket: 18, activeListings: 58, pricePerSqft: '$175/sqft', yoyChange: '+3.1%', schoolRating: '7/10', walkScore: 28, temperature: 'MODERATE' },
+            { name: 'Matthews', medianPrice: '$445K', daysOnMarket: 17, activeListings: 45, pricePerSqft: '$210/sqft', yoyChange: '+3.5%', schoolRating: '8/10', walkScore: 42, temperature: 'MODERATE' },
+            { name: 'Mooresville', medianPrice: '$485K', daysOnMarket: 20, activeListings: 62, pricePerSqft: '$195/sqft', yoyChange: '+4.2%', schoolRating: '8/10', walkScore: 30, temperature: 'MODERATE' }
+        ];
+
+        let selectedAreas = [];
+        const maxAreas = 3;
+
+        const addAreaBtn = document.getElementById('addAreaBtn');
+        const dropdown = document.getElementById('dropdown');
+        const searchInput = document.getElementById('searchInput');
+        const dropdownList = document.getElementById('dropdownList');
+        const comparisonContent = document.getElementById('comparisonContent');
+        const clearAllBtn = document.getElementById('clearAllBtn');
+
+        // Toggle dropdown
+        addAreaBtn.addEventListener('click', () => {
+            dropdown.classList.toggle('active');
+            if (dropdown.classList.contains('active')) {
+                searchInput.focus();
+                renderDropdownList();
+            }
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.controls-left')) {
+                dropdown.classList.remove('active');
+            }
+        });
+
+        // Search functionality
+        searchInput.addEventListener('input', (e) => {
+            renderDropdownList(e.target.value.toLowerCase());
+        });
+
+        // Render dropdown list
+        function renderDropdownList(searchTerm = '') {
+            dropdownList.innerHTML = '';
+            const filtered = neighborhoods.filter(n => {
+                const isSelected = selectedAreas.some(a => a.name === n.name);
+                const matchesSearch = n.name.toLowerCase().includes(searchTerm);
+                return matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                dropdownList.innerHTML = '<li style="padding: 1rem; text-align: center; color: #999;">No neighborhoods found</li>';
+                return;
+            }
+
+            filtered.forEach(neighborhood => {
+                const isSelected = selectedAreas.some(a => a.name === neighborhood.name);
+                const isDisabled = !isSelected && selectedAreas.length >= maxAreas;
+                const button = document.createElement('button');
+                button.className = 'dropdown-item' + (isSelected ? ' selected' : '');
+                button.disabled = isDisabled;
+                button.textContent = neighborhood.name;
+                button.addEventListener('click', () => {
+                    if (isSelected) {
+                        selectedAreas = selectedAreas.filter(a => a.name !== neighborhood.name);
+                    } else if (!isDisabled) {
+                        selectedAreas.push(neighborhood);
+                    }
+                    renderComparison();
+                    renderDropdownList(searchInput.value.toLowerCase());
+                });
+                dropdownList.appendChild(button);
+            });
+        }
+
+        // Render comparison cards
+        function renderComparison() {
+            clearAllBtn.disabled = selectedAreas.length === 0;
+
+            if (selectedAreas.length === 0) {
+                comparisonContent.innerHTML = '<div class="placeholder">Click \'Add Area\' above to start comparing neighborhoods side by side.</div>';
+                return;
+            }
+
+            comparisonContent.innerHTML = '';
+            const container = document.createElement('div');
+            container.className = 'comparison-container';
+
+            selectedAreas.forEach((area, index) => {
+                const card = document.createElement('div');
+                card.className = 'comparison-card';
+                card.style.animationDelay = `${index * 0.1}s`;
+
+                const badgeClass = area.temperature === 'HOT' ? 'hot' : area.temperature === 'WARM' ? 'warm' : 'moderate';
+
+                card.innerHTML = `
+                    <div class="card-header">
+                        <h3>${area.name}</h3>
+                        <button class="remove-btn" aria-label="Remove ${area.name}">×</button>
+                    </div>
+                    <div class="card-content">
+                        <div class="data-row">
+                            <span class="data-label">Median Price</span>
+                            <span class="data-value">${area.medianPrice}</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Days on Market</span>
+                            <span class="data-value">${area.daysOnMarket}</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Active Listings</span>
+                            <span class="data-value">${area.activeListings}</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Price per Sq Ft</span>
+                            <span class="data-value">${area.pricePerSqft}</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Year-over-Year</span>
+                            <span class="data-value">${area.yoyChange}</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">School Rating</span>
+                            <span class="data-value">${area.schoolRating}</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Walk Score</span>
+                            <span class="data-value">${area.walkScore}</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Market Temperature</span>
+                            <span class="data-value" style="width: 100%; text-align: center;">
+                                <span class="badge ${badgeClass}">${area.temperature}</span>
+                            </span>
+                        </div>
+                    </div>
+                `;
+
+                const removeBtn = card.querySelector('.remove-btn');
+                removeBtn.addEventListener('click', () => {
+                    selectedAreas = selectedAreas.filter(a => a.name !== area.name);
+                    renderComparison();
+                    renderDropdownList(searchInput.value.toLowerCase());
+                });
+
+                container.appendChild(card);
+            });
+
+            comparisonContent.appendChild(container);
+        }
+
+        // Clear all
+        clearAllBtn.addEventListener('click', () => {
+            selectedAreas = [];
+            renderComparison();
+            renderDropdownList();
+            searchInput.value = '';
+        });
+
+        // Initialize
+        renderComparison();
+        renderDropdownList();
+    </script>
+</body>
+</html>
