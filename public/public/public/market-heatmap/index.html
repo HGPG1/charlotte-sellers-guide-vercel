@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charlotte Market Heatmap | 2026 Charlotte Seller's Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sansita:wght@400;700;900&family=Cooper+Hewitt:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cooper Hewitt', system-ui, -apple-system, sans-serif;
+            color: #1e2a3a;
+            background-color: #f7f7f7;
+            line-height: 1.6;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: sticky;
+            top: 0;
+            background-color: #1e2a3a;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        nav .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        nav .logo {
+            font-family: 'Sansita', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: #f7f7f7;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #E8725C;
+        }
+
+        nav .cta-button {
+            background-color: #E8725C;
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        nav .cta-button:hover {
+            background-color: #d65a47;
+        }
+
+        /* Hero Banner */
+        .hero {
+            background-color: #1e2a3a;
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero-logo {
+            font-family: 'Sansita', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #E8725C;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            font-family: 'Sansita', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #d0d8e0;
+        }
+
+        /* Main Content Layout */
+        .content-wrapper {
+            max-width: 1400px;
+            margin: 3rem auto;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            height: fit-content;
+        }
+
+        .sidebar h3 {
+            font-family: 'Sansita', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1e2a3a;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar p {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-group {
+            margin-bottom: 2rem;
+        }
+
+        .filter-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #1e2a3a;
+        }
+
+        .filter-group input,
+        .filter-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-family: 'Cooper Hewitt', system-ui, sans-serif;
+        }
+
+        .filter-group input:focus,
+        .filter-group select:focus {
+            outline: none;
+            border-color: #E8725C;
+            box-shadow: 0 0 0 3px rgba(232, 114, 92, 0.1);
+        }
+
+        .price-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .price-inputs input {
+            width: 100%;
+        }
+
+        .price-range-display {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        .reset-button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .reset-button:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Legend */
+        .legend {
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .legend-dot.hot {
+            background-color: #E8725C;
+        }
+
+        .legend-dot.warm {
+            background-color: #F5A962;
+        }
+
+        .legend-dot.moderate {
+            background-color: #999;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Stat Cards */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .stat-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-card .value {
+            font-family: 'Sansita', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1e2a3a;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card .label {
+            color: #666;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* Map Container */
+        .map-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            min-height: 500px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+        }
+
+        /* Neighborhoods Section */
+        .neighborhoods-section {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .neighborhoods-section h2 {
+            font-family: 'Sansita', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1e2a3a;
+        }
+
+        .neighborhoods-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .neighborhood-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .neighborhood-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .neighborhood-card.hidden {
+            display: none;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .neighborhood-card h3 {
+            font-family: 'Sansita', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e2a3a;
+        }
+
+        .badge {
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge.hot {
+            background-color: #E8725C;
+            color: white;
+        }
+
+        .badge.warm {
+            background-color: #F5A962;
+            color: white;
+        }
+
+        .badge.moderate {
+            background-color: #999;
+            color: white;
+        }
+
+        .card-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .card-stat {
+            border-top: 1px solid #eee;
+            padding-top: 1rem;
+        }
+
+        .card-stat .label {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.25rem;
+        }
+
+        .card-stat .value {
+            font-family: 'Sansita', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1e2a3a;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1e2a3a;
+            color: #f7f7f7;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        footer .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        footer h4 {
+            font-family: 'Sansita', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            color: #d0d8e0;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            nav .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .content-wrapper {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .neighborhoods-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .price-inputs {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 1rem;
+            }
+
+            nav .logo {
+                font-size: 1.2rem;
+            }
+
+            nav ul {
+                font-size: 0.85rem;
+                gap: 0.5rem;
+            }
+
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .sidebar {
+                padding: 1.5rem;
+            }
+
+            .stat-card .value {
+                font-size: 2rem;
+            }
+
+            .neighborhoods-section h2 {
+                font-size: 1.2rem;
+            }
+        }
+
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="/" class="logo">Home Grown Property Group</a>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/quiz">Seller Quiz</a></li>
+                <li><a href="/home-selling-score">Home Score</a></li>
+                <li><a href="/neighborhoods">Neighborhoods</a></li>
+                <li><a href="/compare">Compare Areas</a></li>
+                <li><a href="/market-heatmap">Market Data</a></li>
+                <li><a href="/thank-you">Bonuses</a></li>
+                <li><a href="/home-selling-score" class="cta-button">Get Started</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-logo">HOME GROWN PROPERTY GROUP</div>
+            <h1>Charlotte Market Heatmap</h1>
+            <p>Interactive market activity visualization</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="content-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h3>Refine your search</h3>
+            <p>Filter neighborhoods by criteria</p>
+
+            <div class="filter-group">
+                <label for="neighborhood-search">Search Neighborhood</label>
+                <input
+                    type="text"
+                    id="neighborhood-search"
+                    placeholder="Enter neighborhood..."
+                >
+            </div>
+
+            <div class="filter-group">
+                <label>Price Range</label>
+                <div class="price-inputs">
+                    <input
+                        type="number"
+                        id="price-min"
+                        placeholder="Min ($k)"
+                        value="0"
+                        min="0"
+                        step="50"
+                    >
+                    <input
+                        type="number"
+                        id="price-max"
+                        placeholder="Max ($k)"
+                        value="2000"
+                        min="0"
+                        step="50"
+                    >
+                </div>
+                <div class="price-range-display">
+                    <span id="price-display">$0k - $2,000k</span>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label for="market-activity">Market Activity</label>
+                <select id="market-activity">
+                    <option value="">All Activity</option>
+                    <option value="hot">Hot Markets</option>
+                    <option value="warm">Warm Markets</option>
+                    <option value="moderate">Moderate Markets</option>
+                </select>
+            </div>
+
+            <button class="reset-button" onclick="resetFilters()">Reset Filters</button>
+
+            <!-- Legend -->
+            <div class="legend">
+                <h3>Legend</h3>
+                <div class="legend-item">
+                    <div class="legend-dot hot"></div>
+                    <span>Hot Market</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot warm"></div>
+                    <span>Warm Market</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot moderate"></div>
+                    <span>Moderate Market</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Stat Cards -->
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="icon">🏠</div>
+                    <div class="value" id="stat-listings">447</div>
+                    <div class="label">Total Listings</div>
+                </div>
+                <div class="stat-card">
+                    <div class="icon">💰</div>
+                    <div class="value" id="stat-price">$588,125</div>
+                    <div class="label">Avg Price</div>
+                </div>
+                <div class="stat-card">
+                    <div class="icon">📈</div>
+                    <div class="value" id="stat-hot">3</div>
+                    <div class="label">Hot Markets</div>
+                </div>
+            </div>
+
+            <!-- Map Container -->
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d204841.18644717922!2d-80.99320000000001!3d35.2271!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8856a94b4af7e4f9%3A0xa8c0a2488172ab1!2sCharlotte%2C%20NC!5e0!3m2!1sen!2sus!4v1701234567890"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+
+            <!-- Neighborhoods Section -->
+            <section class="neighborhoods-section">
+                <h2 id="neighborhoods-title">Filtered Neighborhoods (8)</h2>
+                <div class="neighborhoods-grid" id="neighborhoods-grid">
+                    <!-- Neighborhood cards will be populated by JavaScript -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <h4>2026 Charlotte Seller's Guide</h4>
+            <p>&copy; 2026 Home Grown Property Group. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Neighborhood data
+        const neighborhoods = [
+            { name: 'Dilworth', activity: 'hot', avgPrice: 725000, listings: 45 },
+            { name: 'Myers Park', activity: 'hot', avgPrice: 1250000, listings: 32 },
+            { name: 'South End', activity: 'hot', avgPrice: 485000, listings: 78 },
+            { name: 'Plaza Midwood', activity: 'warm', avgPrice: 425000, listings: 56 },
+            { name: 'NoDa', activity: 'warm', avgPrice: 395000, listings: 41 },
+            { name: 'Ballantyne', activity: 'warm', avgPrice: 625000, listings: 67 },
+            { name: 'Cotswold', activity: 'moderate', avgPrice: 475000, listings: 34 },
+            { name: 'University City', activity: 'moderate', avgPrice: 325000, listings: 52 }
+        ];
+
+        // Initialize the page
+        function initPage() {
+            renderNeighborhoods(neighborhoods);
+            updateStats(neighborhoods);
+        }
+
+        // Render neighborhood cards
+        function renderNeighborhoods(data) {
+            const grid = document.getElementById('neighborhoods-grid');
+            grid.innerHTML = '';
+
+            if (data.length === 0) {
+                grid.innerHTML = '<div class="no-results">No neighborhoods match your filters. Try adjusting your criteria.</div>';
+                return;
+            }
+
+            data.forEach(neighborhood => {
+                const card = document.createElement('div');
+                card.className = 'neighborhood-card';
+                card.innerHTML = `
+                    <div class="card-header">
+                        <h3>${neighborhood.name}</h3>
+                        <span class="badge ${neighborhood.activity}">${neighborhood.activity.toUpperCase()}</span>
+                    </div>
+                    <div class="card-stats">
+                        <div class="card-stat">
+                            <div class="label">Avg Price</div>
+                            <div class="value">$${(neighborhood.avgPrice / 1000).toLocaleString('en-US', {maximumFractionDigits: 0})}k</div>
+                        </div>
+                        <div class="card-stat">
+                            <div class="label">Listings</div>
+                            <div class="value">${neighborhood.listings}</div>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            document.getElementById('neighborhoods-title').textContent = `Filtered Neighborhoods (${data.length})`;
+        }
+
+        // Update stat cards
+        function updateStats(data) {
+            const totalListings = data.reduce((sum, n) => sum + n.listings, 0);
+            const avgPrice = Math.round(data.reduce((sum, n) => sum + n.avgPrice, 0) / data.length);
+            const hotCount = data.filter(n => n.activity === 'hot').length;
+
+            document.getElementById('stat-listings').textContent = totalListings;
+            document.getElementById('stat-price').textContent = '$' + (avgPrice / 1000).toLocaleString('en-US', {maximumFractionDigits: 0}) + 'k';
+            document.getElementById('stat-hot').textContent = hotCount;
+        }
+
+        // Filter neighborhoods
+        function filterNeighborhoods() {
+            const searchTerm = document.getElementById('neighborhood-search').value.toLowerCase();
+            const minPrice = parseInt(document.getElementById('price-min').value) * 1000 || 0;
+            const maxPrice = parseInt(document.getElementById('price-max').value) * 1000 || Infinity;
+            const activity = document.getElementById('market-activity').value;
+
+            const filtered = neighborhoods.filter(neighborhood => {
+                const matchesSearch = neighborhood.name.toLowerCase().includes(searchTerm);
+                const matchesPrice = neighborhood.avgPrice >= minPrice && neighborhood.avgPrice <= maxPrice;
+                const matchesActivity = activity === '' || neighborhood.activity === activity;
+
+                return matchesSearch && matchesPrice && matchesActivity;
+            });
+
+            renderNeighborhoods(filtered);
+            updateStats(filtered);
+        }
+
+        // Reset filters
+        function resetFilters() {
+            document.getElementById('neighborhood-search').value = '';
+            document.getElementById('price-min').value = '0';
+            document.getElementById('price-max').value = '2000';
+            document.getElementById('market-activity').value = '';
+            document.getElementById('price-display').textContent = '$0k - $2,000k';
+            renderNeighborhoods(neighborhoods);
+            updateStats(neighborhoods);
+        }
+
+        // Update price range display
+        function updatePriceDisplay() {
+            const minPrice = document.getElementById('price-min').value;
+            const maxPrice = document.getElementById('price-max').value;
+            document.getElementById('price-display').textContent = `$${minPrice}k - $${maxPrice}k`;
+            filterNeighborhoods();
+        }
+
+        // Event listeners
+        document.getElementById('neighborhood-search').addEventListener('input', filterNeighborhoods);
+        document.getElementById('market-activity').addEventListener('change', filterNeighborhoods);
+        document.getElementById('price-min').addEventListener('input', updatePriceDisplay);
+        document.getElementById('price-max').addEventListener('input', updatePriceDisplay);
+
+        // Initialize on page load
+        initPage();
+    </script>
+</body>
+</html>
