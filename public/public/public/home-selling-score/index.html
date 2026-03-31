@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Selling Score - 2026 Charlotte Seller's Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sansita:wght@400;700;900&family=Cooper+Hewitt:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cooper Hewitt', system-ui, -apple-system, sans-serif;
+            color: #333;
+            background-color: #f7f7f7;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: #1e2a3a;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        nav .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        nav .logo {
+            font-family: 'Sansita', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        nav .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        nav .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        nav .nav-links a:hover {
+            color: #E8725C;
+        }
+
+        nav .cta-button {
+            background-color: #E8725C;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        nav .cta-button:hover {
+            background-color: #d55f48;
+        }
+
+        /* Hero Banner */
+        .hero {
+            background: linear-gradient(135deg, #1e2a3a 0%, #2a3d52 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-family: 'Sansita', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            margin-bottom: 0;
+        }
+
+        /* Main Content */
+        .main-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Form Card */
+        .form-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 3rem;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 3rem;
+        }
+
+        .form-card h2 {
+            font-family: 'Sansita', sans-serif;
+            font-size: 1.8rem;
+            color: #1e2a3a;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .form-card .form-subtitle {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-row.full {
+            grid-template-columns: 1fr;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #1e2a3a;
+            font-size: 0.95rem;
+        }
+
+        label .required {
+            color: #E8725C;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #E8725C;
+            box-shadow: 0 0 0 3px rgba(232, 114, 92, 0.1);
+        }
+
+        input.error,
+        select.error {
+            border-color: #d32f2f;
+        }
+
+        .error-message {
+            color: #d32f2f;
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* Buttons */
+        .form-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background-color: #1e2a3a;
+            color: white;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .btn-primary:hover {
+            background-color: #151d29;
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: #1e2a3a;
+            border: 2px solid #1e2a3a;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .btn-secondary:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Features Section */
+        .features-section {
+            margin-top: 4rem;
+        }
+
+        .features-section h3 {
+            font-family: 'Sansita', sans-serif;
+            font-size: 1.5rem;
+            color: #1e2a3a;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h4 {
+            font-family: 'Sansita', sans-serif;
+            font-size: 1.2rem;
+            color: #1e2a3a;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Modal Overlay */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow-y: auto;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 1rem;
+        }
+
+        .modal-header h2 {
+            font-family: 'Sansita', sans-serif;
+            font-size: 1.8rem;
+            color: #1e2a3a;
+            margin: 0;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: #333;
+        }
+
+        .score-display {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .score-circle {
+            display: inline-block;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1e2a3a 0%, #2a3d52 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Sansita', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 16px rgba(30, 42, 58, 0.2);
+        }
+
+        .score-label {
+            font-family: 'Sansita', sans-serif;
+            font-size: 1.3rem;
+            color: #1e2a3a;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .metrics-list {
+            text-align: left;
+            margin: 2rem 0;
+            background-color: #f7f7f7;
+            padding: 1.5rem;
+            border-radius: 4px;
+        }
+
+        .metric-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .metric-item:last-child {
+            border-bottom: none;
+        }
+
+        .metric-name {
+            font-weight: 600;
+            color: #1e2a3a;
+        }
+
+        .metric-score {
+            color: #E8725C;
+            font-weight: 700;
+        }
+
+        .result-description {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .modal-footer {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .modal-footer .btn {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .success-message {
+            background-color: #e8f5e9;
+            border: 1px solid #4caf50;
+            color: #2e7d32;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            display: none;
+            text-align: center;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1e2a3a;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav .nav-container {
+                gap: 1rem;
+            }
+
+            nav .nav-links {
+                gap: 1rem;
+                order: 3;
+                width: 100%;
+                flex-direction: column;
+            }
+
+            nav .nav-links a {
+                font-size: 0.9rem;
+            }
+
+            nav .cta-button {
+                width: 100%;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .form-card {
+                padding: 1.5rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .form-buttons {
+                flex-direction: column;
+            }
+
+            .form-buttons .btn {
+                width: 100%;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                width: 95%;
+                padding: 1.5rem;
+            }
+
+            .score-circle {
+                width: 100px;
+                height: 100px;
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">Home Grown Property Group</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/quiz">Seller Quiz</a></li>
+                <li><a href="/home-selling-score">Home Score</a></li>
+                <li><a href="/neighborhoods">Neighborhoods</a></li>
+                <li><a href="/compare">Compare Areas</a></li>
+                <li><a href="/market-heatmap">Market Data</a></li>
+                <li><a href="/thank-you">Bonuses</a></li>
+                <li><a href="/home-selling-score" class="cta-button">Get Started</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Home Selling Score</h1>
+            <p>Get a personalized assessment of your home's selling potential</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Success Message -->
+        <div class="success-message" id="successMessage">
+            <strong>Success!</strong> Your assessment has been submitted. Redirecting...
+        </div>
+
+        <!-- Form Card -->
+        <div class="form-card">
+            <h2>Your Home Assessment</h2>
+            <p class="form-subtitle">Answer a few quick questions about your property</p>
+
+            <form id="assessmentForm">
+                <!-- Row 1: Name and Email -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fullName">Full Name <span class="required">*</span></label>
+                        <input type="text" id="fullName" name="fullName" placeholder="John Smith" required>
+                        <div class="error-message" id="fullNameError">Please enter your full name</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                        <div class="error-message" id="emailError">Please enter a valid email address</div>
+                    </div>
+                </div>
+
+                <!-- Row 2: Phone and Address -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="(704) 555-0000">
+                        <div class="error-message" id="phoneError">Please enter a valid phone number</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Property Address</label>
+                        <input type="text" id="address" name="address" placeholder="123 Main Street, Charlotte, NC">
+                        <div class="error-message" id="addressError">Please enter your property address</div>
+                    </div>
+                </div>
+
+                <!-- Row 3: Neighborhood and Year Built -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="neighborhood">Subdivision/Neighborhood</label>
+                        <input type="text" id="neighborhood" name="neighborhood" placeholder="e.g., Myers Park, South Park">
+                        <div class="error-message" id="neighborhoodError">Please enter a neighborhood</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="yearBuilt">Year Built</label>
+                        <input type="number" id="yearBuilt" name="yearBuilt" placeholder="2005" min="1800" max="2026">
+                        <div class="error-message" id="yearBuiltError">Please enter a valid year</div>
+                    </div>
+                </div>
+
+                <!-- Row 4: Bedrooms and Bathrooms -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="bedrooms">Bedrooms</label>
+                        <select id="bedrooms" name="bedrooms">
+                            <option value="">Select number of bedrooms</option>
+                            <option value="1">1 Bedroom</option>
+                            <option value="2">2 Bedrooms</option>
+                            <option value="3">3 Bedrooms</option>
+                            <option value="4">4 Bedrooms</option>
+                            <option value="5">5 Bedrooms</option>
+                            <option value="6+">6+ Bedrooms</option>
+                        </select>
+                        <div class="error-message" id="bedroomsError">Please select number of bedrooms</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bathrooms">Bathrooms</label>
+                        <select id="bathrooms" name="bathrooms">
+                            <option value="">Select number of bathrooms</option>
+                            <option value="1">1 Bathroom</option>
+                            <option value="1.5">1.5 Bathrooms</option>
+                            <option value="2">2 Bathrooms</option>
+                            <option value="2.5">2.5 Bathrooms</option>
+                            <option value="3">3 Bathrooms</option>
+                            <option value="3.5">3.5 Bathrooms</option>
+                            <option value="4">4 Bathrooms</option>
+                            <option value="5+">5+ Bathrooms</option>
+                        </select>
+                        <div class="error-message" id="bathroomsError">Please select number of bathrooms</div>
+                    </div>
+                </div>
+
+                <!-- Row 5: Square Footage -->
+                <div class="form-row full">
+                    <div class="form-group">
+                        <label for="squareFootage">Approximate Square Footage</label>
+                        <input type="number" id="squareFootage" name="squareFootage" placeholder="2500" min="0">
+                        <div class="error-message" id="squareFootageError">Please enter a valid square footage</div>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="form-buttons">
+                    <button type="button" class="btn btn-secondary" id="demoBtn">Try Demo</button>
+                    <button type="submit" class="btn btn-primary" id="submitBtn">Start Assessment</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Features Section -->
+        <div class="features-section">
+            <h3>What's Included in Your Assessment</h3>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h4>Market Analysis</h4>
+                    <p>We analyze current Charlotte market trends and local demand to understand your home's competitive position.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏠</div>
+                    <h4>Comparable Sales</h4>
+                    <p>Our experts review recent sales of similar homes in your area to establish realistic pricing strategies.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💡</div>
+                    <h4>Strategic Pricing</h4>
+                    <p>Receive actionable insights on how to position your home for maximum appeal and optimal selling price.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Demo Results Modal -->
+    <div class="modal" id="demoModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Your Home Selling Score</h2>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="score-display">
+                <div class="score-circle">82</div>
+                <div class="score-label">Out of 100</div>
+                <p style="color: #666; margin: 0;">Your home has strong selling potential</p>
+            </div>
+
+            <div class="metrics-list">
+                <div class="metric-item">
+                    <span class="metric-name">Market Desirability</span>
+                    <span class="metric-score">85/100</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-name">Home Condition & Features</span>
+                    <span class="metric-score">78/100</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-name">Market Timing</span>
+                    <span class="metric-score">82/100</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-name">Price Competitiveness</span>
+                    <span class="metric-score">81/100</span>
+                </div>
+            </div>
+
+            <div class="result-description">
+                <strong>What This Means:</strong> Your home is in a strong position for a successful sale. With the current Charlotte market conditions and your home's desirable location and features, we recommend moving forward with a competitive pricing strategy. Our team has identified specific improvements that could increase your score even further.
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="closeModalBtn">Close</button>
+                <button type="button" class="btn btn-primary" id="proceedBtn">Get Full Assessment</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>2026 Charlotte Seller's Guide</strong> | &copy; 2026 Home Grown Property Group. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const form = document.getElementById('assessmentForm');
+        const demoBtn = document.getElementById('demoBtn');
+        const submitBtn = document.getElementById('submitBtn');
+        const demoModal = document.getElementById('demoModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        const closeModalBtnBottom = document.getElementById('closeModalBtn');
+        const proceedBtn = document.getElementById('proceedBtn');
+        const successMessage = document.getElementById('successMessage');
+
+        // Form field references
+        const fields = {
+            fullName: document.getElementById('fullName'),
+            email: document.getElementById('email'),
+            phone: document.getElementById('phone'),
+            address: document.getElementById('address'),
+            neighborhood: document.getElementById('neighborhood'),
+            yearBuilt: document.getElementById('yearBuilt'),
+            bedrooms: document.getElementById('bedrooms'),
+            bathrooms: document.getElementById('bathrooms'),
+            squareFootage: document.getElementById('squareFootage')
+        };
+
+        // Validation rules
+        const validationRules = {
+            fullName: {
+                required: true,
+                validate: (value) => value.trim().length >= 2,
+                errorId: 'fullNameError'
+            },
+            email: {
+                required: true,
+                validate: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+                errorId: 'emailError'
+            },
+            phone: {
+                required: false,
+                validate: (value) => value === '' || /^[\d\s\-\(\)]{10,}$/.test(value),
+                errorId: 'phoneError'
+            },
+            address: {
+                required: false,
+                validate: (value) => true,
+                errorId: 'addressError'
+            },
+            neighborhood: {
+                required: false,
+                validate: (value) => true,
+                errorId: 'neighborhoodError'
+            },
+            yearBuilt: {
+                required: false,
+                validate: (value) => value === '' || (parseInt(value) >= 1800 && parseInt(value) <= 2026),
+                errorId: 'yearBuiltError'
+            },
+            bedrooms: {
+                required: false,
+                validate: (value) => true,
+                errorId: 'bedroomsError'
+            },
+            bathrooms: {
+                required: false,
+                validate: (value) => true,
+                errorId: 'bathroomsError'
+            },
+            squareFootage: {
+                required: false,
+                validate: (value) => value === '' || (parseInt(value) > 0),
+                errorId: 'squareFootageError'
+            }
+        };
+
+        // Validate a single field
+        function validateField(fieldName) {
+            const field = fields[fieldName];
+            const value = field.value;
+            const rule = validationRules[fieldName];
+            const errorElement = document.getElementById(rule.errorId);
+
+            let isValid = true;
+
+            if (rule.required && value.trim() === '') {
+                isValid = false;
+            } else if (value.trim() !== '' && !rule.validate(value)) {
+                isValid = false;
+            }
+
+            if (!isValid) {
+                field.classList.add('error');
+                errorElement.classList.add('show');
+            } else {
+                field.classList.remove('error');
+                errorElement.classList.remove('show');
+            }
+
+            return isValid;
+        }
+
+        // Validate entire form
+        function validateForm() {
+            let isValid = true;
+            Object.keys(validationRules).forEach(fieldName => {
+                if (!validateField(fieldName)) {
+                    isValid = false;
+                }
+            });
+            return isValid;
+        }
+
+        // Real-time validation on blur
+        Object.keys(fields).forEach(fieldName => {
+            fields[fieldName].addEventListener('blur', () => {
+                validateField(fieldName);
+            });
+
+            fields[fieldName].addEventListener('input', () => {
+                const errorElement = document.getElementById(validationRules[fieldName].errorId);
+                if (errorElement.classList.contains('show')) {
+                    validateField(fieldName);
+                }
+            });
+        });
+
+        // Demo button - show sample results
+        demoBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            demoModal.classList.add('show');
+        });
+
+        // Close modal
+        closeModalBtn.addEventListener('click', () => {
+            demoModal.classList.remove('show');
+        });
+
+        closeModalBtnBottom.addEventListener('click', () => {
+            demoModal.classList.remove('show');
+        });
+
+        // Proceed from demo to full assessment
+        proceedBtn.addEventListener('click', () => {
+            demoModal.classList.remove('show');
+            form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === demoModal) {
+                demoModal.classList.remove('show');
+            }
+        });
+
+        // Form submission
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            if (validateForm()) {
+                // Show success message
+                successMessage.classList.add('show');
+
+                // Collect form data
+                const formData = {
+                    fullName: fields.fullName.value,
+                    email: fields.email.value,
+                    phone: fields.phone.value || '',
+                    address: fields.address.value || '',
+                    neighborhood: fields.neighborhood.value || '',
+                    yearBuilt: fields.yearBuilt.value || '',
+                    bedrooms: fields.bedrooms.value || '',
+                    bathrooms: fields.bathrooms.value || '',
+                    squareFootage: fields.squareFootage.value || ''
+                };
+
+                // Log form data (in production, this would be sent to a server)
+                console.log('Form submitted with data:', formData);
+
+                // Redirect after delay
+                setTimeout(() => {
+                    window.location.href = '/thank-you';
+                }, 2000);
+            } else {
+                // Scroll to first error
+                const firstError = form.querySelector('.error');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    firstError.focus();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
