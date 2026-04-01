@@ -3,690 +3,271 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thank You - 2026 Charlotte Seller's Guide | Home Grown Property Group</title>
-    <link href="https://fonts.googleapis.com/css2?family=Sansita:wght@400;700;800&family=Cooper+Hewitt:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Your Bonuses - 2026 Charlotte Seller's Guide | Home Grown Property Group</title>
+    <!-- #Last Updated 4-1-26-12:00pm -->
+    <link href="https://fonts.googleapis.com/css2?family=Sansita:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: 'Cooper Hewitt', system-ui, -apple-system, sans-serif;
-            color: #2A384C;
-            background-color: #f7f7f7;
-            line-height: 1.6;
+            font-family: "Cooper Hewitt", system-ui, -apple-system, sans-serif;
+            background-color: #f7f7f7; color: #1a1a1a; line-height: 1.6;
         }
+        h1, h2, h3, h4, h5, h6 { font-family: "Sansita", system-ui, -apple-system, sans-serif; }
 
         /* Navigation */
         nav {
-            position: sticky;
-            top: 0;
-            background-color: #2A384C;
-            color: white;
-            padding: 1rem 0;
-            z-index: 1000;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e7eb; box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
-
         .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            max-width: 1280px; margin: 0 auto; padding: 0 24px;
+            display: flex; justify-content: space-between; align-items: center; height: 70px;
+        }
+        .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #1a1a1a; }
+        .nav-logo img { height: 40px; width: auto; }
+        .nav-logo-text { display: flex; flex-direction: column; gap: 2px; }
+        .nav-logo-main { font-family: "Sansita", sans-serif; font-weight: 700; font-size: 14px; line-height: 1; }
+        .nav-logo-badge { font-size: 10px; color: #666; }
+        .nav-links { display: flex; gap: 20px; list-style: none; white-space: nowrap; }
+        .nav-links a { text-decoration: none; color: #1a1a1a; font-size: 13px; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: #A0B2C2; }
+        .nav-cta {
+            background-color: #2A384C; color: white; border: none; padding: 10px 24px;
+            border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer;
+            text-decoration: none; transition: background-color 0.3s;
+        }
+        .nav-cta:hover { background-color: #1F2D3D; }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-container { height: 60px; }
+            .nav-logo img { height: 32px; }
         }
 
-        .nav-logo {
-            font-family: 'Sansita', sans-serif;
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: white;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: #A0B2C2;
-        }
-
-        .cta-button {
-            background-color: #A0B2C2;
-            color: white;
-            padding: 0.7rem 1.5rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: 'Cooper Hewitt', system-ui, sans-serif;
-            font-weight: 600;
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        .cta-button:hover {
-            background-color: #d65a46;
-            transform: translateY(-2px);
-        }
-
-        .cta-button:active {
-            transform: translateY(0);
-        }
-
-        /* Mobile Menu Toggle */
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* Hero Section */
+        /* Hero */
         .hero {
-            background-color: #2A384C;
-            color: white;
-            padding: 4rem 2rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            min-height: 500px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            background: linear-gradient(135deg, #2A384C 0%, #3A4D63 100%);
+            color: white; padding: 60px 20px; text-align: center;
+            position: relative; overflow: hidden; min-height: 400px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
         }
-
-        .confetti {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background-color: #A0B2C2;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .checkmark-circle {
-            width: 100px;
-            height: 100px;
-            background-color: #4CAF50;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 2rem;
-            font-size: 3rem;
+        .checkmark {
+            width: 90px; height: 90px; background: #4CAF50; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 24px; font-size: 44px;
             animation: scaleIn 0.6s ease-out;
         }
-
-        @keyframes scaleIn {
-            from {
-                transform: scale(0);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
+        @keyframes scaleIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .hero h1 { font-size: 40px; font-weight: 700; margin-bottom: 10px; animation: fadeUp 0.8s ease-out; }
+        .hero p { font-size: 18px; color: #D1D9DF; max-width: 600px; margin: 0 auto; animation: fadeUp 0.8s ease-out 0.2s both; }
+        .confetti {
+            position: absolute; width: 8px; height: 8px; opacity: 0; pointer-events: none;
         }
+        @keyframes confettiFall { to { transform: translateY(600px) rotate(360deg); opacity: 0; } }
+        @media (max-width: 768px) { .hero h1 { font-size: 28px; } .hero p { font-size: 16px; } }
 
-        @keyframes confettiFall {
-            to {
-                transform: translateY(600px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        .hero h1 {
-            font-family: 'Sansita', sans-serif;
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            color: #e0e0e0;
-            max-width: 600px;
-            margin: 0 auto;
-            animation: fadeInUp 0.8s ease-out 0.2s both;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Bonuses Section */
-        .bonuses-section {
-            max-width: 1200px;
-            margin: 4rem auto;
-            padding: 0 2rem;
-        }
-
-        .section-title {
-            font-family: 'Sansita', sans-serif;
-            font-size: 2.2rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 3rem;
-            color: #2A384C;
-        }
-
-        .bonuses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
-        }
-
+        /* Bonuses */
+        .bonuses { max-width: 1100px; margin: -40px auto 0; padding: 0 20px; position: relative; z-index: 2; }
+        .bonuses-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
         .bonus-card {
-            background-color: white;
-            border-radius: 8px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            animation: cardFadeIn 0.6s ease-out forwards;
-            opacity: 0;
+            background: white; border-radius: 12px; padding: 32px; text-align: center;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1); transition: all 0.3s;
+            animation: fadeUp 0.6s ease-out forwards; opacity: 0;
         }
-
-        .bonus-card:nth-child(1) {
-            animation-delay: 0.2s;
+        .bonus-card:nth-child(1) { animation-delay: 0.2s; }
+        .bonus-card:nth-child(2) { animation-delay: 0.4s; }
+        .bonus-card:nth-child(3) { animation-delay: 0.6s; }
+        .bonus-card:hover { transform: translateY(-6px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+        .bonus-icon { font-size: 48px; margin-bottom: 16px; }
+        .bonus-card h3 { font-size: 20px; color: #2A384C; margin-bottom: 10px; }
+        .bonus-card p { color: #666; font-size: 15px; margin-bottom: 20px; line-height: 1.7; }
+        .bonus-btn {
+            background: #A0B2C2; color: white; padding: 12px 28px; border: none;
+            border-radius: 6px; cursor: pointer; font-family: inherit; font-weight: 600;
+            font-size: 15px; transition: background 0.3s;
         }
+        .bonus-btn:hover { background: #8A9DB0; }
+        @media (max-width: 768px) { .bonuses-grid { grid-template-columns: 1fr; } }
 
-        .bonus-card:nth-child(2) {
-            animation-delay: 0.4s;
+        /* Next Steps */
+        .next-steps { max-width: 1100px; margin: 60px auto; padding: 0 20px; }
+        .section-title { font-size: 28px; color: #2A384C; text-align: center; margin-bottom: 36px; }
+        .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .step-card {
+            text-align: center; padding: 24px; border-radius: 10px;
+            background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: all 0.3s;
         }
-
-        .bonus-card:nth-child(3) {
-            animation-delay: 0.6s;
+        .step-card:hover { background: #f0f4f7; }
+        .step-num {
+            width: 48px; height: 48px; background: #A0B2C2; color: white; border-radius: 50%;
+            display: inline-flex; align-items: center; justify-content: center;
+            font-family: "Sansita", sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 12px;
         }
+        .step-card h3 { font-size: 16px; color: #2A384C; margin-bottom: 6px; }
+        .step-card p { font-size: 14px; color: #666; }
+        .step-card a { color: #A0B2C2; text-decoration: none; font-weight: 600; }
+        .step-card a:hover { color: #2A384C; }
+        @media (max-width: 768px) { .steps-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 500px) { .steps-grid { grid-template-columns: 1fr; } }
 
-        @keyframes cardFadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* CTA Banner */
+        .cta-banner {
+            background: linear-gradient(135deg, #2A384C 0%, #3A4D63 100%);
+            color: white; padding: 48px 20px; text-align: center; margin-top: 60px;
         }
-
-        .bonus-card:hover {
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-            transform: translateY(-5px);
-        }
-
-        .bonus-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .bonus-card h3 {
-            font-family: 'Sansita', sans-serif;
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #2A384C;
-            margin-bottom: 1rem;
-        }
-
-        .bonus-card p {
-            color: #555;
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
-        }
-
-        .bonus-button {
-            background-color: #A0B2C2;
-            color: white;
-            padding: 0.9rem 1.8rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: 'Cooper Hewitt', system-ui, sans-serif;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        .bonus-button:hover {
-            background-color: #d65a46;
-            transform: translateY(-2px);
-        }
-
-        .bonus-button:active {
-            transform: translateY(0);
-        }
-
-        /* What's Next Section */
-        .whats-next-section {
-            background-color: white;
-            padding: 4rem 2rem;
-            margin: 4rem 0;
-        }
-
-        .whats-next-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .step {
-            text-align: center;
-            padding: 1.5rem;
-            border-radius: 8px;
-            background-color: #f7f7f7;
-            transition: all 0.3s ease;
-        }
-
-        .step:hover {
-            background-color: #e8f0f7;
-            box-shadow: 0 4px 12px rgba(160, 178, 194, 0.1);
-        }
-
-        .step-number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            background-color: #A0B2C2;
-            color: white;
-            border-radius: 50%;
-            font-family: 'Sansita', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .step h3 {
-            font-family: 'Sansita', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #2A384C;
-            margin-bottom: 0.5rem;
-        }
-
-        .step p {
-            color: #666;
-            font-size: 0.95rem;
-        }
-
-        .step a {
-            color: #A0B2C2;
+        .cta-banner h2 { font-size: 28px; margin-bottom: 16px; }
+        .cta-banner-btn {
+            background: #A0B2C2; color: white; padding: 14px 36px; border: none;
+            border-radius: 6px; cursor: pointer; font-family: inherit; font-weight: 600;
+            font-size: 16px; transition: background 0.3s; display: inline-block;
             text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
         }
-
-        .step a:hover {
-            color: #d65a46;
-        }
-
-        /* CTA Section */
-        .final-cta {
-            background: linear-gradient(135deg, #2A384C 0%, #2a3a4a 100%);
-            color: white;
-            padding: 3rem 2rem;
-            text-align: center;
-            margin: 4rem 0 0 0;
-        }
-
-        .final-cta-container {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .final-cta h2 {
-            font-family: 'Sansita', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-        }
-
-        .final-cta-button {
-            background-color: #A0B2C2;
-            color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: 'Cooper Hewitt', system-ui, sans-serif;
-            font-weight: 600;
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            display: inline-block;
-        }
-
-        .final-cta-button:hover {
-            background-color: #d65a46;
-            transform: translateY(-2px);
-        }
-
-        .final-cta-button:active {
-            transform: translateY(0);
-        }
-
-        .final-cta p {
-            font-size: 1.1rem;
-            color: #e0e0e0;
-            margin-top: 1.5rem;
-        }
-
-        .phone-number {
-            color: #A0B2C2;
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
+        .cta-banner-btn:hover { background: #8A9DB0; }
+        .cta-phone { color: #A0B2C2; font-weight: 700; font-size: 20px; margin-top: 16px; }
 
         /* Footer */
         footer {
-            background-color: #2A384C;
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            font-size: 0.9rem;
+            background: #2A384C; color: #ccc; padding: 40px 20px; text-align: center;
         }
-
-        footer a {
-            color: #A0B2C2;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        footer a:hover {
-            color: #f0a090;
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                right: 0;
-                background-color: #2A384C;
-                flex-direction: column;
-                gap: 1rem;
-                padding: 1rem 2rem;
-                align-items: flex-start;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
-            }
-
-            .bonuses-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .final-cta h2 {
-                font-size: 1.5rem;
-            }
-
-            .checkmark-circle {
-                width: 80px;
-                height: 80px;
-                font-size: 2.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .nav-container {
-                padding: 0 1rem;
-            }
-
-            .nav-logo {
-                font-size: 1rem;
-            }
-
-            .hero {
-                padding: 2rem 1rem;
-                min-height: 400px;
-            }
-
-            .hero h1 {
-                font-size: 1.5rem;
-            }
-
-            .hero p {
-                font-size: 0.9rem;
-            }
-
-            .bonuses-section {
-                padding: 0 1rem;
-            }
-
-            .section-title {
-                font-size: 1.5rem;
-            }
-
-            .bonus-card {
-                padding: 1.5rem;
-            }
-
-            .steps-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-
-            .final-cta {
-                padding: 2rem 1rem;
-            }
-
-            .final-cta h2 {
-                font-size: 1.3rem;
-            }
-
-            .final-cta-button {
-                width: 100%;
-            }
-        }
+        .footer-logo { max-width: 120px; height: auto; margin-bottom: 16px; }
+        footer h4 { font-family: "Sansita", sans-serif; font-size: 16px; color: white; margin-bottom: 8px; }
+        .footer-copyright { font-size: 13px; color: #999; margin-top: 16px; }
     </style>
 </head>
 <body>
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <div class="nav-logo">Home Grown Property Group</div>
-            <button class="menu-toggle" id="menuToggle">☰</button>
-            <ul class="nav-links" id="navLinks">
+            <a href="/" class="nav-logo">
+                <img src="https://signature.homegrownpropertygroup.com/logo.png" alt="Home Grown Property Group">
+                <div class="nav-logo-text">
+                    <div class="nav-logo-main">Home Grown Property Group</div>
+                    <div class="nav-logo-badge">Real Broker LLC</div>
+                </div>
+            </a>
+            <ul class="nav-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="/quiz">Seller Quiz</a></li>
                 <li><a href="/home-selling-score">Home Score</a></li>
                 <li><a href="/neighborhoods">Neighborhoods</a></li>
-                <li><a href="/compare">Compare Areas</a></li>
                 <li><a href="/market-heatmap">Market Data</a></li>
                 <li><a href="/thank-you">Bonuses</a></li>
-                <li><a href="/home-selling-score" class="cta-button">Get Started</a></li>
             </ul>
+            <a href="/home-selling-score" class="nav-cta">Get Started</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="hero" id="hero">
-        <div class="checkmark-circle">✓</div>
+        <div class="checkmark">✓</div>
         <h1>You're All Set!</h1>
         <p>Your 2026 Charlotte Seller's Guide is ready. Here are your exclusive bonuses.</p>
     </section>
 
-    <!-- Bonuses Section -->
-    <section class="bonuses-section">
-        <h2 class="section-title">Your Exclusive Bonuses</h2>
+    <!-- Bonuses -->
+    <section class="bonuses">
         <div class="bonuses-grid">
-            <!-- Bonus 1 -->
             <div class="bonus-card">
                 <div class="bonus-icon">📋</div>
                 <h3>Home Preparation Checklist</h3>
                 <p>Room-by-room checklist to maximize your home's appeal and value before listing.</p>
-                <button class="bonus-button" onclick="downloadBonus('Home Preparation Checklist')">Download Checklist</button>
+                <button class="bonus-btn" onclick="downloadBonus('Home Preparation Checklist')">Download Checklist</button>
             </div>
-
-            <!-- Bonus 2 -->
             <div class="bonus-card">
                 <div class="bonus-icon">💬</div>
                 <h3>Negotiation Scripts</h3>
                 <p>Proven scripts and strategies for handling offers, counteroffers, and multiple-bid situations.</p>
-                <button class="bonus-button" onclick="downloadBonus('Negotiation Scripts')">Download Scripts</button>
+                <button class="bonus-btn" onclick="downloadBonus('Negotiation Scripts')">Download Scripts</button>
             </div>
-
-            <!-- Bonus 3 -->
             <div class="bonus-card">
                 <div class="bonus-icon">📊</div>
                 <h3>Market Timing Report</h3>
                 <p>Month-by-month analysis of Charlotte's 2026 market to help you pick the perfect listing window.</p>
-                <button class="bonus-button" onclick="downloadBonus('Market Timing Report')">Download Report</button>
+                <button class="bonus-btn" onclick="downloadBonus('Market Timing Report')">Download Report</button>
             </div>
         </div>
     </section>
 
-    <!-- What's Next Section -->
-    <section class="whats-next-section">
-        <div class="whats-next-container">
-            <h2 class="section-title">What's Next?</h2>
-            <div class="steps-grid">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Review Your Guide</h3>
-                    <p>Explore all sections of your personalized seller's guide</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Take the Quiz</h3>
-                    <p><a href="/quiz">Complete the Seller Readiness Quiz</a> to assess your preparation</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Get Your Score</h3>
-                    <p><a href="/home-selling-score">Receive your personalized Home Selling Score</a></p>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <h3>Connect With Us</h3>
-                    <p>Schedule a free consultation with our Charlotte experts</p>
-                </div>
+    <!-- Next Steps -->
+    <section class="next-steps">
+        <h2 class="section-title">What's Next?</h2>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-num">1</div>
+                <h3>Review Your Guide</h3>
+                <p>Explore all sections of your personalized seller's guide</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">2</div>
+                <h3>Take the Quiz</h3>
+                <p><a href="/quiz">Complete the Seller Readiness Quiz</a> to assess your preparation</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">3</div>
+                <h3>Review Your Score</h3>
+                <p><a href="/home-selling-score">Check your Home Selling Score</a> results</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">4</div>
+                <h3>Connect With Us</h3>
+                <p>Schedule a free consultation with our Charlotte experts</p>
             </div>
         </div>
     </section>
 
-    <!-- Final CTA Section -->
-    <section class="final-cta">
-        <div class="final-cta-container">
-            <h2>Ready to Take the Next Step?</h2>
-            <button class="final-cta-button" onclick="window.location.href='/home-selling-score'">Schedule a Free Consultation</button>
-            <p>Or call us: <span class="phone-number">(704) 555-0123</span></p>
-        </div>
+    <!-- CTA Banner -->
+    <section class="cta-banner">
+        <h2>Ready to Take the Next Step?</h2>
+        <a href="/home-selling-score" class="cta-banner-btn">Schedule a Free Consultation</a>
+        <p style="margin-top:16px; color:#D1D9DF;">Or call us directly:</p>
+        <div class="cta-phone">(704) 677-9191</div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Charlotte Seller's Guide by Home Grown Property Group. All rights reserved.</p>
+        <img src="https://signature.homegrownpropertygroup.com/logo.png" alt="Home Grown Property Group" class="footer-logo">
+        <h4>2026 Charlotte Seller's Guide</h4>
+        <div class="footer-copyright">© 2026 Home Grown Property Group. All rights reserved.</div>
     </footer>
 
     <script>
-        // Mobile Menu Toggle
-        const menuToggle = document.getElementById('menuToggle');
-        const navLinks = document.getElementById('navLinks');
+    // Gate check — must have completed score OR have ?unlocked=true
+    (function() {
+        const params = new URLSearchParams(window.location.search);
+        const unlocked = params.get('unlocked') === 'true';
+        let hasLead = false;
+        try { hasLead = !!localStorage.getItem('hgpg_lead'); } catch(e) {}
 
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        // Close menu when link is clicked
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-            });
-        });
-
-        // Confetti Animation
-        function createConfetti() {
-            const hero = document.getElementById('hero');
-            for (let i = 0; i < 30; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.style.left = Math.random() * 100 + '%';
-                confetti.style.top = '-10px';
-                confetti.style.backgroundColor = ['#A0B2C2', '#4CAF50', '#FFD700', '#87CEEB'][Math.floor(Math.random() * 4)];
-                confetti.style.delay = Math.random() * 0.5 + 's';
-                confetti.style.animation = `confettiFall ${2 + Math.random() * 1}s ease-in forwards`;
-                hero.appendChild(confetti);
-            }
+        if (!unlocked && !hasLead) {
+            window.location.href = '/home-selling-score';
+            return;
         }
+    })();
 
-        // Trigger confetti when page loads
-        window.addEventListener('load', createConfetti);
-
-        // Download Bonus Handler
-        function downloadBonus(bonusName) {
-            alert(`${bonusName} will be emailed to you!`);
+    // Confetti
+    function createConfetti() {
+        const hero = document.getElementById('hero');
+        const colors = ['#A0B2C2', '#4CAF50', '#FFD700', '#D1D9DF', '#2A384C'];
+        for (let i = 0; i < 40; i++) {
+            const c = document.createElement('div');
+            c.className = 'confetti';
+            c.style.left = Math.random() * 100 + '%';
+            c.style.top = '-10px';
+            c.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            c.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+            c.style.width = (6 + Math.random() * 6) + 'px';
+            c.style.height = (6 + Math.random() * 6) + 'px';
+            c.style.animation = `confettiFall ${2 + Math.random() * 1.5}s ease-in ${Math.random() * 0.5}s forwards`;
+            hero.appendChild(c);
         }
+    }
+    window.addEventListener('load', createConfetti);
 
-        // Smooth scroll for internal links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+    function downloadBonus(name) {
+        alert(name + ' will be emailed to you shortly!');
+    }
     </script>
 </body>
 </html>
