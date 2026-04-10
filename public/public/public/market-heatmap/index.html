@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Charlotte Market Heatmap | 2026 Charlotte Seller's Guide</title>
-    <link href="https://fonts.googleapis.com/css2?family=Sansita:wght@400;700;900&family=Cooper+Hewitt:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sansita:ital,wght@0,400;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,20 +13,26 @@
         }
 
         body {
-            font-family: 'Cooper Hewitt', system-ui, -apple-system, sans-serif;
+            font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
             color: #2A384C;
-            background-color: #f7f7f7;
+            background-color: #F0F0F0;
             line-height: 1.6;
         }
 
-        /* Navigation Bar */
+        /* ── Navigation ── */
         nav {
             position: sticky;
             top: 0;
-            background-color: #2A384C;
-            padding: 1rem 2rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 0.75rem 2rem;
             z-index: 1000;
+            transition: box-shadow 0.3s;
+        }
+
+        nav.scrolled {
+            box-shadow: 0 2px 16px rgba(42, 56, 76, 0.12);
         }
 
         nav .container {
@@ -35,29 +41,32 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 2rem;
         }
 
         nav .logo {
-            font-family: 'Sansita', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: white;
+            display: flex;
+            align-items: center;
             text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        nav .logo img {
+            height: 40px;
+            width: auto;
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 1.75rem;
             align-items: center;
         }
 
         nav a {
-            color: #f7f7f7;
+            color: #2A384C;
             text-decoration: none;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            font-weight: 500;
             transition: color 0.3s;
         }
 
@@ -65,23 +74,88 @@
             color: #A0B2C2;
         }
 
-        nav .cta-button {
-            background-color: #A0B2C2;
-            color: white;
-            padding: 0.6rem 1.5rem;
-            border-radius: 4px;
+        .nav-cta {
+            background-color: #2A384C;
+            color: #fff !important;
+            padding: 0.55rem 1.4rem;
+            border-radius: 6px;
+            text-decoration: none;
             font-weight: 600;
+            font-size: 0.9rem;
             transition: background-color 0.3s;
         }
 
-        nav .cta-button:hover {
-            background-color: #d65a47;
+        .nav-cta:hover {
+            background-color: #A0B2C2;
         }
 
-        /* Hero Banner */
-        .hero {
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 3px;
             background-color: #2A384C;
-            color: white;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                gap: 0;
+                padding-top: 1rem;
+            }
+
+            nav ul.open {
+                display: flex;
+            }
+
+            nav ul li {
+                width: 100%;
+            }
+
+            nav ul li a {
+                display: block;
+                padding: 0.7rem 0;
+                border-bottom: 1px solid #eee;
+            }
+
+            nav .container {
+                flex-wrap: wrap;
+            }
+        }
+
+        /* ── Hero ── */
+        .hero {
+            background: linear-gradient(135deg, #2A384C 0%, #3a4f6a 100%);
+            color: #fff;
             padding: 4rem 2rem;
             text-align: center;
         }
@@ -91,44 +165,39 @@
             margin: 0 auto;
         }
 
-        .hero-logo {
-            font-family: 'Sansita', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: #A0B2C2;
-            margin-bottom: 1rem;
-            letter-spacing: 1px;
-        }
-
         .hero h1 {
             font-family: 'Sansita', sans-serif;
-            font-size: 3.5rem;
-            font-weight: 900;
+            font-size: 3rem;
+            font-weight: 800;
             margin-bottom: 0.5rem;
         }
 
         .hero p {
-            font-size: 1.2rem;
-            color: #d0d8e0;
+            font-size: 1.15rem;
+            color: #D1D9DF;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        /* Main Content Layout */
+        /* ── Content Layout ── */
         .content-wrapper {
             max-width: 1400px;
-            margin: 3rem auto;
+            margin: 2.5rem auto;
             display: grid;
             grid-template-columns: 300px 1fr;
             gap: 2rem;
             padding: 0 2rem;
         }
 
-        /* Sidebar */
+        /* ── Sidebar ── */
         .sidebar {
-            background-color: white;
+            background: #fff;
             padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
             height: fit-content;
+            position: sticky;
+            top: 80px;
         }
 
         .sidebar h3 {
@@ -136,42 +205,45 @@
             font-size: 1.1rem;
             font-weight: 700;
             color: #2A384C;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
         }
 
-        .sidebar p {
+        .sidebar > p {
             font-size: 0.85rem;
             color: #666;
             margin-bottom: 1.5rem;
         }
 
         .filter-group {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .filter-group label {
             display: block;
             font-weight: 600;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+            font-size: 0.88rem;
             color: #2A384C;
         }
 
         .filter-group input,
         .filter-group select {
             width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            padding: 0.65rem 0.75rem;
+            border: 1px solid #D1D9DF;
+            border-radius: 6px;
             font-size: 0.9rem;
-            font-family: 'Cooper Hewitt', system-ui, sans-serif;
+            font-family: inherit;
+            color: #2A384C;
+            background: #fff;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
 
         .filter-group input:focus,
         .filter-group select:focus {
             outline: none;
             border-color: #A0B2C2;
-            box-shadow: 0 0 0 3px rgba(160, 178, 194, 0.1);
+            box-shadow: 0 0 0 3px rgba(160, 178, 194, 0.15);
         }
 
         .price-inputs {
@@ -180,44 +252,48 @@
             gap: 0.5rem;
         }
 
-        .price-inputs input {
-            width: 100%;
-        }
-
         .price-range-display {
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             color: #666;
-            margin-top: 0.5rem;
+            margin-top: 0.4rem;
         }
 
         .reset-button {
             width: 100%;
-            padding: 0.75rem;
-            background-color: #f0f0f0;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            padding: 0.7rem;
+            background: #F0F0F0;
+            border: 1px solid #D1D9DF;
+            border-radius: 6px;
             font-weight: 600;
+            font-size: 0.9rem;
+            color: #2A384C;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.2s;
+            font-family: inherit;
         }
 
         .reset-button:hover {
-            background-color: #e0e0e0;
+            background: #D1D9DF;
         }
 
         /* Legend */
         .legend {
-            margin-top: 2.5rem;
-            padding-top: 2rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
             border-top: 1px solid #eee;
+        }
+
+        .legend h3 {
+            margin-bottom: 0.75rem;
         }
 
         .legend-item {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 0.75rem;
-            font-size: 0.9rem;
+            gap: 0.6rem;
+            margin-bottom: 0.6rem;
+            font-size: 0.88rem;
+            color: #555;
         }
 
         .legend-dot {
@@ -227,85 +303,161 @@
             flex-shrink: 0;
         }
 
-        .legend-dot.hot {
-            background-color: #A0B2C2;
-        }
+        .legend-dot.hot { background-color: #A0B2C2; }
+        .legend-dot.warm { background-color: #F5A962; }
+        .legend-dot.moderate { background-color: #999; }
 
-        .legend-dot.warm {
-            background-color: #F5A962;
-        }
-
-        .legend-dot.moderate {
-            background-color: #999;
-        }
-
-        /* Main Content */
+        /* ── Main Content ── */
         .main-content {
             display: flex;
             flex-direction: column;
             gap: 2rem;
+            min-width: 0;
         }
 
         /* Stat Cards */
         .stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
+            gap: 1.25rem;
         }
 
         .stat-card {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            background: #fff;
+            padding: 1.75rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
             text-align: center;
         }
 
         .stat-card .icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
         }
 
         .stat-card .value {
             font-family: 'Sansita', sans-serif;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 700;
             color: #2A384C;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
         }
 
         .stat-card .label {
             color: #666;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 500;
         }
 
-        /* Map Container */
-        .map-container {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        /* ── Sortable Table ── */
+        .table-section {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
             overflow: hidden;
-            min-height: 500px;
         }
 
-        .map-container iframe {
+        .table-section h2 {
+            font-family: 'Sansita', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2A384C;
+            padding: 1.5rem 1.75rem 0;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            padding: 1rem 1.75rem 1.75rem;
+        }
+
+        table {
             width: 100%;
-            height: 500px;
-            border: none;
+            border-collapse: collapse;
+            font-size: 0.92rem;
         }
 
-        /* Neighborhoods Section */
-        .neighborhoods-section {
-            background-color: white;
+        thead th {
+            background: #F0F0F0;
+            color: #2A384C;
+            font-weight: 700;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0.85rem 1rem;
+            text-align: left;
+            cursor: pointer;
+            user-select: none;
+            white-space: nowrap;
+            border-bottom: 2px solid #D1D9DF;
+            transition: background 0.2s;
+        }
+
+        thead th:hover {
+            background: #D1D9DF;
+        }
+
+        thead th .sort-arrow {
+            display: inline-block;
+            margin-left: 4px;
+            font-size: 0.7rem;
+            opacity: 0.35;
+            transition: opacity 0.2s;
+        }
+
+        thead th.sorted .sort-arrow {
+            opacity: 1;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #eee;
+            transition: background 0.15s;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f9fafb;
+        }
+
+        tbody tr:hover {
+            background: rgba(160, 178, 194, 0.1);
+        }
+
+        tbody td {
+            padding: 0.85rem 1rem;
+            color: #333;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.3rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #fff;
+        }
+
+        .badge.hot { background-color: #A0B2C2; }
+        .badge.warm { background-color: #F5A962; }
+        .badge.moderate { background-color: #999; }
+
+        .no-results-row td {
+            text-align: center;
             padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            color: #666;
+        }
+
+        /* ── Neighborhood Cards ── */
+        .neighborhoods-section {
+            background: #fff;
+            padding: 2rem 1.75rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
         }
 
         .neighborhoods-section h2 {
             font-family: 'Sansita', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
             color: #2A384C;
@@ -314,61 +466,48 @@
         .neighborhoods-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
+            gap: 1.25rem;
         }
 
         .neighborhood-card {
             border: 1px solid #eee;
-            border-radius: 8px;
+            border-radius: 10px;
             padding: 1.5rem;
-            transition: all 0.3s;
+            transition: transform 0.25s, box-shadow 0.25s;
+            background: #fff;
         }
 
         .neighborhood-card:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .neighborhood-card.hidden {
-            display: none;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
         }
 
         .card-header {
             display: flex;
             justify-content: space-between;
-            align-items: start;
+            align-items: flex-start;
             margin-bottom: 1rem;
         }
 
         .neighborhood-card h3 {
             font-family: 'Sansita', sans-serif;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: #2A384C;
         }
 
-        .badge {
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
+        .card-price {
+            font-family: 'Sansita', sans-serif;
+            font-size: 1.6rem;
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            color: #2A384C;
+            margin-bottom: 0.25rem;
         }
 
-        .badge.hot {
-            background-color: #A0B2C2;
-            color: white;
-        }
-
-        .badge.warm {
-            background-color: #F5A962;
-            color: white;
-        }
-
-        .badge.moderate {
-            background-color: #999;
-            color: white;
+        .card-listings {
+            font-size: 0.88rem;
+            color: #666;
+            margin-bottom: 1rem;
         }
 
         .card-stats {
@@ -379,23 +518,30 @@
 
         .card-stat {
             border-top: 1px solid #eee;
-            padding-top: 1rem;
+            padding-top: 0.85rem;
         }
 
         .card-stat .label {
-            font-size: 0.85rem;
-            color: #666;
-            margin-bottom: 0.25rem;
+            font-size: 0.82rem;
+            color: #888;
+            margin-bottom: 0.15rem;
         }
 
         .card-stat .value {
             font-family: 'Sansita', sans-serif;
-            font-size: 1.4rem;
+            font-size: 1.15rem;
             font-weight: 700;
             color: #2A384C;
         }
 
-        /* Footer */
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+
+        /* ── Footer ── */
         footer {
             background-color: #2A384C;
             color: #f7f7f7;
@@ -409,6 +555,15 @@
             margin: 0 auto;
         }
 
+        footer .footer-logo {
+            margin-bottom: 1rem;
+        }
+
+        footer .footer-logo img {
+            height: 50px;
+            width: auto;
+        }
+
         footer h4 {
             font-family: 'Sansita', sans-serif;
             font-size: 1.1rem;
@@ -417,30 +572,43 @@
         }
 
         footer p {
-            font-size: 0.9rem;
-            color: #d0d8e0;
+            font-size: 0.88rem;
+            color: #A0B2C2;
+            margin-bottom: 0.25rem;
         }
 
-        /* Mobile Responsive */
+        footer a {
+            color: #A0B2C2;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #D1D9DF;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 1024px) {
+            .content-wrapper {
+                grid-template-columns: 260px 1fr;
+            }
+        }
+
         @media (max-width: 768px) {
-            nav .container {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 1rem;
-            }
-
             .hero h1 {
                 font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
             }
 
             .content-wrapper {
                 grid-template-columns: 1fr;
                 padding: 0 1rem;
+            }
+
+            .sidebar {
+                position: static;
             }
 
             .stats {
@@ -454,57 +622,57 @@
             .price-inputs {
                 grid-template-columns: 1fr;
             }
+
+            .table-wrapper {
+                padding: 0.75rem;
+            }
+
+            table {
+                font-size: 0.82rem;
+            }
+
+            thead th,
+            tbody td {
+                padding: 0.65rem 0.6rem;
+            }
         }
 
         @media (max-width: 480px) {
             nav {
-                padding: 1rem;
+                padding: 0.75rem 1rem;
             }
 
-            nav .logo {
-                font-size: 1.2rem;
-            }
-
-            nav ul {
-                font-size: 0.85rem;
-                gap: 0.5rem;
+            .hero {
+                padding: 2.5rem 1rem;
             }
 
             .hero h1 {
-                font-size: 1.5rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .sidebar {
-                padding: 1.5rem;
+                font-size: 1.6rem;
             }
 
             .stat-card .value {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
 
-            .neighborhoods-section h2 {
-                font-size: 1.2rem;
+            .card-price {
+                font-size: 1.3rem;
             }
-        }
-
-        .no-results {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 2rem;
-            color: #666;
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav>
+    <nav id="main-nav">
         <div class="container">
-            <a href="/" class="logo"><img src="https://signature.homegrownpropertygroup.com/logo.png" alt="Home Grown Property Group" style="height:40px;width:auto;margin-right:10px;">Home Grown Property Group</a>
-            <ul>
+            <a href="/" class="logo">
+                <img src="https://charlotte-sell-iluh5wd7.manus.space/logo_cropped.webp" alt="Home Grown Property Group">
+            </a>
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul id="nav-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="/quiz">Seller Quiz</a></li>
                 <li><a href="/home-selling-score">Home Score</a></li>
@@ -512,17 +680,16 @@
                 <li><a href="/compare">Compare Areas</a></li>
                 <li><a href="/market-heatmap">Market Data</a></li>
                 <li><a href="/thank-you">Bonuses</a></li>
-                <li><a href="/home-selling-score" class="cta-button">Get Started</a></li>
+                <li><a href="/home-selling-score" class="nav-cta">Get Started</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero Banner -->
+    <!-- Hero -->
     <section class="hero">
         <div class="container">
-            <div class="hero-logo">HOME GROWN PROPERTY GROUP</div>
             <h1>Charlotte Market Heatmap</h1>
-            <p>Interactive market activity visualization</p>
+            <p>Interactive market activity visualization for the Charlotte metro area</p>
         </div>
     </section>
 
@@ -530,41 +697,21 @@
     <div class="content-wrapper">
         <!-- Sidebar -->
         <aside class="sidebar">
-            <h3>Refine your search</h3>
+            <h3>Refine Your Search</h3>
             <p>Filter neighborhoods by criteria</p>
 
             <div class="filter-group">
                 <label for="neighborhood-search">Search Neighborhood</label>
-                <input
-                    type="text"
-                    id="neighborhood-search"
-                    placeholder="Enter neighborhood..."
-                >
+                <input type="text" id="neighborhood-search" placeholder="Search neighborhood...">
             </div>
 
             <div class="filter-group">
                 <label>Price Range</label>
                 <div class="price-inputs">
-                    <input
-                        type="number"
-                        id="price-min"
-                        placeholder="Min ($k)"
-                        value="0"
-                        min="0"
-                        step="50"
-                    >
-                    <input
-                        type="number"
-                        id="price-max"
-                        placeholder="Max ($k)"
-                        value="2000"
-                        min="0"
-                        step="50"
-                    >
+                    <input type="number" id="price-min" placeholder="Min ($k)" value="0" min="0" step="50">
+                    <input type="number" id="price-max" placeholder="Max ($k)" value="2000" min="0" step="50">
                 </div>
-                <div class="price-range-display">
-                    <span id="price-display">$0k - $2,000k</span>
-                </div>
+                <div class="price-range-display"><span id="price-display">$0k &ndash; $2,000k</span></div>
             </div>
 
             <div class="filter-group">
@@ -577,63 +724,61 @@
                 </select>
             </div>
 
-            <button class="reset-button" onclick="resetFilters()">Reset Filters</button>
+            <button class="reset-button" id="reset-btn">Reset Filters</button>
 
-            <!-- Legend -->
             <div class="legend">
                 <h3>Legend</h3>
-                <div class="legend-item">
-                    <div class="legend-dot hot"></div>
-                    <span>Hot Market</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-dot warm"></div>
-                    <span>Warm Market</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-dot moderate"></div>
-                    <span>Moderate Market</span>
-                </div>
+                <div class="legend-item"><div class="legend-dot hot"></div><span>Hot Market</span></div>
+                <div class="legend-item"><div class="legend-dot warm"></div><span>Warm Market</span></div>
+                <div class="legend-item"><div class="legend-dot moderate"></div><span>Moderate Market</span></div>
             </div>
         </aside>
 
         <!-- Main Content Area -->
         <main class="main-content">
-            <!-- Stat Cards -->
+            <!-- Summary Stats -->
             <div class="stats">
                 <div class="stat-card">
-                    <div class="icon">🏠</div>
+                    <div class="icon">&#127968;</div>
                     <div class="value" id="stat-listings">447</div>
                     <div class="label">Total Listings</div>
                 </div>
                 <div class="stat-card">
-                    <div class="icon">💰</div>
+                    <div class="icon">&#128176;</div>
                     <div class="value" id="stat-price">$588,125</div>
-                    <div class="label">Avg Price</div>
+                    <div class="label">Average Price</div>
                 </div>
                 <div class="stat-card">
-                    <div class="icon">📈</div>
+                    <div class="icon">&#128200;</div>
                     <div class="value" id="stat-hot">3</div>
                     <div class="label">Hot Markets</div>
                 </div>
             </div>
 
-            <!-- Map Container -->
-            <div class="map-container">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d204841.18644717922!2d-80.99320000000001!3d35.2271!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8856a94b4af7e4f9%3A0xa8c0a2488172ab1!2sCharlotte%2C%20NC!5e0!3m2!1sen!2sus!4v1701234567890"
-                    allowfullscreen=""
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
+            <!-- Sortable Table -->
+            <div class="table-section">
+                <h2 id="table-title">Neighborhood Market Data</h2>
+                <div class="table-wrapper">
+                    <table id="market-table">
+                        <thead>
+                            <tr>
+                                <th data-key="name">Name <span class="sort-arrow">&#9650;&#9660;</span></th>
+                                <th data-key="medianPrice">Median Price <span class="sort-arrow">&#9650;&#9660;</span></th>
+                                <th data-key="dom">DOM <span class="sort-arrow">&#9650;&#9660;</span></th>
+                                <th data-key="yoy">YoY Change <span class="sort-arrow">&#9650;&#9660;</span></th>
+                                <th data-key="listings">Inventory <span class="sort-arrow">&#9650;&#9660;</span></th>
+                                <th data-key="activity">Heat Score <span class="sort-arrow">&#9650;&#9660;</span></th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body"></tbody>
+                    </table>
+                </div>
             </div>
 
-            <!-- Neighborhoods Section -->
+            <!-- Neighborhood Cards -->
             <section class="neighborhoods-section">
                 <h2 id="neighborhoods-title">Filtered Neighborhoods (8)</h2>
-                <div class="neighborhoods-grid" id="neighborhoods-grid">
-                    <!-- Neighborhood cards will be populated by JavaScript -->
-                </div>
+                <div class="neighborhoods-grid" id="neighborhoods-grid"></div>
             </section>
         </main>
     </div>
@@ -641,122 +786,218 @@
     <!-- Footer -->
     <footer>
         <div class="container">
+            <div class="footer-logo">
+                <img src="https://charlotte-sell-iluh5wd7.manus.space/homegrown-logo.png" alt="Home Grown Property Group">
+            </div>
             <h4>2026 Charlotte Seller's Guide</h4>
-            <p>&copy; 2026 Home Grown Property Group. All rights reserved.</p>
+            <p>Serving Charlotte, Huntersville, Cornelius, Davidson, Mooresville, Concord, Matthews &amp; beyond</p>
+            <p style="margin-top:0.5rem;"><a href="tel:7046779191">(704) 677-9191</a></p>
+            <p style="margin-top:1rem; font-size:0.8rem; color:#6c8096;">&copy; 2026 Home Grown Property Group. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        // Neighborhood data
+        /* ── Data ── */
         const neighborhoods = [
-            { name: 'Dilworth', activity: 'hot', avgPrice: 725000, listings: 45 },
-            { name: 'Myers Park', activity: 'hot', avgPrice: 1250000, listings: 32 },
-            { name: 'South End', activity: 'hot', avgPrice: 485000, listings: 78 },
-            { name: 'Plaza Midwood', activity: 'warm', avgPrice: 425000, listings: 56 },
-            { name: 'NoDa', activity: 'warm', avgPrice: 395000, listings: 41 },
-            { name: 'Ballantyne', activity: 'warm', avgPrice: 625000, listings: 67 },
-            { name: 'Cotswold', activity: 'moderate', avgPrice: 475000, listings: 34 },
-            { name: 'University City', activity: 'moderate', avgPrice: 325000, listings: 52 }
+            { name: 'Dilworth',         medianPrice: 725000,  dom: 18, yoy: 5.2, listings: 45, activity: 'hot' },
+            { name: 'Myers Park',       medianPrice: 1250000, dom: 22, yoy: 3.8, listings: 32, activity: 'hot' },
+            { name: 'South End',        medianPrice: 485000,  dom: 12, yoy: 7.1, listings: 78, activity: 'hot' },
+            { name: 'Plaza Midwood',    medianPrice: 425000,  dom: 15, yoy: 4.5, listings: 56, activity: 'warm' },
+            { name: 'NoDa',             medianPrice: 395000,  dom: 14, yoy: 6.3, listings: 42, activity: 'warm' },
+            { name: 'Ballantyne',       medianPrice: 625000,  dom: 20, yoy: 3.2, listings: 89, activity: 'warm' },
+            { name: 'Cotswold',         medianPrice: 475000,  dom: 19, yoy: 3.8, listings: 38, activity: 'moderate' },
+            { name: 'University City',  medianPrice: 325000,  dom: 24, yoy: 4.1, listings: 67, activity: 'moderate' }
         ];
 
-        // Initialize the page
-        function initPage() {
-            renderNeighborhoods(neighborhoods);
-            updateStats(neighborhoods);
-        }
+        /* ── State ── */
+        let currentSort = { key: null, asc: true };
+        let filteredData = [...neighborhoods];
 
-        // Render neighborhood cards
-        function renderNeighborhoods(data) {
-            const grid = document.getElementById('neighborhoods-grid');
-            grid.innerHTML = '';
+        /* ── DOM refs ── */
+        const searchInput   = document.getElementById('neighborhood-search');
+        const priceMin      = document.getElementById('price-min');
+        const priceMax      = document.getElementById('price-max');
+        const activitySelect = document.getElementById('market-activity');
+        const priceDisplay  = document.getElementById('price-display');
+        const tableBody     = document.getElementById('table-body');
+        const grid          = document.getElementById('neighborhoods-grid');
 
-            if (data.length === 0) {
-                grid.innerHTML = '<div class="no-results">No neighborhoods match your filters. Try adjusting your criteria.</div>';
-                return;
+        /* ── Helpers ── */
+        const fmt = n => '$' + n.toLocaleString('en-US');
+        const activityRank = { hot: 1, warm: 2, moderate: 3 };
+
+        /* ── Filtering ── */
+        function applyFilters() {
+            const term   = searchInput.value.toLowerCase().trim();
+            const minP   = (parseInt(priceMin.value) || 0) * 1000;
+            const maxP   = (parseInt(priceMax.value) || Infinity) * 1000;
+            const act    = activitySelect.value;
+
+            filteredData = neighborhoods.filter(n => {
+                if (term && !n.name.toLowerCase().includes(term)) return false;
+                if (n.medianPrice < minP || n.medianPrice > maxP) return false;
+                if (act && n.activity !== act) return false;
+                return true;
+            });
+
+            if (currentSort.key) {
+                sortData(currentSort.key, currentSort.asc, false);
             }
 
-            data.forEach(neighborhood => {
-                const card = document.createElement('div');
-                card.className = 'neighborhood-card';
-                card.innerHTML = `
+            render();
+        }
+
+        /* ── Sorting ── */
+        function sortData(key, asc, toggle) {
+            if (toggle) {
+                if (currentSort.key === key) {
+                    asc = !currentSort.asc;
+                } else {
+                    asc = (key === 'name') ? true : false;
+                }
+            }
+            currentSort = { key, asc };
+
+            filteredData.sort((a, b) => {
+                let va = a[key], vb = b[key];
+                if (key === 'activity') { va = activityRank[va]; vb = activityRank[vb]; }
+                if (typeof va === 'string') { va = va.toLowerCase(); vb = vb.toLowerCase(); }
+                if (va < vb) return asc ? -1 : 1;
+                if (va > vb) return asc ? 1 : -1;
+                return 0;
+            });
+
+            /* update header classes */
+            document.querySelectorAll('#market-table thead th').forEach(th => {
+                th.classList.remove('sorted');
+                const arrow = th.querySelector('.sort-arrow');
+                arrow.innerHTML = '&#9650;&#9660;';
+            });
+            const activeTh = document.querySelector(`th[data-key="${key}"]`);
+            if (activeTh) {
+                activeTh.classList.add('sorted');
+                activeTh.querySelector('.sort-arrow').innerHTML = asc ? '&#9650;' : '&#9660;';
+            }
+        }
+
+        /* ── Render ── */
+        function render() {
+            renderTable();
+            renderCards();
+            updateStats();
+        }
+
+        function renderTable() {
+            if (filteredData.length === 0) {
+                tableBody.innerHTML = '<tr class="no-results-row"><td colspan="6">No neighborhoods match your filters.</td></tr>';
+                return;
+            }
+            tableBody.innerHTML = filteredData.map(n => `
+                <tr>
+                    <td><strong>${n.name}</strong></td>
+                    <td>${fmt(n.medianPrice)}</td>
+                    <td>${n.dom}</td>
+                    <td>+${n.yoy}%</td>
+                    <td>${n.listings}</td>
+                    <td><span class="badge ${n.activity}">${n.activity.toUpperCase()}</span></td>
+                </tr>
+            `).join('');
+        }
+
+        function renderCards() {
+            if (filteredData.length === 0) {
+                grid.innerHTML = '<div class="no-results">No neighborhoods match your filters. Try adjusting your criteria.</div>';
+                document.getElementById('neighborhoods-title').textContent = 'Filtered Neighborhoods (0)';
+                return;
+            }
+            grid.innerHTML = filteredData.map(n => `
+                <div class="neighborhood-card">
                     <div class="card-header">
-                        <h3>${neighborhood.name}</h3>
-                        <span class="badge ${neighborhood.activity}">${neighborhood.activity.toUpperCase()}</span>
+                        <h3>${n.name}</h3>
+                        <span class="badge ${n.activity}">${n.activity.toUpperCase()}</span>
                     </div>
+                    <div class="card-price">${fmt(n.medianPrice)}</div>
+                    <div class="card-listings">${n.listings} active listings</div>
                     <div class="card-stats">
                         <div class="card-stat">
                             <div class="label">Avg Price</div>
-                            <div class="value">$${(neighborhood.avgPrice / 1000).toLocaleString('en-US', {maximumFractionDigits: 0})}k</div>
+                            <div class="value">${fmt(n.medianPrice)}</div>
                         </div>
                         <div class="card-stat">
                             <div class="label">Listings</div>
-                            <div class="value">${neighborhood.listings}</div>
+                            <div class="value">${n.listings}</div>
                         </div>
                     </div>
-                `;
-                grid.appendChild(card);
-            });
-
-            document.getElementById('neighborhoods-title').textContent = `Filtered Neighborhoods (${data.length})`;
+                </div>
+            `).join('');
+            document.getElementById('neighborhoods-title').textContent = `Filtered Neighborhoods (${filteredData.length})`;
         }
 
-        // Update stat cards
-        function updateStats(data) {
-            const totalListings = data.reduce((sum, n) => sum + n.listings, 0);
-            const avgPrice = Math.round(data.reduce((sum, n) => sum + n.avgPrice, 0) / data.length);
+        function updateStats() {
+            const data = filteredData;
+            const totalListings = data.reduce((s, n) => s + n.listings, 0);
+            const avgPrice = data.length ? Math.round(data.reduce((s, n) => s + n.medianPrice, 0) / data.length) : 0;
             const hotCount = data.filter(n => n.activity === 'hot').length;
 
-            document.getElementById('stat-listings').textContent = totalListings;
-            document.getElementById('stat-price').textContent = '$' + (avgPrice / 1000).toLocaleString('en-US', {maximumFractionDigits: 0}) + 'k';
+            document.getElementById('stat-listings').textContent = totalListings.toLocaleString('en-US');
+            document.getElementById('stat-price').textContent = fmt(avgPrice);
             document.getElementById('stat-hot').textContent = hotCount;
         }
 
-        // Filter neighborhoods
-        function filterNeighborhoods() {
-            const searchTerm = document.getElementById('neighborhood-search').value.toLowerCase();
-            const minPrice = parseInt(document.getElementById('price-min').value) * 1000 || 0;
-            const maxPrice = parseInt(document.getElementById('price-max').value) * 1000 || Infinity;
-            const activity = document.getElementById('market-activity').value;
-
-            const filtered = neighborhoods.filter(neighborhood => {
-                const matchesSearch = neighborhood.name.toLowerCase().includes(searchTerm);
-                const matchesPrice = neighborhood.avgPrice >= minPrice && neighborhood.avgPrice <= maxPrice;
-                const matchesActivity = activity === '' || neighborhood.activity === activity;
-
-                return matchesSearch && matchesPrice && matchesActivity;
-            });
-
-            renderNeighborhoods(filtered);
-            updateStats(filtered);
-        }
-
-        // Reset filters
-        function resetFilters() {
-            document.getElementById('neighborhood-search').value = '';
-            document.getElementById('price-min').value = '0';
-            document.getElementById('price-max').value = '2000';
-            document.getElementById('market-activity').value = '';
-            document.getElementById('price-display').textContent = '$0k - $2,000k';
-            renderNeighborhoods(neighborhoods);
-            updateStats(neighborhoods);
-        }
-
-        // Update price range display
         function updatePriceDisplay() {
-            const minPrice = document.getElementById('price-min').value;
-            const maxPrice = document.getElementById('price-max').value;
-            document.getElementById('price-display').textContent = `$${minPrice}k - $${maxPrice}k`;
-            filterNeighborhoods();
+            const minV = priceMin.value || '0';
+            const maxV = priceMax.value || '2,000';
+            priceDisplay.textContent = `$${parseInt(minV).toLocaleString('en-US')}k \u2013 $${parseInt(maxV).toLocaleString('en-US')}k`;
         }
 
-        // Event listeners
-        document.getElementById('neighborhood-search').addEventListener('input', filterNeighborhoods);
-        document.getElementById('market-activity').addEventListener('change', filterNeighborhoods);
-        document.getElementById('price-min').addEventListener('input', updatePriceDisplay);
-        document.getElementById('price-max').addEventListener('input', updatePriceDisplay);
+        /* ── Reset ── */
+        function resetFilters() {
+            searchInput.value = '';
+            priceMin.value = '0';
+            priceMax.value = '2000';
+            activitySelect.value = '';
+            priceDisplay.textContent = '$0k \u2013 $2,000k';
+            currentSort = { key: null, asc: true };
+            document.querySelectorAll('#market-table thead th').forEach(th => {
+                th.classList.remove('sorted');
+                th.querySelector('.sort-arrow').innerHTML = '&#9650;&#9660;';
+            });
+            filteredData = [...neighborhoods];
+            render();
+        }
 
-        // Initialize on page load
-        initPage();
+        /* ── Event Listeners ── */
+        searchInput.addEventListener('input', applyFilters);
+        activitySelect.addEventListener('change', applyFilters);
+        priceMin.addEventListener('input', () => { updatePriceDisplay(); applyFilters(); });
+        priceMax.addEventListener('input', () => { updatePriceDisplay(); applyFilters(); });
+        document.getElementById('reset-btn').addEventListener('click', resetFilters);
+
+        /* Table header sort */
+        document.querySelectorAll('#market-table thead th').forEach(th => {
+            th.addEventListener('click', () => {
+                const key = th.getAttribute('data-key');
+                sortData(key, true, true);
+                render();
+            });
+        });
+
+        /* Hamburger */
+        const hamburger = document.getElementById('hamburger');
+        const navLinks  = document.getElementById('nav-links');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            navLinks.classList.toggle('open');
+        });
+
+        /* Nav scroll shadow */
+        const mainNav = document.getElementById('main-nav');
+        window.addEventListener('scroll', () => {
+            mainNav.classList.toggle('scrolled', window.scrollY > 10);
+        }, { passive: true });
+
+        /* ── Init ── */
+        render();
     </script>
 </body>
 </html>

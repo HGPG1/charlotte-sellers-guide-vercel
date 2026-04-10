@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Selling Score - 2026 Charlotte Seller's Guide</title>
-    <!-- #Last Updated 4-1-26-12:00pm -->
-    <link href="https://fonts.googleapis.com/css2?family=Sansita:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sansita:ital,wght@0,400;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body {
             font-family: "Cooper Hewitt", system-ui, -apple-system, sans-serif;
-            background-color: #f7f7f7;
+            background-color: #F0F0F0;
             color: #1a1a1a;
             line-height: 1.6;
         }
@@ -19,12 +18,17 @@
             font-family: "Sansita", system-ui, -apple-system, sans-serif;
         }
 
-        /* Navigation */
+        /* ── Navigation ── */
         nav {
             position: sticky; top: 0; z-index: 1000;
             background: rgba(255,255,255,0.95);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid #e5e7eb;
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        nav.scrolled {
+            border-bottom-color: #e5e7eb;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
         .nav-container {
@@ -45,38 +49,70 @@
             text-decoration: none; transition: background-color 0.3s;
         }
         .nav-cta:hover { background-color: #1F2D3D; }
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
+
+        /* Hamburger */
+        .hamburger {
+            display: none; background: none; border: none; cursor: pointer; padding: 4px;
+            flex-direction: column; gap: 5px; z-index: 1100;
+        }
+        .hamburger span {
+            display: block; width: 24px; height: 2px; background: #2A384C;
+            border-radius: 2px; transition: all 0.3s ease;
+        }
+        .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        /* Mobile menu overlay */
+        .mobile-menu {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.98); z-index: 1050;
+            flex-direction: column; align-items: center; justify-content: center; gap: 24px;
+        }
+        .mobile-menu.open { display: flex; }
+        .mobile-menu a {
+            text-decoration: none; color: #2A384C; font-size: 20px; font-weight: 600;
+            font-family: "Sansita", sans-serif; transition: color 0.3s;
+        }
+        .mobile-menu a:hover { color: #A0B2C2; }
+        .mobile-menu .nav-cta {
+            margin-top: 12px; padding: 14px 32px; font-size: 16px;
+            display: inline-block; border-radius: 8px;
+        }
+
+        @media (max-width: 900px) {
+            .nav-links, .nav-container > .nav-cta { display: none; }
+            .hamburger { display: flex; }
             .nav-container { height: 60px; }
             .nav-logo img { height: 32px; }
         }
 
-        /* Hero */
+        /* ── Hero ── */
         .hero {
             background: linear-gradient(135deg, #2A384C 0%, #3A4D63 100%);
             color: white; padding: 60px 20px; text-align: center;
         }
-        .hero h1 { font-size: 42px; font-weight: 700; margin-bottom: 12px; }
-        .hero p { font-size: 18px; color: #D1D9DF; max-width: 600px; margin: 0 auto; }
+        .hero h1 { font-size: 42px; font-weight: 800; margin-bottom: 12px; }
+        .hero p { font-size: 18px; color: #D1D9DF; max-width: 620px; margin: 0 auto; }
         @media (max-width: 768px) {
             .hero { padding: 40px 20px; }
             .hero h1 { font-size: 28px; }
             .hero p { font-size: 16px; }
         }
 
-        /* Container */
+        /* ── Container ── */
         .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
 
-        /* Progress Bar */
+        /* ── Progress Bar ── */
         .progress-section { margin-bottom: 32px; }
         .progress-text { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px; color: #666; }
-        .progress-bar-bg { width: 100%; height: 8px; background: #e5e7eb; border-radius: 4px; overflow: hidden; }
+        .progress-bar-bg { width: 100%; height: 8px; background: #D1D9DF; border-radius: 4px; overflow: hidden; }
         .progress-bar-fill {
             height: 100%; background: linear-gradient(90deg, #A0B2C2, #2A384C);
             transition: width 0.4s ease; border-radius: 4px;
         }
 
-        /* Card */
+        /* ── Card ── */
         .card {
             background: white; border-radius: 12px; padding: 40px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 30px;
@@ -89,36 +125,37 @@
         .card h2 { font-size: 24px; color: #2A384C; margin-bottom: 6px; }
         .card .subtitle { color: #666; margin-bottom: 24px; font-size: 15px; }
 
-        /* Form Styles */
+        /* ── Form Styles ── */
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
         .form-row.full { grid-template-columns: 1fr; }
         .form-group { display: flex; flex-direction: column; }
         .form-group label { font-weight: 600; font-size: 14px; color: #2A384C; margin-bottom: 6px; }
         .form-group label .req { color: #A0B2C2; }
-        .form-group input, .form-group select {
-            width: 100%; padding: 12px 14px; border: 2px solid #e5e7eb; border-radius: 6px;
+        .form-group input {
+            width: 100%; padding: 12px 14px; border: 2px solid #D1D9DF; border-radius: 6px;
             font-family: inherit; font-size: 15px; transition: border-color 0.3s;
+            background: #fafafa;
         }
-        .form-group input:focus, .form-group select:focus { outline: none; border-color: #A0B2C2; }
+        .form-group input:focus { outline: none; border-color: #A0B2C2; background: #fff; }
         .form-group input.error { border-color: #d32f2f; }
         .error-msg { color: #d32f2f; font-size: 13px; margin-top: 4px; display: none; }
         .error-msg.show { display: block; }
         @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
 
-        /* Quiz Styles */
+        /* ── Quiz Styles ── */
         .step-label { color: #A0B2C2; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
         .question-text { font-family: "Sansita", sans-serif; font-size: 26px; font-weight: 700; color: #2A384C; margin-bottom: 28px; line-height: 1.3; }
         .options-list { list-style: none; }
         .option-item { margin-bottom: 14px; }
         .option-input { display: none; }
         .option-label {
-            display: flex; align-items: center; padding: 16px; border: 2px solid #e5e7eb;
+            display: flex; align-items: center; padding: 16px; border: 2px solid #D1D9DF;
             border-radius: 8px; cursor: pointer; transition: all 0.2s; background: #fafafa;
         }
         .option-label:hover { border-color: #A0B2C2; background: #f0f4f7; }
         .option-input:checked + .option-label { border-color: #A0B2C2; background: #f0f4f7; font-weight: 600; }
         .option-radio {
-            width: 20px; height: 20px; border: 2px solid #A0B2C2; border-radius: 50%;
+            width: 22px; height: 22px; border: 2px solid #A0B2C2; border-radius: 50%;
             margin-right: 14px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
             transition: all 0.2s;
         }
@@ -127,8 +164,8 @@
         }
         .option-text { font-size: 15px; color: #2A384C; }
 
-        /* Buttons */
-        .btn-row { display: flex; gap: 12px; margin-top: 28px; }
+        /* ── Buttons ── */
+        .btn-row { display: flex; gap: 12px; margin-top: 28px; align-items: center; }
         .btn {
             padding: 14px 28px; border: none; border-radius: 6px; font-size: 16px;
             font-weight: 600; cursor: pointer; transition: all 0.3s; font-family: inherit;
@@ -137,72 +174,98 @@
         .btn-primary { background: #2A384C; color: white; flex: 1; }
         .btn-primary:hover { background: #1F2D3D; }
         .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
-        .btn-secondary { background: #e5e7eb; color: #2A384C; }
-        .btn-secondary:hover { background: #d1d5db; }
+        .btn-secondary { background: #D1D9DF; color: #2A384C; }
+        .btn-secondary:hover { background: #c0cad3; }
         .btn-secondary:disabled { opacity: 0.5; cursor: not-allowed; }
         .btn-accent { background: #A0B2C2; color: white; flex: 1; }
         .btn-accent:hover { background: #8A9DB0; }
+        .demo-link {
+            background: none; border: none; color: #A0B2C2; font-size: 14px;
+            cursor: pointer; text-decoration: underline; font-family: inherit;
+            padding: 0; transition: color 0.3s;
+        }
+        .demo-link:hover { color: #2A384C; }
 
-        /* Score Results */
+        /* ── Score Results ── */
         .score-section { text-align: center; animation: fadeIn 0.6s ease; }
         .score-ring-wrapper { position: relative; width: 200px; height: 200px; margin: 0 auto 24px; }
         .score-ring-bg {
             position: absolute; width: 100%; height: 100%; border-radius: 50%;
-            background: conic-gradient(#A0B2C2 0deg, #A0B2C2 var(--angle), #e5e7eb var(--angle), #e5e7eb 360deg);
-            transition: background 1s ease;
+            background: conic-gradient(#A0B2C2 0deg, #A0B2C2 var(--angle, 0deg), #D1D9DF var(--angle, 0deg), #D1D9DF 360deg);
+            transition: --angle 1s ease;
         }
         .score-ring-inner {
-            position: relative; z-index: 2; width: 170px; height: 170px; background: white;
+            position: absolute; top: 15px; left: 15px; width: 170px; height: 170px; background: white;
             border-radius: 50%; display: flex; flex-direction: column; align-items: center;
-            justify-content: center; margin: 15px;
+            justify-content: center; z-index: 2;
         }
-        .score-number { font-family: "Sansita", sans-serif; font-size: 56px; font-weight: 700; color: #2A384C; }
-        .score-out-of { font-size: 13px; color: #999; text-transform: uppercase; letter-spacing: 1px; }
+        .score-number { font-family: "Sansita", sans-serif; font-size: 56px; font-weight: 800; color: #2A384C; line-height: 1; }
+        .score-out-of { font-size: 13px; color: #999; text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
         .score-title { font-family: "Sansita", sans-serif; font-size: 32px; color: #2A384C; margin-bottom: 12px; }
         .score-desc { font-size: 16px; color: #666; max-width: 550px; margin: 0 auto 32px; line-height: 1.7; }
         .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0; text-align: left; }
         .metric-card {
-            background: #f7f7f7; border-radius: 8px; padding: 16px; display: flex;
+            background: #F0F0F0; border-radius: 8px; padding: 16px; display: flex;
             justify-content: space-between; align-items: center;
         }
         .metric-name { font-weight: 600; color: #2A384C; font-size: 14px; }
         .metric-score { color: #A0B2C2; font-weight: 700; font-size: 16px; }
         @media (max-width: 600px) { .metrics-grid { grid-template-columns: 1fr; } }
 
-        /* Features */
+        /* ── Features Section ── */
         .features-section { margin-top: 48px; }
         .features-section h3 { font-size: 22px; color: #2A384C; text-align: center; margin-bottom: 24px; }
         .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .feature-card {
-            background: white; padding: 24px; border-radius: 10px; text-align: center;
+            background: white; padding: 28px 24px; border-radius: 10px; text-align: center;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: transform 0.3s;
         }
         .feature-card:hover { transform: translateY(-4px); }
-        .feature-icon { font-size: 32px; margin-bottom: 10px; }
+        .feature-icon {
+            width: 48px; height: 48px; margin: 0 auto 14px;
+            background: #F0F0F0; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .feature-icon svg { width: 24px; height: 24px; stroke: #2A384C; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
         .feature-card h4 { font-size: 16px; color: #2A384C; margin-bottom: 6px; }
-        .feature-card p { font-size: 13px; color: #666; }
+        .feature-card p { font-size: 13px; color: #666; line-height: 1.5; }
         @media (max-width: 768px) { .features-grid { grid-template-columns: 1fr; } }
 
-        /* Footer */
+        /* ── Footer ── */
         footer {
-            background: #2A384C; color: #ccc; padding: 40px 20px; text-align: center; margin-top: 60px;
+            background: #2A384C; color: #ccc; padding: 48px 20px 32px; text-align: center; margin-top: 60px;
         }
+        .footer-inner { max-width: 800px; margin: 0 auto; }
         .footer-logo { max-width: 120px; height: auto; margin-bottom: 16px; }
-        footer h4 { font-family: "Sansita", sans-serif; font-size: 16px; color: white; margin-bottom: 8px; }
-        .footer-copyright { font-size: 13px; color: #999; margin-top: 16px; }
+        footer h4 { font-family: "Sansita", sans-serif; font-size: 18px; color: white; margin-bottom: 16px; }
+        .footer-areas { font-size: 14px; color: #A0B2C2; margin-bottom: 12px; line-height: 1.8; }
+        .footer-areas span { white-space: nowrap; }
+        .footer-areas .sep { margin: 0 6px; color: #4a5e72; }
+        .footer-phone {
+            display: inline-block; color: white; text-decoration: none; font-size: 16px;
+            font-weight: 600; margin: 12px 0 8px; transition: color 0.3s;
+        }
+        .footer-phone:hover { color: #A0B2C2; }
+        .footer-copyright { font-size: 13px; color: #6b7f92; margin-top: 20px; }
 
+        /* ── Utility ── */
         .hidden { display: none !important; }
+
+        @media (max-width: 480px) {
+            .card { padding: 24px 18px; }
+            .question-text { font-size: 22px; }
+        }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav>
+    <nav id="main-nav">
         <div class="nav-container">
             <a href="/" class="nav-logo">
-                <img src="https://signature.homegrownpropertygroup.com/logo.png" alt="Home Grown Property Group">
+                <img src="https://charlotte-sell-iluh5wd7.manus.space/logo_cropped.webp" alt="Home Grown Property Group">
                 <div class="nav-logo-text">
                     <div class="nav-logo-main">Home Grown Property Group</div>
-                    <div class="nav-logo-badge">Real Broker LLC</div>
+                    <div class="nav-logo-badge">2026 Seller's Guide</div>
                 </div>
             </a>
             <ul class="nav-links">
@@ -210,17 +273,33 @@
                 <li><a href="/quiz">Seller Quiz</a></li>
                 <li><a href="/home-selling-score">Home Score</a></li>
                 <li><a href="/neighborhoods">Neighborhoods</a></li>
+                <li><a href="/compare">Compare Areas</a></li>
                 <li><a href="/market-heatmap">Market Data</a></li>
                 <li><a href="/thank-you">Bonuses</a></li>
             </ul>
             <a href="/home-selling-score" class="nav-cta">Get Started</a>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="/" onclick="closeMobileMenu()">Home</a>
+        <a href="/quiz" onclick="closeMobileMenu()">Seller Quiz</a>
+        <a href="/home-selling-score" onclick="closeMobileMenu()">Home Score</a>
+        <a href="/neighborhoods" onclick="closeMobileMenu()">Neighborhoods</a>
+        <a href="/compare" onclick="closeMobileMenu()">Compare Areas</a>
+        <a href="/market-heatmap" onclick="closeMobileMenu()">Market Data</a>
+        <a href="/thank-you" onclick="closeMobileMenu()">Bonuses</a>
+        <a href="/home-selling-score" class="nav-cta" onclick="closeMobileMenu()">Get Started</a>
+    </div>
 
     <!-- Hero -->
     <section class="hero">
         <h1>Home Selling Score</h1>
-        <p>Get a personalized assessment of your home's market readiness with expert recommendations</p>
+        <p>Get a comprehensive assessment of your home's market readiness with personalized recommendations</p>
     </section>
 
     <div class="container">
@@ -263,43 +342,9 @@
                         <div class="error-msg" id="e-address">Please enter a property address</div>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Subdivision / Neighborhood</label>
-                        <input type="text" id="f-subdivision" placeholder="e.g., Myers Park">
-                    </div>
-                    <div class="form-group">
-                        <label>Year Built</label>
-                        <input type="number" id="f-year" placeholder="2005" min="1800" max="2026">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Bedrooms</label>
-                        <select id="f-beds">
-                            <option value="">Select</option>
-                            <option>1</option><option>2</option><option>3</option>
-                            <option>4</option><option>5</option><option>6+</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Bathrooms</label>
-                        <select id="f-baths">
-                            <option value="">Select</option>
-                            <option>1</option><option>1.5</option><option>2</option>
-                            <option>2.5</option><option>3</option><option>3.5</option>
-                            <option>4</option><option>5+</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row full">
-                    <div class="form-group">
-                        <label>Square Feet</label>
-                        <input type="number" id="f-sqft" placeholder="2500" min="0">
-                    </div>
-                </div>
                 <div class="btn-row">
-                    <button class="btn btn-primary" onclick="submitLeadForm()">Start Assessment →</button>
+                    <button class="btn btn-primary" onclick="submitLeadForm()">Start Assessment &rarr;</button>
+                    <button type="button" class="demo-link" onclick="startDemo()">Try Demo</button>
                 </div>
             </form>
         </div>
@@ -321,8 +366,8 @@
                 <p class="score-desc" id="score-desc"></p>
                 <div class="metrics-grid" id="metrics-grid"></div>
                 <div class="btn-row" style="justify-content:center;">
-                    <button class="btn btn-accent" onclick="window.location.href='/thank-you?unlocked=true'" style="max-width:320px;">
-                        Unlock Your Exclusive Bonuses →
+                    <button class="btn btn-accent" onclick="window.location.href='/thank-you?unlocked=true'" style="max-width:360px;">
+                        Unlock Your Exclusive Bonuses &rarr;
                     </button>
                 </div>
             </div>
@@ -333,17 +378,23 @@
             <h3>What's Included in Your Assessment</h3>
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">📊</div>
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 6-6"/><circle cx="21" cy="10" r="1" fill="#2A384C" stroke="none"/></svg>
+                    </div>
                     <h4>Market Analysis</h4>
-                    <p>Current Charlotte market trends and local demand for your home's competitive position.</p>
+                    <p>Current Charlotte market trends and local demand insights for your home's competitive position.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🏠</div>
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/><path d="M9 10h.01"/><path d="M15 10h.01"/></svg>
+                    </div>
                     <h4>Comparable Sales</h4>
                     <p>Recent sales of similar homes in your area to establish realistic pricing strategies.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">💡</div>
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M4.93 19.07l2.83-2.83"/><path d="M16.24 7.76l2.83-2.83"/></svg>
+                    </div>
                     <h4>Strategic Pricing</h4>
                     <p>Actionable insights on positioning your home for maximum appeal and optimal price.</p>
                 </div>
@@ -353,24 +404,63 @@
 
     <!-- Footer -->
     <footer>
-        <img src="https://signature.homegrownpropertygroup.com/logo.png" alt="Home Grown Property Group" class="footer-logo">
-        <h4>2026 Charlotte Seller's Guide</h4>
-        <div class="footer-copyright">© 2026 Home Grown Property Group. All rights reserved.</div>
+        <div class="footer-inner">
+            <img src="https://charlotte-sell-iluh5wd7.manus.space/homegrown-logo.png" alt="Home Grown Property Group" class="footer-logo">
+            <h4>2026 Charlotte Seller's Guide</h4>
+            <div class="footer-areas">
+                <span>Charlotte</span><span class="sep">&bull;</span>
+                <span>Fort Mill</span><span class="sep">&bull;</span>
+                <span>Indian Land</span><span class="sep">&bull;</span>
+                <span>Waxhaw</span><span class="sep">&bull;</span>
+                <span>Pineville</span><span class="sep">&bull;</span>
+                <span>Huntersville</span><span class="sep">&bull;</span>
+                <span>Cornelius</span><span class="sep">&bull;</span>
+                <span>Matthews</span><span class="sep">&bull;</span>
+                <span>Ballantyne</span>
+            </div>
+            <a href="tel:7046779191" class="footer-phone">(704) 677-9191</a>
+            <div class="footer-copyright">&copy; 2026 Home Grown Property Group. All rights reserved.</div>
+        </div>
     </footer>
 
     <script>
-    // ═══════════════════════════════════════════
+    // ═══════════════════════════════════════════════
+    // NAVIGATION
+    // ═══════════════════════════════════════════════
+    (function() {
+        var nav = document.getElementById('main-nav');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 10) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        });
+
+        var hamburger = document.getElementById('hamburger');
+        var mobileMenu = document.getElementById('mobile-menu');
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('open');
+            document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+        });
+    })();
+
+    function closeMobileMenu() {
+        document.getElementById('hamburger').classList.remove('active');
+        document.getElementById('mobile-menu').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    // ═══════════════════════════════════════════════
     // QUIZ DATA
-    // ═══════════════════════════════════════════
-    const quizData = [
+    // ═══════════════════════════════════════════════
+    var quizData = [
         {
             category: "Property Condition",
             question: "How would you describe the overall condition of your home?",
             options: [
-                { text: "Fully updated — move-in ready with modern finishes", score: 25 },
-                { text: "Mostly updated — minor cosmetic items needed", score: 20 },
-                { text: "Average condition — functional but dated", score: 14 },
-                { text: "Needs significant work — major repairs or updates required", score: 8 }
+                { text: "Fully updated \u2014 move-in ready with modern finishes", score: 25 },
+                { text: "Mostly updated \u2014 minor cosmetic items needed", score: 20 },
+                { text: "Average condition \u2014 functional but dated", score: 14 },
+                { text: "Needs significant work \u2014 major repairs or updates required", score: 8 }
             ]
         },
         {
@@ -387,71 +477,81 @@
             category: "Location & Demand",
             question: "How would you rate buyer demand in your neighborhood?",
             options: [
-                { text: "Very high — homes sell within days with multiple offers", score: 25 },
-                { text: "Strong — steady interest, homes sell within a few weeks", score: 20 },
-                { text: "Moderate — some interest but homes sit for 30-60 days", score: 14 },
-                { text: "Low — limited activity, homes take 60+ days to sell", score: 8 }
+                { text: "Very high \u2014 homes sell within days with multiple offers", score: 25 },
+                { text: "Strong \u2014 steady interest, homes sell within a few weeks", score: 20 },
+                { text: "Moderate \u2014 some interest but homes sit for 30\u201360 days", score: 14 },
+                { text: "Low \u2014 limited activity, homes take 60+ days to sell", score: 8 }
             ]
         },
         {
             category: "Selling Timeline",
             question: "When are you looking to sell your home?",
             options: [
-                { text: "Within 30 days — ready to list now", score: 25 },
-                { text: "1-3 months — preparing to list soon", score: 22 },
-                { text: "3-6 months — exploring my options", score: 16 },
-                { text: "Not sure yet — just getting information", score: 10 }
+                { text: "Within 30 days \u2014 ready to list now", score: 25 },
+                { text: "1\u20133 months \u2014 preparing to list soon", score: 22 },
+                { text: "3\u20136 months \u2014 exploring my options", score: 16 },
+                { text: "Not sure yet \u2014 just getting information", score: 10 }
             ]
         },
         {
             category: "Pricing Knowledge",
-            question: "How confident are you in your home's current market value?",
+            question: "How confident are you in your home\u2019s current market value?",
             options: [
-                { text: "Very confident — I've had a recent appraisal or CMA", score: 25 },
-                { text: "Somewhat confident — I track neighborhood sales", score: 20 },
-                { text: "Unsure — I have a rough idea but need guidance", score: 14 },
-                { text: "No idea — I haven't looked into it", score: 8 }
+                { text: "Very confident \u2014 I\u2019ve had a recent appraisal or CMA", score: 25 },
+                { text: "Somewhat confident \u2014 I track neighborhood sales", score: 20 },
+                { text: "Unsure \u2014 I have a rough idea but need guidance", score: 14 },
+                { text: "No idea \u2014 I haven\u2019t looked into it", score: 8 }
             ]
         },
         {
-            category: "Curb Appeal & Presentation",
+            category: "Curb Appeal",
             question: "How prepared is your home for showings and photos?",
             options: [
-                { text: "Showcase ready — professionally staged or decluttered", score: 25 },
-                { text: "Mostly ready — clean and organized, minor touch-ups needed", score: 20 },
-                { text: "Needs work — cluttered or dated, would benefit from staging", score: 14 },
-                { text: "Not prepared at all — significant decluttering and prep needed", score: 8 }
+                { text: "Showcase ready \u2014 professionally staged or decluttered", score: 25 },
+                { text: "Mostly ready \u2014 clean and organized, minor touch-ups needed", score: 20 },
+                { text: "Needs work \u2014 cluttered or dated, would benefit from staging", score: 14 },
+                { text: "Not prepared at all \u2014 significant decluttering and prep needed", score: 8 }
             ]
         }
     ];
 
-    const resultTiers = [
-        { min: 90, title: "Market Ready!", msg: "Your home is in an excellent position to sell. With the right pricing strategy and marketing plan, you could see strong offers quickly. Let's connect to build your custom listing strategy and maximize your return." },
-        { min: 75, title: "Strong Position", msg: "You're well-prepared for a successful sale. A few targeted improvements could push your score even higher. Our team can identify the specific upgrades that deliver the best ROI for your property." },
+    var resultTiers = [
+        { min: 90, title: "Market Ready!", msg: "Your home is in an excellent position to sell. With the right pricing strategy and marketing plan, you could see strong offers quickly. Let\u2019s connect to build your custom listing strategy and maximize your return." },
+        { min: 75, title: "Strong Position", msg: "You\u2019re well-prepared for a successful sale. A few targeted improvements could push your score even higher. Our team can identify the specific upgrades that deliver the best ROI for your property." },
         { min: 60, title: "Good Foundation", msg: "You have a solid starting point. With some strategic preparation and market guidance, your home can compete effectively. We recommend a consultation to create a targeted improvement plan." },
-        { min: 45, title: "Room to Grow", msg: "There's real potential here, but some preparation work will make a meaningful difference in your sale price and timeline. Let us help you prioritize the improvements that matter most." },
-        { min: 0, title: "Getting Started", msg: "Every successful home sale starts with a plan. We'll help you build a roadmap from preparation through closing day, so you're fully confident when the time comes to list." }
+        { min: 45, title: "Room to Grow", msg: "There\u2019s real potential here, but some preparation work will make a meaningful difference in your sale price and timeline. Let us help you prioritize the improvements that matter most." },
+        { min: 0, title: "Getting Started", msg: "Every successful home sale starts with a plan. We\u2019ll help you build a roadmap from preparation through closing day, so you\u2019re fully confident when the time comes to list." }
     ];
 
-    // ═══════════════════════════════════════════
+    // ═══════════════════════════════════════════════
     // STATE
-    // ═══════════════════════════════════════════
-    let currentStep = 0; // 0 = lead form, 1-6 = quiz, 7 = results
-    let answers = [];
-    let leadData = {};
+    // ═══════════════════════════════════════════════
+    var currentStep = 0; // 0 = lead form, 1-6 = quiz, 7 = results
+    var answers = [];
+    var leadData = {};
 
-    // ═══════════════════════════════════════════
+    // ═══════════════════════════════════════════════
+    // PROGRESS HELPER
+    // ═══════════════════════════════════════════════
+    function updateProgress(step, total) {
+        var pct = Math.round((step / total) * 100);
+        document.getElementById('progress-bar').style.width = pct + '%';
+        document.getElementById('progress-label').textContent = 'Step ' + step + ' of ' + total;
+        document.getElementById('progress-pct').textContent = pct + '%';
+    }
+
+    // ═══════════════════════════════════════════════
     // LEAD FORM
-    // ═══════════════════════════════════════════
+    // ═══════════════════════════════════════════════
     function submitLeadForm() {
-        const name = document.getElementById('f-name').value.trim();
-        const email = document.getElementById('f-email').value.trim();
-        const address = document.getElementById('f-address').value.trim();
-        let valid = true;
+        var name = document.getElementById('f-name').value.trim();
+        var email = document.getElementById('f-email').value.trim();
+        var address = document.getElementById('f-address').value.trim();
+        var valid = true;
 
         // Reset errors
-        document.querySelectorAll('.error-msg').forEach(e => e.classList.remove('show'));
-        document.querySelectorAll('input.error').forEach(e => e.classList.remove('error'));
+        document.querySelectorAll('.error-msg').forEach(function(e) { e.classList.remove('show'); });
+        document.querySelectorAll('input.error').forEach(function(e) { e.classList.remove('error'); });
 
         if (!name) {
             document.getElementById('e-name').classList.add('show');
@@ -468,26 +568,33 @@
             document.getElementById('f-address').classList.add('error');
             valid = false;
         }
-
         if (!valid) return;
 
         leadData = {
-            name, email, address,
-            phone: document.getElementById('f-phone').value.trim(),
-            subdivision: document.getElementById('f-subdivision').value.trim(),
-            yearBuilt: document.getElementById('f-year').value,
-            bedrooms: document.getElementById('f-beds').value,
-            bathrooms: document.getElementById('f-baths').value,
-            sqft: document.getElementById('f-sqft').value
+            name: name,
+            email: email,
+            address: address,
+            phone: document.getElementById('f-phone').value.trim()
         };
 
-        // Store lead flag
         try { localStorage.setItem('hgpg_lead', JSON.stringify(leadData)); } catch(e) {}
-
-        // Log lead data (connect to FUB webhook later)
         console.log('Lead captured:', leadData);
 
-        // Hide form, show quiz
+        startQuiz();
+    }
+
+    function startDemo() {
+        leadData = {
+            name: 'Demo User',
+            email: 'demo@example.com',
+            address: '123 Demo St, Charlotte, NC',
+            phone: ''
+        };
+        try { localStorage.setItem('hgpg_lead', JSON.stringify(leadData)); } catch(e) {}
+        startQuiz();
+    }
+
+    function startQuiz() {
         document.getElementById('step-0').classList.add('hidden');
         document.getElementById('quiz-container').classList.remove('hidden');
         currentStep = 1;
@@ -495,57 +602,57 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // ═══════════════════════════════════════════
+    // ═══════════════════════════════════════════════
     // QUIZ RENDERING
-    // ═══════════════════════════════════════════
+    // ═══════════════════════════════════════════════
     function renderQuestion() {
-        const idx = currentStep - 1;
-        const q = quizData[idx];
-        const total = quizData.length + 1; // +1 for lead form step
+        var idx = currentStep - 1;
+        var q = quizData[idx];
+        var totalSteps = quizData.length + 1; // +1 for lead form step
 
-        // Update progress
-        const pct = Math.round(((currentStep + 1) / (total + 1)) * 100);
-        document.getElementById('progress-bar').style.width = pct + '%';
-        document.getElementById('progress-label').textContent = `Step ${currentStep + 1} of ${total + 1}`;
-        document.getElementById('progress-pct').textContent = pct + '%';
+        updateProgress(currentStep + 1, totalSteps + 1);
 
-        let optionsHTML = '';
-        q.options.forEach((opt, i) => {
-            const id = `q${idx}-o${i}`;
-            optionsHTML += `
-                <li class="option-item">
-                    <input type="radio" id="${id}" name="q${idx}" class="option-input"
-                           data-index="${i}" ${answers[idx] === i ? 'checked' : ''}>
-                    <label for="${id}" class="option-label">
-                        <div class="option-radio"></div>
-                        <span class="option-text">${opt.text}</span>
-                    </label>
-                </li>`;
+        var optionsHTML = '';
+        q.options.forEach(function(opt, i) {
+            var id = 'q' + idx + '-o' + i;
+            optionsHTML +=
+                '<li class="option-item">' +
+                    '<input type="radio" id="' + id + '" name="q' + idx + '" class="option-input" data-index="' + i + '"' + (answers[idx] === i ? ' checked' : '') + '>' +
+                    '<label for="' + id + '" class="option-label">' +
+                        '<div class="option-radio"></div>' +
+                        '<span class="option-text">' + opt.text + '</span>' +
+                    '</label>' +
+                '</li>';
         });
 
-        document.getElementById('quiz-container').innerHTML = `
-            <div class="card">
-                <div class="step-label">${q.category} — Question ${currentStep} of ${quizData.length}</div>
-                <h2 class="question-text">${q.question}</h2>
-                <ul class="options-list">${optionsHTML}</ul>
-                <div class="btn-row">
-                    <button class="btn btn-secondary" onclick="prevQuestion()" ${currentStep === 1 ? 'disabled' : ''}>Back</button>
-                    <button class="btn btn-primary" onclick="nextQuestion()">
-                        ${currentStep === quizData.length ? 'See My Score' : 'Next →'}
-                    </button>
-                </div>
-            </div>`;
+        var isLast = currentStep === quizData.length;
+        document.getElementById('quiz-container').innerHTML =
+            '<div class="card">' +
+                '<div class="step-label">' + q.category + ' \u2014 Question ' + currentStep + ' of ' + quizData.length + '</div>' +
+                '<h2 class="question-text">' + q.question + '</h2>' +
+                '<ul class="options-list">' + optionsHTML + '</ul>' +
+                '<div class="btn-row">' +
+                    '<button class="btn btn-secondary" onclick="prevQuestion()"' + (currentStep === 1 ? ' disabled' : '') + '>Back</button>' +
+                    '<button class="btn btn-primary" onclick="nextQuestion()">' + (isLast ? 'See My Score' : 'Next &rarr;') + '</button>' +
+                '</div>' +
+            '</div>';
 
         // Bind radio listeners
-        document.querySelectorAll(`input[name="q${idx}"]`).forEach(input => {
-            input.addEventListener('change', e => { answers[idx] = parseInt(e.target.dataset.index); });
+        document.querySelectorAll('input[name="q' + idx + '"]').forEach(function(input) {
+            input.addEventListener('change', function(e) {
+                answers[idx] = parseInt(e.target.dataset.index);
+            });
         });
     }
 
     function nextQuestion() {
-        const idx = currentStep - 1;
+        var idx = currentStep - 1;
         if (answers[idx] === undefined) {
-            alert('Please select an answer before continuing.');
+            // Brief shake animation on the options
+            var card = document.querySelector('#quiz-container .card');
+            card.style.animation = 'none';
+            card.offsetHeight; // trigger reflow
+            card.style.animation = '';
             return;
         }
         if (currentStep === quizData.length) {
@@ -565,25 +672,22 @@
         }
     }
 
-    // ═══════════════════════════════════════════
+    // ═══════════════════════════════════════════════
     // RESULTS
-    // ═══════════════════════════════════════════
+    // ═══════════════════════════════════════════════
     function showResults() {
-        // Calculate scores per category
-        let totalScore = 0;
-        const categoryScores = [];
-        answers.forEach((ansIdx, qIdx) => {
-            const score = quizData[qIdx].options[ansIdx].score;
+        var totalScore = 0;
+        var categoryScores = [];
+        answers.forEach(function(ansIdx, qIdx) {
+            var score = quizData[qIdx].options[ansIdx].score;
             totalScore += score;
             categoryScores.push({ name: quizData[qIdx].category, score: score, max: 25 });
         });
 
-        // Normalize to 100
-        const maxPossible = quizData.length * 25;
-        const normalizedScore = Math.round((totalScore / maxPossible) * 100);
+        var maxPossible = quizData.length * 25;
+        var normalizedScore = Math.round((totalScore / maxPossible) * 100);
 
-        // Find tier
-        const tier = resultTiers.find(t => normalizedScore >= t.min);
+        var tier = resultTiers.find(function(t) { return normalizedScore >= t.min; });
 
         // Update progress to 100%
         document.getElementById('progress-bar').style.width = '100%';
@@ -595,35 +699,40 @@
         document.getElementById('features-section').classList.add('hidden');
         document.getElementById('results-container').classList.remove('hidden');
 
-        // Animate score
-        const scoreEl = document.getElementById('score-val');
-        const ringEl = document.getElementById('score-ring');
-        let current = 0;
-        const interval = setInterval(() => {
+        // Animate score counter and ring
+        var scoreEl = document.getElementById('score-val');
+        var ringEl = document.getElementById('score-ring');
+        var current = 0;
+        var duration = 1200; // ms
+        var frameInterval = Math.max(duration / normalizedScore, 12);
+        var interval = setInterval(function() {
             current++;
             if (current > normalizedScore) { clearInterval(interval); return; }
             scoreEl.textContent = current;
-            const angle = (current / 100) * 360;
-            ringEl.style.setProperty('--angle', angle + 'deg');
-        }, 20);
+            var angle = (current / 100) * 360;
+            ringEl.style.background = 'conic-gradient(#A0B2C2 0deg, #A0B2C2 ' + angle + 'deg, #D1D9DF ' + angle + 'deg, #D1D9DF 360deg)';
+        }, frameInterval);
 
         document.getElementById('score-title').textContent = tier.title;
         document.getElementById('score-desc').textContent = tier.msg;
 
-        // Metrics
-        let metricsHTML = '';
-        categoryScores.forEach(cat => {
-            const catPct = Math.round((cat.score / cat.max) * 100);
-            metricsHTML += `
-                <div class="metric-card">
-                    <span class="metric-name">${cat.name}</span>
-                    <span class="metric-score">${catPct}/100</span>
-                </div>`;
+        // Metrics grid
+        var metricsHTML = '';
+        categoryScores.forEach(function(cat) {
+            var catPct = Math.round((cat.score / cat.max) * 100);
+            metricsHTML +=
+                '<div class="metric-card">' +
+                    '<span class="metric-name">' + cat.name + '</span>' +
+                    '<span class="metric-score">' + catPct + '/100</span>' +
+                '</div>';
         });
         document.getElementById('metrics-grid').innerHTML = metricsHTML;
 
-        // Store completion flag
-        try { localStorage.setItem('hgpg_score_complete', 'true'); } catch(e) {}
+        // Store completion
+        try {
+            localStorage.setItem('hgpg_score_complete', 'true');
+            localStorage.setItem('hgpg_score_value', normalizedScore.toString());
+        } catch(e) {}
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }

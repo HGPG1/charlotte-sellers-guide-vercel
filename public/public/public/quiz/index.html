@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seller Readiness Quiz - 2026 Charlotte Seller's Guide</title>
-    <link href="https://fonts.googleapis.com/css2?family=Sansita:wght@400;700;800&family=Cooper+Hewitt:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sansita:ital,wght@0,400;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,11 +12,19 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Cooper Hewitt', system-ui, -apple-system, sans-serif;
-            color: #2A384C;
+            font-family: system-ui, -apple-system, sans-serif;
+            color: #333;
             background-color: #f7f7f7;
             line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: "Sansita", system-ui, -apple-system, sans-serif;
         }
 
         /* Navigation */
@@ -24,14 +32,21 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            background-color: #2A384C;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        nav.scrolled {
+            border-bottom-color: #e5e7eb;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -39,25 +54,47 @@
         }
 
         .nav-logo {
-            font-family: 'Sansita', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: white;
+            display: flex;
+            align-items: center;
+            gap: 12px;
             text-decoration: none;
-            letter-spacing: 0.5px;
+            color: #1a1a1a;
+        }
+
+        .nav-logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-logo-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .nav-logo-main {
+            font-family: "Sansita", system-ui, -apple-system, sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 1;
+        }
+
+        .nav-logo-badge {
+            font-size: 10px;
+            color: #666;
         }
 
         .nav-links {
             display: flex;
-            gap: 30px;
-            align-items: center;
+            gap: 20px;
             list-style: none;
+            white-space: nowrap;
         }
 
         .nav-links a {
-            color: #f7f7f7;
             text-decoration: none;
-            font-size: 14px;
+            color: #1a1a1a;
+            font-size: 13px;
             font-weight: 500;
             transition: color 0.3s ease;
         }
@@ -66,31 +103,131 @@
             color: #A0B2C2;
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
         .nav-cta {
-            background-color: #A0B2C2;
+            background-color: #2A384C;
             color: white;
-            padding: 10px 20px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 600;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 6px;
             font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
             transition: background-color 0.3s ease;
         }
 
         .nav-cta:hover {
-            background-color: #8A9DB0;
+            background-color: #1F2D3D;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: #2A384C;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 20px 24px;
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 12px 0;
+            text-decoration: none;
+            color: #1a1a1a;
+            font-size: 15px;
+            font-weight: 500;
+            border-bottom: 1px solid #f0f0f0;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-menu a:hover {
+            color: #A0B2C2;
+        }
+
+        .mobile-menu .mobile-cta {
+            display: block;
+            margin-top: 16px;
+            background-color: #2A384C;
+            color: white;
+            text-align: center;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .nav-cta {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-container {
+                height: 60px;
+            }
+
+            .nav-logo img {
+                height: 32px;
+            }
+
+            .mobile-menu {
+                top: 60px;
+            }
         }
 
         /* Hero Section */
         .hero {
-            background-color: #2A384C;
+            background: linear-gradient(135deg, #2A384C, #3A4D63);
             color: white;
             padding: 60px 20px;
             text-align: center;
         }
 
         .hero h1 {
-            font-family: 'Sansita', sans-serif;
             font-size: 48px;
             font-weight: 800;
             margin-bottom: 15px;
@@ -99,7 +236,7 @@
 
         .hero p {
             font-size: 18px;
-            color: #e0e0e0;
+            color: #D1D9DF;
             max-width: 600px;
             margin: 0 auto;
             font-weight: 400;
@@ -150,6 +287,7 @@
             min-height: 400px;
             display: flex;
             flex-direction: column;
+            animation: fadeIn 0.4s ease;
         }
 
         .question-number {
@@ -196,12 +334,12 @@
 
         .option-label:hover {
             border-color: #A0B2C2;
-            background-color: #fff5f3;
+            background-color: #f5f8fa;
         }
 
         .option-input:checked + .option-label {
             border-color: #A0B2C2;
-            background-color: #fff5f3;
+            background-color: #f0f4f8;
             font-weight: 600;
         }
 
@@ -319,8 +457,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 160px;
-            height: 160px;
+            width: 150px;
+            height: 150px;
             background-color: white;
             border-radius: 50%;
         }
@@ -393,31 +531,63 @@
             }
         }
 
-        .quiz-card {
-            animation: fadeIn 0.4s ease;
-        }
-
         /* Footer */
         footer {
-            background-color: #2A384C;
-            color: white;
+            background: #2A384C;
+            color: #ccc;
+            padding: 40px 20px;
             text-align: center;
-            padding: 30px 20px;
             margin-top: 60px;
-            font-size: 14px;
         }
 
-        footer p {
-            margin: 5px 0;
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            max-width: 160px;
+            height: auto;
+            margin-bottom: 16px;
+        }
+
+        footer h4 {
+            font-family: "Sansita", system-ui, -apple-system, sans-serif;
+            font-size: 16px;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .footer-areas {
+            font-size: 13px;
+            color: #A0B2C2;
+            margin-bottom: 12px;
+            line-height: 1.8;
+        }
+
+        .footer-contact {
+            font-size: 14px;
+            color: #D1D9DF;
+            margin-bottom: 16px;
+        }
+
+        .footer-contact a {
+            color: #D1D9DF;
+            text-decoration: none;
+        }
+
+        .footer-contact a:hover {
+            color: white;
+        }
+
+        .footer-copyright {
+            font-size: 13px;
+            color: #999;
+            margin-top: 16px;
         }
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
-            .nav-links {
-                gap: 15px;
-                font-size: 12px;
-            }
-
             .hero h1 {
                 font-size: 36px;
             }
@@ -464,6 +634,11 @@
                 margin-bottom: 20px;
             }
 
+            .score-inner {
+                width: 120px;
+                height: 120px;
+            }
+
             .score-number {
                 font-size: 44px;
             }
@@ -481,31 +656,7 @@
             }
         }
 
-        @media (max-width: 600px) {
-            .nav-container {
-                height: auto;
-                padding: 12px 15px;
-                flex-wrap: wrap;
-                gap: 15px;
-            }
-
-            .nav-logo {
-                font-size: 16px;
-            }
-
-            .nav-links {
-                flex-direction: column;
-                gap: 10px;
-                width: 100%;
-                order: 3;
-            }
-
-            .nav-cta {
-                width: 100%;
-                text-align: center;
-                order: 4;
-            }
-
+        @media (max-width: 480px) {
             .hero {
                 padding: 40px 15px;
             }
@@ -518,9 +669,15 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav>
+    <nav id="main-nav">
         <div class="nav-container">
-            <a href="/" class="nav-logo"><img src="https://signature.homegrownpropertygroup.com/logo.png" alt="Home Grown Property Group" style="height:40px;width:auto;margin-right:10px;">Home Grown Property Group</a>
+            <a href="/" class="nav-logo">
+                <img src="https://charlotte-sell-iluh5wd7.manus.space/logo_cropped.webp" alt="Home Grown Property Group">
+                <div class="nav-logo-text">
+                    <span class="nav-logo-main">Home Grown Property Group</span>
+                    <span class="nav-logo-badge">2026 Seller's Guide</span>
+                </div>
+            </a>
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="/quiz">Seller Quiz</a></li>
@@ -530,7 +687,24 @@
                 <li><a href="/market-heatmap">Market Data</a></li>
                 <li><a href="/thank-you">Bonuses</a></li>
             </ul>
-            <a href="/home-selling-score" class="nav-cta">Get Started</a>
+            <div class="nav-right">
+                <a href="/home-selling-score" class="nav-cta">Get Started</a>
+                <button class="hamburger" id="hamburger-btn" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="/">Home</a>
+            <a href="/quiz">Seller Quiz</a>
+            <a href="/home-selling-score">Home Score</a>
+            <a href="/neighborhoods">Neighborhoods</a>
+            <a href="/compare">Compare Areas</a>
+            <a href="/market-heatmap">Market Data</a>
+            <a href="/thank-you">Bonuses</a>
+            <a href="/home-selling-score" class="mobile-cta">Get Started</a>
         </div>
     </nav>
 
@@ -543,7 +717,7 @@
     <!-- Main Content -->
     <div class="container">
         <!-- Progress Section -->
-        <div class="progress-section">
+        <div class="progress-section" id="progress-section">
             <div class="progress-text">
                 <span id="progress-label">Question 1 of 5</span>
                 <span id="progress-percent">20%</span>
@@ -564,14 +738,12 @@
                 <div class="score-circle">
                     <div class="score-circle-bg" id="score-bg"></div>
                     <div class="score-inner">
-                        <div class="score-number" id="final-score">75</div>
+                        <div class="score-number" id="final-score">0</div>
                         <div class="score-label">out of 100</div>
                     </div>
                 </div>
-                <h2 class="results-heading" id="results-title">Well Prepared!</h2>
-                <p class="results-text" id="results-message">
-                    You have a solid understanding of what it takes to sell in Charlotte's market. Consider scheduling a consultation to refine your strategy.
-                </p>
+                <h2 class="results-heading" id="results-title"></h2>
+                <p class="results-text" id="results-message"></p>
                 <a href="/home-selling-score" class="results-cta">Get Your Home Selling Score</a>
             </div>
         </div>
@@ -579,84 +751,110 @@
 
     <!-- Footer -->
     <footer>
-        <p><strong>2026 Charlotte Seller's Guide</strong></p>
-        <p>&copy; 2026 Home Grown Property Group. All rights reserved.</p>
+        <div class="footer-container">
+            <img src="https://charlotte-sell-iluh5wd7.manus.space/homegrown-logo.png" alt="Home Grown Property Group" class="footer-logo">
+            <h4>2026 Charlotte Seller's Guide</h4>
+            <p class="footer-areas">Charlotte | Fort Mill | Indian Land | Waxhaw | Pineville | Huntersville | Cornelius | Matthews | Ballantyne</p>
+            <p class="footer-contact"><a href="tel:7046779191">(704) 677-9191</a></p>
+            <div class="footer-copyright">&copy; 2026 Home Grown Property Group. All rights reserved.</div>
+        </div>
     </footer>
 
     <script>
+        // Scroll-triggered nav border
+        window.addEventListener('scroll', function() {
+            var nav = document.getElementById('main-nav');
+            if (window.scrollY > 10) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile hamburger toggle
+        var hamburgerBtn = document.getElementById('hamburger-btn');
+        var mobileMenu = document.getElementById('mobile-menu');
+
+        hamburgerBtn.addEventListener('click', function() {
+            mobileMenu.classList.toggle('active');
+        });
+
         // Quiz data
-        const quizData = [
+        var quizData = [
             {
                 id: 1,
                 question: "When are you planning to sell your home?",
                 options: [
-                    "Within 30 days",
+                    "Already listed",
                     "1-3 months",
                     "3-6 months",
-                    "Not sure yet"
+                    "6-12 months",
+                    "Just exploring"
                 ],
-                scores: [25, 20, 15, 10]
+                scores: [20, 16, 12, 8, 4]
             },
             {
                 id: 2,
-                question: "Have you had your home professionally appraised or evaluated?",
+                question: "How would you describe your home's current condition?",
                 options: [
-                    "Yes within last 6 months",
-                    "Yes but over 6 months ago",
-                    "No but I know my neighborhood values",
-                    "No I have no idea"
+                    "Move-in ready with modern updates",
+                    "Needs minor cosmetic updates",
+                    "Needs moderate work and updates",
+                    "Needs major renovation",
+                    "Not sure about condition"
                 ],
-                scores: [25, 20, 15, 10]
+                scores: [20, 16, 12, 8, 4]
             },
             {
                 id: 3,
-                question: "What updates or improvements have you made recently?",
+                question: "How familiar are you with the current Charlotte real estate market?",
                 options: [
-                    "Major renovation in last 2 years",
-                    "Minor updates (paint/fixtures/landscaping)",
-                    "Basic maintenance only",
-                    "None"
+                    "Very familiar \u2014 I follow trends regularly",
+                    "Somewhat familiar \u2014 I know the basics",
+                    "Basic understanding only",
+                    "Limited knowledge",
+                    "Not at all familiar"
                 ],
-                scores: [25, 20, 15, 10]
+                scores: [20, 16, 12, 8, 4]
             },
             {
                 id: 4,
-                question: "How would you describe your local market knowledge?",
+                question: "How would you describe your financial readiness to sell?",
                 options: [
-                    "Very informed - I follow market trends regularly",
-                    "Somewhat informed - I know basics",
-                    "Not very informed - I need guidance",
-                    "No knowledge of current market"
+                    "Fully prepared \u2014 finances are in order",
+                    "Mostly prepared \u2014 a few things to finalize",
+                    "Somewhat prepared \u2014 need to review finances",
+                    "Not really prepared \u2014 significant planning needed",
+                    "Haven't considered financial aspects"
                 ],
-                scores: [25, 20, 15, 10]
+                scores: [20, 16, 12, 8, 4]
             },
             {
                 id: 5,
-                question: "What's your primary motivation for selling?",
+                question: "How emotionally ready are you to sell your home?",
                 options: [
-                    "Upgrading to a larger home",
-                    "Downsizing",
-                    "Relocating for work/life",
-                    "Investment/financial reasons"
+                    "Completely ready \u2014 excited to move on",
+                    "Mostly ready \u2014 comfortable with the decision",
+                    "Mixed feelings \u2014 some attachment",
+                    "Reluctant \u2014 difficult decision",
+                    "Not ready \u2014 not sure I want to sell"
                 ],
-                scores: [20, 20, 20, 20]
+                scores: [20, 16, 12, 8, 4]
             }
         ];
 
         // Results messages
-        const resultMessages = {
-            90: { title: "Excellent!", message: "You're exceptionally well-prepared to sell your home in Charlotte's market. You have strong market knowledge and a clear timeline. Let's maximize your home's value with our expert guidance." },
-            80: { title: "Well Prepared!", message: "You have a solid understanding of what it takes to sell in Charlotte's market. Consider scheduling a consultation to refine your strategy and address any remaining gaps." },
-            70: { title: "Good Foundation", message: "You're on the right track with your home selling preparation. We recommend getting professional appraisal and market analysis to strengthen your position and increase your confidence." },
-            60: { title: "Ready to Learn", message: "You have some important preparation steps ahead. Let us help you develop a comprehensive home selling strategy tailored to Charlotte's 2026 market conditions." },
-            50: { title: "Getting Started", message: "You're at the beginning of your home selling journey. We're here to guide you through every step, from market evaluation to closing, ensuring you're fully prepared." },
-            0: { title: "Just Beginning", message: "Don't worry – many sellers start right where you are. Let us help you build a solid foundation and develop a winning strategy for selling your home in Charlotte." }
-        };
+        var resultMessages = [
+            { min: 90, max: 100, title: "Excellent!", message: "You're exceptionally well-prepared to sell your home in Charlotte's 2026 market. You have strong market knowledge, financial readiness, and a clear timeline. Let's maximize your home's value with our expert guidance." },
+            { min: 76, max: 89, title: "Well Prepared!", message: "You have a solid understanding of what it takes to sell in Charlotte's market. Consider scheduling a consultation to refine your strategy and address any remaining gaps in your preparation." },
+            { min: 60, max: 75, title: "Good Foundation", message: "You're on the right track with your home selling preparation. A professional market analysis and personalized consultation will help strengthen your position and boost your confidence." },
+            { min: 40, max: 59, title: "Ready to Learn", message: "You have some important preparation steps ahead, but that's completely normal. Let us help you develop a comprehensive selling strategy tailored to Charlotte's 2026 market conditions." },
+            { min: 20, max: 39, title: "Getting Started", message: "You're at the beginning of your home selling journey, and there's no better time to start planning. We're here to guide you through every step, from market evaluation to closing day." }
+        ];
 
         // State
-        let currentQuestion = 0;
-        let answers = [];
-        let totalScore = 0;
+        var currentQuestion = 0;
+        var answers = [];
 
         // Initialize quiz
         function initQuiz() {
@@ -665,69 +863,54 @@
 
         // Render current question
         function renderQuestion() {
-            const quizContainer = document.getElementById('quiz-container');
+            var quizContainer = document.getElementById('quiz-container');
             quizContainer.innerHTML = '';
 
-            const question = quizData[currentQuestion];
-            const card = document.createElement('div');
+            var question = quizData[currentQuestion];
+            var card = document.createElement('div');
             card.className = 'quiz-card';
 
-            let optionsHTML = '';
-            question.options.forEach((option, index) => {
-                const optionId = `option-${currentQuestion}-${index}`;
-                optionsHTML += `
-                    <li class="option-item">
-                        <input
-                            type="radio"
-                            id="${optionId}"
-                            name="answer"
-                            class="option-input"
-                            data-index="${index}"
-                            data-score="${question.scores[index]}"
-                            ${answers[currentQuestion] === index ? 'checked' : ''}
-                        >
-                        <label for="${optionId}" class="option-label">
-                            <div class="custom-radio"></div>
-                            <span class="option-text">${option}</span>
-                        </label>
-                    </li>
-                `;
-            });
+            var optionsHTML = '';
+            for (var i = 0; i < question.options.length; i++) {
+                var optionId = 'option-' + currentQuestion + '-' + i;
+                var checked = answers[currentQuestion] === i ? 'checked' : '';
+                optionsHTML += '<li class="option-item">' +
+                    '<input type="radio" id="' + optionId + '" name="answer" class="option-input" data-index="' + i + '" data-score="' + question.scores[i] + '" ' + checked + '>' +
+                    '<label for="' + optionId + '" class="option-label">' +
+                    '<div class="custom-radio"></div>' +
+                    '<span class="option-text">' + question.options[i] + '</span>' +
+                    '</label>' +
+                    '</li>';
+            }
 
-            card.innerHTML = `
-                <div class="question-number">Question ${currentQuestion + 1} of 5</div>
-                <h2 class="question-text">${question.question}</h2>
-                <ul class="options-list">
-                    ${optionsHTML}
-                </ul>
-                <div class="quiz-controls">
-                    <button class="btn btn-secondary" id="btn-back" onclick="previousQuestion()" ${currentQuestion === 0 ? 'disabled' : ''}>
-                        Back
-                    </button>
-                    <button class="btn btn-primary" id="btn-next" onclick="nextQuestion()">
-                        ${currentQuestion === 4 ? 'See Results' : 'Next'}
-                    </button>
-                </div>
-            `;
+            card.innerHTML =
+                '<div class="question-number">Question ' + (currentQuestion + 1) + ' of 5</div>' +
+                '<h2 class="question-text">' + question.question + '</h2>' +
+                '<ul class="options-list">' + optionsHTML + '</ul>' +
+                '<div class="quiz-controls">' +
+                '<button class="btn btn-secondary" id="btn-back" onclick="previousQuestion()" ' + (currentQuestion === 0 ? 'disabled' : '') + '>Back</button>' +
+                '<button class="btn btn-primary" id="btn-next" onclick="nextQuestion()">' + (currentQuestion === 4 ? 'See Results' : 'Next') + '</button>' +
+                '</div>';
 
             quizContainer.appendChild(card);
 
             // Add event listeners to radio buttons
-            document.querySelectorAll('.option-input').forEach(input => {
-                input.addEventListener('change', (e) => {
-                    const index = parseInt(e.target.dataset.index);
+            var inputs = document.querySelectorAll('.option-input');
+            for (var j = 0; j < inputs.length; j++) {
+                inputs[j].addEventListener('change', function(e) {
+                    var index = parseInt(e.target.dataset.index);
                     answers[currentQuestion] = index;
                 });
-            });
+            }
 
             updateProgress();
         }
 
         // Update progress bar
         function updateProgress() {
-            const percentage = ((currentQuestion + 1) / 5) * 100;
+            var percentage = ((currentQuestion + 1) / 5) * 100;
             document.getElementById('progress-bar').style.width = percentage + '%';
-            document.getElementById('progress-label').textContent = `Question ${currentQuestion + 1} of 5`;
+            document.getElementById('progress-label').textContent = 'Question ' + (currentQuestion + 1) + ' of 5';
             document.getElementById('progress-percent').textContent = Math.round(percentage) + '%';
         }
 
@@ -743,7 +926,7 @@
             } else {
                 currentQuestion++;
                 renderQuestion();
-                window.scrollTo(0, 0);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
 
@@ -752,51 +935,43 @@
             if (currentQuestion > 0) {
                 currentQuestion--;
                 renderQuestion();
-                window.scrollTo(0, 0);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
 
         // Calculate and show results
         function showResults() {
-            // Calculate total score
-            totalScore = 0;
-            answers.forEach((answerIndex, questionIndex) => {
-                if (answerIndex !== undefined) {
-                    totalScore += quizData[questionIndex].scores[answerIndex];
+            var totalScore = 0;
+            for (var i = 0; i < answers.length; i++) {
+                if (answers[i] !== undefined) {
+                    totalScore += quizData[i].scores[answers[i]];
                 }
-            });
+            }
 
-            // Determine result message
-            let resultMessage = resultMessages[90];
-            if (totalScore >= 90) {
-                resultMessage = resultMessages[90];
-            } else if (totalScore >= 80) {
-                resultMessage = resultMessages[80];
-            } else if (totalScore >= 70) {
-                resultMessage = resultMessages[70];
-            } else if (totalScore >= 60) {
-                resultMessage = resultMessages[60];
-            } else if (totalScore >= 50) {
-                resultMessage = resultMessages[50];
-            } else {
-                resultMessage = resultMessages[0];
+            // Find matching result message
+            var result = resultMessages[resultMessages.length - 1];
+            for (var j = 0; j < resultMessages.length; j++) {
+                if (totalScore >= resultMessages[j].min && totalScore <= resultMessages[j].max) {
+                    result = resultMessages[j];
+                    break;
+                }
             }
 
             // Update results UI
             document.getElementById('final-score').textContent = totalScore;
-            document.getElementById('results-title').textContent = resultMessage.title;
-            document.getElementById('results-message').textContent = resultMessage.message;
+            document.getElementById('results-title').textContent = result.title;
+            document.getElementById('results-message').textContent = result.message;
 
             // Calculate and set circular progress angle
-            const scoreAngle = (totalScore / 100) * 360;
+            var scoreAngle = (totalScore / 100) * 360;
             document.getElementById('score-bg').style.setProperty('--score-angle', scoreAngle + 'deg');
 
-            // Hide quiz, show results
+            // Hide quiz and progress, show results
             document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('progress-section').classList.add('hidden');
             document.getElementById('results-container').style.display = 'block';
-            document.getElementById('results-container').classList.remove('hidden');
 
-            window.scrollTo(0, 0);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         // Start the quiz

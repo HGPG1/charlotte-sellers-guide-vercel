@@ -3,60 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neighborhoods - 2026 Charlotte Seller's Guide</title>
-    <link href="https://fonts.googleapis.com/css2?family=Sansita:wght@400;700;900&family=Cooper+Hewitt:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Neighborhood Guide - 2026 Charlotte Seller's Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sansita:ital,wght@0,400;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
     <style>
-        * {
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
         body {
-            font-family: 'Cooper Hewitt', system-ui, -apple-system, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             color: #2A384C;
-            background-color: #f7f7f7;
+            background-color: #F0F0F0;
             line-height: 1.6;
         }
 
-        /* Navigation */
+        /* ============ NAVIGATION ============ */
         nav {
             position: sticky;
             top: 0;
             z-index: 1000;
-            background-color: #2A384C;
-            padding: 1rem 2rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 0 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 2rem;
+            height: 64px;
+            transition: box-shadow 0.3s ease;
         }
 
-        .nav-brand {
-            font-family: 'Sansita', sans-serif;
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: white;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
+        nav.scrolled {
+            box-shadow: 0 2px 16px rgba(42, 56, 76, 0.12);
+        }
+
+        .nav-logo {
+            flex-shrink: 0;
+        }
+
+        .nav-logo img {
+            height: 40px;
+            width: auto;
+            display: block;
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 1.5rem;
             align-items: center;
-            flex-wrap: wrap;
         }
 
         .nav-links a {
-            color: white;
             text-decoration: none;
-            font-size: 0.95rem;
-            transition: color 0.3s;
+            color: #2A384C;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+            white-space: nowrap;
         }
 
         .nav-links a:hover {
@@ -64,56 +70,384 @@
         }
 
         .nav-cta {
-            background-color: #A0B2C2;
-            color: white;
-            padding: 0.7rem 1.5rem;
-            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .nav-cta a {
+            display: inline-block;
+            background: #2A384C;
+            color: #fff;
+            padding: 0.5rem 1.25rem;
+            border-radius: 6px;
             text-decoration: none;
+            font-size: 0.9rem;
             font-weight: 600;
-            transition: background-color 0.3s;
+            transition: background 0.2s, transform 0.2s;
         }
 
-        .nav-cta:hover {
-            background-color: #8A9DB0;
+        .nav-cta a:hover {
+            background: #3d5068;
+            transform: translateY(-1px);
         }
 
-        @media (max-width: 768px) {
-            nav {
-                flex-direction: column;
-                gap: 1rem;
-                padding: 1rem;
-            }
-
-            .nav-links {
-                gap: 1rem;
-                justify-content: center;
-                width: 100%;
-            }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
         }
 
-        /* Hero Banner */
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2.5px;
+            background: #2A384C;
+            border-radius: 2px;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(7.5px) rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-7.5px) rotate(-45deg);
+        }
+
+        /* ============ HERO ============ */
         .hero {
-            background: linear-gradient(135deg, #2A384C 0%, #3A4D63 100%);
-            color: white;
-            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #2A384C 0%, #3d5068 50%, #2A384C 100%);
+            color: #fff;
             text-align: center;
+            padding: 5rem 2rem 4rem;
         }
 
         .hero h1 {
             font-family: 'Sansita', sans-serif;
             font-size: 3rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
         }
 
         .hero p {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
+            color: #D1D9DF;
             max-width: 600px;
             margin: 0 auto;
-            opacity: 0.95;
+        }
+
+        /* ============ SEARCH ============ */
+        .search-section {
+            max-width: 1200px;
+            margin: -1.5rem auto 0;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .search-wrapper {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(42, 56, 76, 0.1);
+            padding: 0.5rem;
+        }
+
+        .search-wrapper input {
+            width: 100%;
+            border: 2px solid #D1D9DF;
+            border-radius: 8px;
+            padding: 1rem 1.25rem 1rem 3rem;
+            font-size: 1.05rem;
+            color: #2A384C;
+            outline: none;
+            transition: border-color 0.2s;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' stroke='%23A0B2C2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='9' cy='9' r='7'/%3E%3Cline x1='15' y1='15' x2='19' y2='19'/%3E%3C/svg%3E") no-repeat 1rem center;
+        }
+
+        .search-wrapper input:focus {
+            border-color: #A0B2C2;
+        }
+
+        .search-wrapper input::placeholder {
+            color: #A0B2C2;
+        }
+
+        /* ============ TABS ============ */
+        .tabs-section {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding: 0 2rem;
+        }
+
+        .tabs-container {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding-bottom: 0.25rem;
+        }
+
+        .tabs-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-btn {
+            flex-shrink: 0;
+            background: #fff;
+            border: 2px solid #D1D9DF;
+            border-radius: 8px;
+            padding: 0.6rem 1.25rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #2A384C;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            border-color: #A0B2C2;
+            background: #fff;
+        }
+
+        .tab-btn.active {
+            background: #2A384C;
+            border-color: #2A384C;
+            color: #fff;
+        }
+
+        /* ============ CARDS GRID ============ */
+        .cards-section {
+            max-width: 1200px;
+            margin: 1.5rem auto 3rem;
+            padding: 0 2rem;
+        }
+
+        .region-panel {
+            display: none;
+        }
+
+        .region-panel.active {
+            display: block;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 1.75rem;
+            box-shadow: 0 2px 8px rgba(42, 56, 76, 0.06);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            border: 1px solid #e8ebee;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 28px rgba(42, 56, 76, 0.12);
+        }
+
+        .card h3 {
+            font-family: 'Sansita', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2A384C;
+            margin-bottom: 1rem;
+        }
+
+        .card-stats {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #A0B2C2;
+            font-weight: 600;
+        }
+
+        .stat-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #2A384C;
+        }
+
+        .stat-value.price {
+            font-size: 1.35rem;
+            color: #2A384C;
+        }
+
+        .stat-value.positive {
+            color: #6a9ab5;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: #5a6a7a;
+            line-height: 1.55;
+            border-top: 1px solid #F0F0F0;
+            padding-top: 0.85rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Search results mode */
+        .search-active .region-panel {
+            display: none !important;
+        }
+
+        .search-results {
+            display: none;
+        }
+
+        .search-active .search-results {
+            display: block;
+        }
+
+        .search-results .cards-grid {
+            display: grid;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #A0B2C2;
+            font-size: 1.1rem;
+        }
+
+        /* ============ FOOTER ============ */
+        footer {
+            background: #2A384C;
+            color: #D1D9DF;
+            padding: 3rem 2rem 2rem;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .footer-brand img {
+            height: 50px;
+            width: auto;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        .footer-brand p {
+            font-size: 0.95rem;
+            color: #A0B2C2;
+        }
+
+        .footer-info h4 {
+            font-family: 'Sansita', sans-serif;
+            font-size: 1rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-info p, .footer-info a {
+            font-size: 0.9rem;
+            color: #A0B2C2;
+            text-decoration: none;
+            line-height: 1.7;
+        }
+
+        .footer-info a:hover {
+            color: #fff;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(160, 178, 194, 0.2);
+            text-align: center;
+            font-size: 0.85rem;
+            color: #A0B2C2;
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 1024px) {
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 768px) {
+            nav {
+                padding: 0 1rem;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(12px);
+                flex-direction: column;
+                padding: 1rem 1.5rem 1.5rem;
+                gap: 0;
+                box-shadow: 0 8px 24px rgba(42, 56, 76, 0.1);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 0.7rem 0;
+                border-bottom: 1px solid #F0F0F0;
+            }
+
+            .nav-cta {
+                display: none;
+            }
+
+            .nav-links.open + .nav-cta {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero {
+                padding: 3.5rem 1.25rem 3rem;
+            }
+
             .hero h1 {
                 font-size: 2rem;
             }
@@ -121,1762 +455,498 @@
             .hero p {
                 font-size: 1rem;
             }
-        }
 
-        /* Controls Section */
-        .controls {
-            background-color: white;
-            padding: 2rem;
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        .search-container {
-            flex: 1;
-            min-width: 250px;
-            max-width: 400px;
-        }
-
-        .search-container input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 4px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        .search-container input:focus {
-            outline: none;
-            border-color: #A0B2C2;
-        }
-
-        .filter-container {
-            flex: 1;
-            min-width: 200px;
-            max-width: 300px;
-        }
-
-        .filter-container select {
-            width: 100%;
-            padding: 0.75rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 4px;
-            font-size: 1rem;
-            background-color: white;
-            cursor: pointer;
-            transition: border-color 0.3s;
-        }
-
-        .filter-container select:focus {
-            outline: none;
-            border-color: #A0B2C2;
-        }
-
-        @media (max-width: 768px) {
-            .controls {
-                flex-direction: column;
-            }
-
-            .search-container,
-            .filter-container {
-                max-width: 100%;
-            }
-        }
-
-        /* Main Content */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        /* Region Sections */
-        .region-section {
-            margin-bottom: 3rem;
-        }
-
-        .region-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 3px solid;
-        }
-
-        .region-header h2 {
-            font-family: 'Sansita', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .region-header.charlotte-core {
-            border-bottom-color: #A0B2C2;
-            color: #A0B2C2;
-        }
-
-        .region-header.south-charlotte {
-            border-bottom-color: #4A90E2;
-            color: #4A90E2;
-        }
-
-        .region-header.fort-mill {
-            border-bottom-color: #7B68EE;
-            color: #7B68EE;
-        }
-
-        .region-header.waxhaw {
-            border-bottom-color: #50C878;
-            color: #50C878;
-        }
-
-        .region-header.lake-norman {
-            border-bottom-color: #FF6B6B;
-            color: #FF6B6B;
-        }
-
-        .region-header.east-cabarrus {
-            border-bottom-color: #FFB84D;
-            color: #FFB84D;
-        }
-
-        .region-header.west-gaston {
-            border-bottom-color: #FF8C42;
-            color: #FF8C42;
-        }
-
-        .neighborhoods-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        @media (max-width: 1024px) {
-            .neighborhoods-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 640px) {
-            .neighborhoods-grid {
+            .cards-grid {
                 grid-template-columns: 1fr;
             }
-        }
 
-        /* Neighborhood Card */
-        .card {
-            background-color: white;
-            border-radius: 6px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-        }
-
-        .card.hidden {
-            display: none;
-        }
-
-        .card-header {
-            padding: 1.5rem;
-            border-bottom: 3px solid #A0B2C2;
-        }
-
-        .card-header h3 {
-            font-family: 'Sansita', sans-serif;
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #2A384C;
-            margin-bottom: 0.5rem;
-        }
-
-        .card-description {
-            color: #666;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        .card-stats {
-            padding: 1.5rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 1rem;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-value {
-            font-family: 'Sansita', sans-serif;
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #A0B2C2;
-        }
-
-        .stat-label {
-            font-size: 0.8rem;
-            color: #999;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .card-highlights {
-            padding: 1.5rem;
-            flex-grow: 1;
-        }
-
-        .highlights-label {
-            font-size: 0.85rem;
-            color: #999;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .highlights {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .highlight-tag {
-            background-color: #f0f0f0;
-            color: #2A384C;
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .card-actions {
-            padding: 1.5rem;
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn {
-            flex: 1;
-            padding: 0.75rem 1rem;
-            border: none;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            text-align: center;
-        }
-
-        .btn-details {
-            background-color: #2A384C;
-            color: white;
-        }
-
-        .btn-details:hover {
-            background-color: #3A4D63;
-        }
-
-        .btn-compare {
-            background-color: white;
-            color: #A0B2C2;
-            border: 2px solid #A0B2C2;
-        }
-
-        .btn-compare:hover {
-            background-color: #fff5f3;
-        }
-
-        .btn-compare.added {
-            background-color: #A0B2C2;
-            color: white;
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.5);
-        }
-
-        .modal.show {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            max-width: 600px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid #A0B2C2;
-        }
-
-        .modal-header h2 {
-            font-family: 'Sansita', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .close-modal {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #999;
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 0;
-            line-height: 1;
-        }
-
-        .close-modal:hover {
-            color: #A0B2C2;
-        }
-
-        .modal-details {
-            display: grid;
-            gap: 1.5rem;
-        }
-
-        .modal-detail-item {
-            border-bottom: 1px solid #e0e0e0;
-            padding-bottom: 1rem;
-        }
-
-        .modal-detail-item:last-child {
-            border-bottom: none;
-        }
-
-        .modal-detail-label {
-            font-size: 0.85rem;
-            color: #999;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 0.3rem;
-        }
-
-        .modal-detail-value {
-            font-family: 'Sansita', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #2A384C;
-        }
-
-        /* Comparison List */
-        .compare-list {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background-color: #2A384C;
-            color: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            min-width: 250px;
-            max-width: 350px;
-            z-index: 1500;
-            display: none;
-        }
-
-        .compare-list.show {
-            display: block;
-        }
-
-        .compare-list h3 {
-            margin-bottom: 1rem;
-            font-family: 'Sansita', sans-serif;
-        }
-
-        .compare-items {
-            list-style: none;
-            max-height: 200px;
-            overflow-y: auto;
-            margin-bottom: 1rem;
-        }
-
-        .compare-item {
-            padding: 0.5rem 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.9rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .remove-compare {
-            background: none;
-            border: none;
-            color: #A0B2C2;
-            cursor: pointer;
-            padding: 0;
-            font-size: 1.2rem;
-            line-height: 1;
-        }
-
-        .compare-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .compare-btn {
-            flex: 1;
-            padding: 0.6rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .compare-btn-view {
-            background-color: #A0B2C2;
-            color: white;
-        }
-
-        .compare-btn-view:hover {
-            background-color: #8A9DB0;
-        }
-
-        .compare-btn-clear {
-            background-color: transparent;
-            color: #A0B2C2;
-            border: 1px solid #A0B2C2;
-        }
-
-        .compare-btn-clear:hover {
-            background-color: rgba(160, 178, 194, 0.1);
-        }
-
-        @media (max-width: 640px) {
-            .compare-list {
-                bottom: 1rem;
-                right: 1rem;
-                min-width: 220px;
+            .search-section,
+            .tabs-section,
+            .cards-section {
+                padding: 0 1rem;
             }
-        }
 
-        /* Footer */
-        footer {
-            background-color: #2A384C;
-            color: white;
-            padding: 2rem;
-            text-align: center;
-            margin-top: 3rem;
-        }
-
-        footer p {
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-copyright {
-            font-size: 0.85rem;
-            opacity: 0.8;
-        }
-
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 3rem 2rem;
-            color: #999;
-        }
-
-        .empty-state h3 {
-            font-family: 'Sansita', sans-serif;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #666;
+            .footer-inner {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <a href="/" class="nav-brand"><img src="https://signature.homegrownpropertygroup.com/logo.png" alt="Home Grown Property Group" style="height:40px;width:auto;margin-right:10px;">Home Grown Property Group</a>
-        <ul class="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/quiz">Seller Quiz</a></li>
-            <li><a href="/home-selling-score">Home Score</a></li>
-            <li><a href="/neighborhoods">Neighborhoods</a></li>
-            <li><a href="/compare">Compare Areas</a></li>
-            <li><a href="/market-heatmap">Market Data</a></li>
-            <li><a href="/thank-you">Bonuses</a></li>
-            <li><a href="/home-selling-score" class="nav-cta">Get Started</a></li>
-        </ul>
-    </nav>
 
-    <!-- Hero Banner -->
-    <section class="hero">
-        <h1>Charlotte Neighborhoods</h1>
-        <p>Explore market data across 30+ neighborhoods in the greater Charlotte area</p>
-    </section>
-
-    <!-- Search and Filter Controls -->
-    <section class="controls">
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Search neighborhoods...">
-        </div>
-        <div class="filter-container">
-            <select id="regionFilter">
-                <option value="">All Regions</option>
-                <option value="charlotte-core">Charlotte Core</option>
-                <option value="south-charlotte">South Charlotte</option>
-                <option value="fort-mill">Fort Mill / Indian Land</option>
-                <option value="waxhaw">Waxhaw / Union County</option>
-                <option value="lake-norman">Lake Norman / North</option>
-                <option value="east-cabarrus">East / Cabarrus</option>
-                <option value="west-gaston">West / Gaston County</option>
-            </select>
-        </div>
-    </section>
-
-    <!-- Main Content -->
-    <div class="container">
-        <!-- Charlotte Core -->
-        <section class="region-section" data-region="charlotte-core">
-            <div class="region-header charlotte-core">
-                <h2>Charlotte Core</h2>
-            </div>
-            <div class="neighborhoods-grid">
-                <div class="card" data-neighborhood="Dilworth" data-region="charlotte-core">
-                    <div class="card-header">
-                        <h3>Dilworth</h3>
-                        <p class="card-description">Historic charm near Uptown</p>
-                    </div>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">$725K</div>
-                            <div class="stat-label">Median Price</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">18</div>
-                            <div class="stat-label">Days on Market</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">45</div>
-                            <div class="stat-label">Listings</div>
-                        </div>
-                    </div>
-                    <div class="card-highlights">
-                        <span class="highlights-label">Highlights</span>
-                        <div class="highlights">
-                            <span class="highlight-tag">Historic homes</span>
-                            <span class="highlight-tag">Walkable</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-details" onclick="openDetails('Dilworth', '$725K', 18, 45, 'Historic charm near Uptown', ['Historic homes', 'Walkable'])">View Details</button>
-                        <button class="btn btn-compare" onclick="addToCompare('Dilworth', '$725K')">Add to Compare</button>
-                    </div>
-                </div>
-
-                <div class="card" data-neighborhood="Myers Park" data-region="charlotte-core">
-                    <div class="card-header">
-                        <h3>Myers Park</h3>
-                        <p class="card-description">Premier tree-lined streets</p>
-                    </div>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">$1.25M</div>
-                            <div class="stat-label">Median Price</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">22</div>
-                            <div class="stat-label">Days on Market</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">32</div>
-                            <div class="stat-label">Listings</div>
-                        </div>
-                    </div>
-                    <div class="card-highlights">
-                        <span class="highlights-label">Highlights</span>
-                        <div class="highlights">
-                            <span class="highlight-tag">Top schools</span>
-                            <span class="highlight-tag">Luxury</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-details" onclick="openDetails('Myers Park', '$1.25M', 22, 32, 'Premier tree-lined streets', ['Top schools', 'Luxury'])">View Details</button>
-                        <button class="btn btn-compare" onclick="addToCompare('Myers Park', '$1.25M')">Add to Compare</button>
-                    </div>
-                </div>
-
-                <div class="card" data-neighborhood="South End" data-region="charlotte-core">
-                    <div class="card-header">
-                        <h3>South End</h3>
-                        <p class="card-description">Urban living hub</p>
-                    </div>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">$485K</div>
-                            <div class="stat-label">Median Price</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">12</div>
-                            <div class="stat-label">Days on Market</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">78</div>
-                            <div class="stat-label">Listings</div>
-                        </div>
-                    </div>
-                    <div class="card-highlights">
-                        <span class="highlights-label">Highlights</span>
-                        <div class="highlights">
-                            <span class="highlight-tag">Light rail</span>
-                            <span class="highlight-tag">Restaurants</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-details" onclick="openDetails('South End', '$485K', 12, 78, 'Urban living hub', ['Light rail', 'Restaurants'])">View Details</button>
-                        <button class="btn btn-compare" onclick="addToCompare('South End', '$485K')">Add to Compare</button>
-                    </div>
-                </div>
-
-                <div class="card" data-neighborhood="Plaza Midwood" data-region="charlotte-core">
-                    <div class="card-header">
-                        <h3>Plaza Midwood</h3>
-                        <p class="card-description">Eclectic arts district</p>
-                    </div>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">$425K</div>
-                            <div class="stat-label">Median Price</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">15</div>
-                            <div class="stat-label">Days on Market</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">56</div>
-                            <div class="stat-label">Listings</div>
-                        </div>
-                    </div>
-                    <div class="card-highlights">
-                        <span class="highlights-label">Highlights</span>
-                        <div class="highlights">
-                            <span class="highlight-tag">Dining</span>
-                            <span class="highlight-tag">Nightlife</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-details" onclick="openDetails('Plaza Midwood', '$425K', 15, 56, 'Eclectic arts district', ['Dining', 'Nightlife'])">View Details</button>
-                        <button class="btn btn-compare" onclick="addToCompare('Plaza Midwood', '$425K')">Add to Compare</button>
-                    </div>
-                </div>
-
-                <div class="card" data-neighborhood="NoDa" data-region="charlotte-core">
-                    <div class="card-header">
-                        <h3>NoDa</h3>
-                        <p class="card-description">Arts & entertainment</p>
-                    </div>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">$395K</div>
-                            <div class="stat-label">Median Price</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">14</div>
-                            <div class="stat-label">Days on Market</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">41</div>
-                            <div class="stat-label">Listings</div>
-                        </div>
-                    </div>
-                    <div class="card-highlights">
-                        <span class="highlights-label">Highlights</span>
-                        <div class="highlights">
-                            <span class="highlight-tag">Galleries</span>
-                            <span class="highlight-tag">Breweries</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-details" onclick="openDetails('NoDa', '$395K', 14, 41, 'Arts & entertainment', ['Galleries', 'Breweries'])">View Details</button>
-                        <button class="btn btn-compare" onclick="addToCompare('NoDa', '$395K')">Add to Compare</button>
-                    </div>
-                </div>
-
-                <div class="card" data-neighborhood="Elizabeth" data-region="charlotte-core">
-                    <div class="card-header">
-                        <h3>Elizabeth</h3>
-                        <p class="card-description">Medical district charm</p>
-                    </div>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">$575K</div>
-                            <div class="stat-label">Median Price</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">16</div>
-                            <div class="stat-label">Days on Market</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">28</div>
-                            <div class="stat-label">Listings</div>
-                        </div>
-                    </div>
-                    <div class="card-highlights">
-                        <span class="highlights-label">Highlights</span>
-                        <div class="highlights">
-                            <span class="highlight-tag">Hospitals nearby</span>
-                            <span class="highlight-tag">Walkable</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-details" onclick="openDetails('Elizabeth', '$575K', 16, 28, 'Medical district charm', ['Hospitals nearby', 'Walkable'])">View Details</button>
-                        <button class="btn btn-compare" onclick="addToCompare('Elizabeth', '$575K')">Add to Compare</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- South Charlotte -->
-        <section class="region-section" data-region="south-charlotte">
-            <div class="region-header south-charlotte">
-                <h2>South Charlotte</h2>
-            </div>
-            <div class="neighborhoods-grid">
-                <div class="card" data-neighborhood="Ballantyne" data-region="south-charlotte">
-                    <div class="card-header">
-                        <h3>Ballantyne</h3>
-                        <p class="card-description">Master-planned community</p>
-                    </div>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">$625K</div>
-                            <div class="stat-label">Median Price</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">20</div>
-                            <div class="stat-label">Days on Market</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">67</div>
-                            <div class="stat-label">Listings</div>
-                        </div>
-                    </div>
-                    <div class="card-highlights">
-                        <span class="highlights-label">Highlights</span>
-                        <div class="highlights">
-                            <span class="highlight-tag">Golf</span>
-                            <span class="highlight-tag">Corporate hub</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-details" onclick="openDetails('Ballantyne', '$625K', 20, 67, 'Master-planned community', ['Golf', 'Corporate hub'])">View Details</button>
-                        <button class="btn btn-compare" onclick="addToCompare('Ballantyne', '$625K')">Add to Compare</button>
-                    </div>
-                </div>
-
-                <div class="card" data-neighborhood="Pineville" data-region="south-charlotte">
-                    <div class="card-header">
-                        <h3>Pineville</h3>
-                        <p class="card-description">Southern charm</p>
-                    </div>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">$385K</div>
-                            <div class="stat-label">Median Price</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">19</div>
-                            <div class="stat-label">Days on Market</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">43</div>
-                            <div class="stat-label">Listings</div>
-                        </div>
-                    </div>
-                    <div class="card-highlights">
-                        <span class="highlights-label">Highlights</span>
-                        <div class="highlights">
-                            <span class="highlight-tag">Affordable</span>
-                            <span class="highlight-tag">Shopping</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-details" onclick="openDetails('Pineville', '$385K', 19, 43, 'Southern charm', ['Affordable', 'Shopping'])">View Details</button>
-                        <button class="btn btn-compare" onclick="addToCompare('Pineville', '$385K')">Add to Compare</button>
-                    </div>
-                </div>
-
-                <div class="card" data-neighborhood="Marvin" data-region="south-charlotte">
-                    <div class="card-header">
-                        <h3>Marvin</h3>
-                        <p class="card-description">Rural luxury</p>
-                    </div>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">$850K</div>
-                            <div class="stat-label">Median Price</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">28</div>
-                            <div class="stat-label">Days on Market</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">22</div>
-                            <div class="stat-label">Listings</div>
-                        </div>
-                    </div>
-                    <div class="card-highlights">
-                        <span class="highlights-label">Highlights</span>
-                        <div class="highlights">
-                            <span class="highlight-tag">Large lots</span>
-                            <span class="highlight-tag">Top schools</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-details" onclick="openDetails('Marvin', '$850K', 28, 22, 'Rural luxury', ['Large lots', 'Top schools'])">View Details</button>
-                        <button class="btn btn-compare" onclick="addToCompare('Marvin', '$850K')">Add to Compare</button>
-                    </div>
-                </div>
-
-                <div class="card" data-neighborhood="Weddington" data-region="south-charlotte">
-                    <div class="card-header">
-                        <h3>Weddington</h3>
-                        <p class="card-description">Family estates</p>
-                    </div>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">$750K</div>
-                            <div class="stat-label">Median Price</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">25</div>
-                            <div class="stat-label">Days on Market</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">19</div>
-                            <div class="stat-label">Listings</div>
-                        </div>
-                    </div>
-                    <div class="card-highlights">
-                        <span class="highlights-label">Highlights</span>
-                        <div class="highlights">
-                            <span class="highlight-tag">Space</span>
-                            <span class="highlight-tag">Schools</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-details" onclick="openDetails('Weddington', '$750K', 25, 19, 'Family estates', ['Space', 'Schools'])">View Details</button>
-                        <button class="btn btn-compare" onclick="addToCompare('Weddington', '$750K')">Add to Compare</button>
-                    </div>
-                </div>
-
-                <div class="card" data-neighborhood="Providence" data-region="south-charlotte">
-                    <div class="card-header">
-                        <h3>Providence</h3>
-                        <p class="card-description">Upscale suburban</p>
-                    </div>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">$695K</div>
-                            <div class="stat-label">Median Price</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">21</div>
-                            <div class="stat-label">Days on Market</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">35</div>
-                            <div class="stat-label">Listings</div>
-                        </div>
-                    </div>
-                    <div class="card-highlights">
-                        <span class="highlights-label">Highlights</span>
-                        <div class="highlights">
-                            <span class="highlight-tag">SouthPark adjacent</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-details" onclick="openDetails('Providence', '$695K', 21, 35, 'Upscale suburban', ['SouthPark adjacent'])">View Details</button>
-                        <button class="btn btn-compare" onclick="addToCompare('Providence', '$695K')">Add to Compare</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Fort Mill / Indian Land -->
-        <section class="region-section" data-region="fort-mill">
-            <div class="region-header fort-mill">
-                <h2>Fort Mill / Indian Land</h2>
-            </div>
-            <div class="neighborhoods-grid">
-                <div class="card" data-neighborhood="Fort Mill" data-region="fort-mill">
-                    <div class="card-header">
-                        <h3>Fort Mill</h3>
-                        <p class="card-description">SC's fastest growing</p>
-                    </div>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">$475K</div>
-                            <div class="stat-label">Median Price</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">16</div>
-                            <div class="stat-label">Days on Market</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">89</div>
-                            <div class="stat-label">Listings</div>
-                        </div>
-                    </div>
-                    <div class="card-highlights">
-                        <span class="highlights-label">Highlights</span>
-                        <div class="highlights">
-                            <span class="highlight-tag">Tax benefits</span>
-                            <span class="highlight-tag">Schools</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-details" onclick="openDetails('Fort Mill', '$475K', 16, 89, 'SC\'s fastest growing', ['Tax benefits', 'Schools'])">View Details</button>
-                        <button class="btn btn-compare" onclick="addToCompare('Fort Mill', '$475K')">Add to Compare</button>
-                    </div>
-                </div>
-
-                <div class="card" data-neighborhood="Indian Land" data-region="fort-mill">
-                    <div class="card-header">
-                        <h3>Indian Land</h3>
-                        <p class="card-description">New construction hub</p>
-                    </div>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">$425K</div>
-                            <div class="stat-label">Median Price</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">14</div>
-                            <div class="stat-label">Days on Market</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">72</div>
-                            <div class="stat-label">Listings</div>
-                        </div>
-                    </div>
-                    <div class="card-highlights">
-                        <span class="highlights-label">Highlights</span>
-                        <div class="highlights">
-                            <span class="highlight-tag">New builds</span>
-                            <span class="highlight-tag">Value</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-details" onclick="openDetails('Indian Land', '$425K', 14, 72, 'New construction hub', ['New builds', 'Value'])">View Details</button>
-                        <button class="btn btn-compare" onclick="addToCompare('Indian Land', '$425K')">Add to Compare</button>
-                    </div>
-                </div>
-
-                <div class="card" data-neighborhood="Tega Cay" data-region="fort-mill">
-                    <div class="card-header">
-                        <h3>Tega Cay</h3>
-                        <p class="card-description">Lakeside living</p>
-                    </div>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">$520K</div>
-                            <div class="stat-label">Median Price</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">18</div>
-                            <div class="stat-label">Days on Market</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">31</div>
-                            <div class="stat-label">Listings</div>
-                        </div>
-                    </div>
-                    <div class="card-highlights">
-                        <span class="highlights-label">Highlights</span>
-                        <div class="highlights">
-                            <span class="highlight-tag">Lake Wylie</span>
-                            <span class="highlight-tag">Community</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-details" onclick="openDetails('Tega Cay', '$520K', 18, 31, 'Lakeside living', ['Lake Wylie', 'Community'])">View Details</button>
-                        <button class="btn btn-compare" onclick="addToCompare('Tega Cay', '$520K')">Add to Compare</button>
-                    </div>
-                </div>
-
-                <div class="card" data-neighborhood="Baxter Village" data-region="fort-mill">
-                    <div class="card-header">
-                        <h3>Baxter Village</h3>
-                        <p class="card-description">Walkable town center</p>
-                    </div>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">$545K</div>
-                            <div class="stat-label">Median Price</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">15</div>
-                            <div class="stat-label">Days on Market</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">24</div>
-                            <div class="stat-label">Listings</div>
-                        </div>
-                    </div>
-                    <div class="card-highlights">
-                        <span class="highlights-label">Highlights</span>
-                        <div class="highlights">
-                            <span class="highlight-tag">Amenities</span>
-                            <span class="highlight-tag">Charm</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-details" onclick="openDetails('Baxter Village', '$545K', 15, 24, 'Walkable town center', ['Amenities', 'Charm'])">View Details</button>
-                        <button class="btn btn-compare" onclick="addToCompare('Baxter Village', '$545K')">Add to Compare</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Waxhaw / Union County -->
-        <section class="region-section" data-region="waxhaw">
-            <div class="region-header waxhaw">
-                <h2>Waxhaw / Union County</h2>
-            </div>
-            <div class="neighborhoods-grid">
-                <div class="card" data-neighborhood="Waxhaw" data-region="waxhaw">
-                    <div class="card-header">
-                        <h3>Waxhaw</h3>
-                        <p class="card-description">Historic small town</p>
-                    </div>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">$550K</div>
-                            <div class="stat-label">Median Price</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">22</div>
-                            <div class="stat-label">Days on Market</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">48</div>
-                            <div class="stat-label">Listings</div>
-                        </div>
-                    </div>
-                    <div class="card-highlights">
-                        <span class="highlights-label">Highlights</span>
-                        <div class="highlights">
-                            <span class="highlight-tag">Downtown</span>
-                            <span class="highlight-tag">Schools</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-details" onclick="openDetails('Waxhaw', '$550K', 22, 48, 'Historic small town', ['Downtown', 'Schools'])">View Details</button>
-                        <button class="btn btn-compare" onclick="addToCompare('Waxhaw', '$550K')">Add to Compare</button>
-                    </div>
-                </div>
-
-                <div class="card" data-neighborhood="Wesley Chapel" data-region="waxhaw">
-                    <div class="card-header">
-                        <h3>Wesley Chapel</h3>
-                        <p class="card-description">Growing corridor</p>
-                    </div>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">$495K</div>
-                            <div class="stat-label">Median Price</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">19</div>
-                            <div class="stat-label">Days on Market</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">38</div>
-                            <div class="stat-label">Listings</div>
-                        </div>
-                    </div>
-                    <div class="card-highlights">
-                        <span class="highlights-label">Highlights</span>
-                        <div class="highlights">
-                            <span class="highlight-tag">New development</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-details" onclick="openDetails('Wesley Chapel', '$495K', 19, 38, 'Growing corridor', ['New development'])">View Details</button>
-                        <button class="btn btn-compare" onclick="addToCompare('Wesley Chapel', '$495K')">Add to Compare</button>
-                    </div>
-                </div>
-
-                <div class="card" data-neighborhood="Stallings" data-region="waxhaw">
-                    <div class="card-header">
-                        <h3>Stallings</h3>
-                        <p class="card-description">Family-friendly</p>
-                    </div>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">$465K</div>
-                            <div class="stat-label">Median Price</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">17</div>
-                            <div class="stat-label">Days on Market</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">33</div>
-                            <div class="stat-label">Listings</div>
-                        </div>
-                    </div>
-                    <div class="card-highlights">
-                        <span class="highlights-label">Highlights</span>
-                        <div class="highlights">
-                            <span class="highlight-tag">Parks</span>
-                            <span class="highlight-tag">Schools</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-details" onclick="openDetails('Stallings', '$465K', 17, 33, 'Family-friendly', ['Parks', 'Schools'])">View Details</button>
-                        <button class="btn btn-compare" onclick="addToCompare('Stallings', '$465K')">Add to Compare</button>
-                    </div>
-                </div>
-
-                <div class="card" data-neighborhood="Mineral Springs" data-region="waxhaw">
-                    <div class="card-header">
-                        <h3>Mineral Springs</h3>
-                        <p class="card-description">Country estates</p>
-                    </div>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">$620K</div>
-                            <div class="stat-label">Median Price</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">30</div>
-                            <div class="stat-label">Days on Market</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">15</div>
-                            <div class="stat-label">Listings</div>
-                        </div>
-                    </div>
-                    <div class="card-highlights">
-                        <span class="highlights-label">Highlights</span>
-                        <div class="highlights">
-                            <span class="highlight-tag">Acreage</span>
-                            <span class="highlight-tag">Privacy</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-details" onclick="openDetails('Mineral Springs', '$620K', 30, 15, 'Country estates', ['Acreage', 'Privacy'])">View Details</button>
-                        <button class="btn btn-compare" onclick="addToCompare('Mineral Springs', '$620K')">Add to Compare</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Lake Norman / North -->
-        <section class="region-section" data-region="lake-norman">
-            <div class="region-header lake-norman">
-                <h2>Lake Norman / North</h2>
-            </div>
-            <div class="neighborhoods-grid">
-                <div class="card" data-neighborhood="Mooresville" data-region="lake-norman">
-                    <div class="card-header">
-                        <h3>Mooresville</h3>
-                        <p class="card-description">Race City USA</p>
-                    </div>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">$485K</div>
-                            <div class="stat-label">Median Price</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">20</div>
-                            <div class="stat-label">Days on Market</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">62</div>
-                            <div class="stat-label">Listings</div>
-                        </div>
-                    </div>
-                    <div class="card-highlights">
-                        <span class="highlights-label">Highlights</span>
-                        <div class="highlights">
-                            <span class="highlight-tag">Lake access</span>
-                            <span class="highlight-tag">I-77</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-details" onclick="openDetails('Mooresville', '$485K', 20, 62, 'Race City USA', ['Lake access', 'I-77'])">View Details</button>
-                        <button class="btn btn-compare" onclick="addToCompare('Mooresville', '$485K')">Add to Compare</button>
-                    </div>
-                </div>
-
-                <div class="card" data-neighborhood="Cornelius" data-region="lake-norman">
-                    <div class="card-header">
-                        <h3>Cornelius</h3>
-                        <p class="card-description">Lakefront living</p>
-                    </div>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">$565K</div>
-                            <div class="stat-label">Median Price</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">18</div>
-                            <div class="stat-label">Days on Market</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">44</div>
-                            <div class="stat-label">Listings</div>
-                        </div>
-                    </div>
-                    <div class="card-highlights">
-                        <span class="highlights-label">Highlights</span>
-                        <div class="highlights">
-                            <span class="highlight-tag">Lake Norman</span>
-                            <span class="highlight-tag">Dining</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-details" onclick="openDetails('Cornelius', '$565K', 18, 44, 'Lakefront living', ['Lake Norman', 'Dining'])">View Details</button>
-                        <button class="btn btn-compare" onclick="addToCompare('Cornelius', '$565K')">Add to Compare</button>
-                    </div>
-                </div>
-
-                <div class="card" data-neighborhood="Davidson" data-region="lake-norman">
-                    <div class="card-header">
-                        <h3>Davidson</h3>
-                        <p class="card-description">College town charm</p>
-                    </div>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">$650K</div>
-                            <div class="stat-label">Median Price</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">15</div>
-                            <div class="stat-label">Days on Market</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">27</div>
-                            <div class="stat-label">Listings</div>
-                        </div>
-                    </div>
-                    <div class="card-highlights">
-                        <span class="highlights-label">Highlights</span>
-                        <div class="highlights">
-                            <span class="highlight-tag">Davidson College</span>
-                            <span class="highlight-tag">Walkable</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-details" onclick="openDetails('Davidson', '$650K', 15, 27, 'College town charm', ['Davidson College', 'Walkable'])">View Details</button>
-                        <button class="btn btn-compare" onclick="addToCompare('Davidson', '$650K')">Add to Compare</button>
-                    </div>
-                </div>
-
-                <div class="card" data-neighborhood="Huntersville" data-region="lake-norman">
-                    <div class="card-header">
-                        <h3>Huntersville</h3>
-                        <p class="card-description">Family hub</p>
-                    </div>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">$475K</div>
-                            <div class="stat-label">Median Price</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">16</div>
-                            <div class="stat-label">Days on Market</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">55</div>
-                            <div class="stat-label">Listings</div>
-                        </div>
-                    </div>
-                    <div class="card-highlights">
-                        <span class="highlights-label">Highlights</span>
-                        <div class="highlights">
-                            <span class="highlight-tag">Birkdale</span>
-                            <span class="highlight-tag">Schools</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-details" onclick="openDetails('Huntersville', '$475K', 16, 55, 'Family hub', ['Birkdale', 'Schools'])">View Details</button>
-                        <button class="btn btn-compare" onclick="addToCompare('Huntersville', '$475K')">Add to Compare</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- East / Cabarrus -->
-        <section class="region-section" data-region="east-cabarrus">
-            <div class="region-header east-cabarrus">
-                <h2>East / Cabarrus</h2>
-            </div>
-            <div class="neighborhoods-grid">
-                <div class="card" data-neighborhood="Concord" data-region="east-cabarrus">
-                    <div class="card-header">
-                        <h3>Concord</h3>
-                        <p class="card-description">Motorsports city</p>
-                    </div>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">$395K</div>
-                            <div class="stat-label">Median Price</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">18</div>
-                            <div class="stat-label">Days on Market</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">58</div>
-                            <div class="stat-label">Listings</div>
-                        </div>
-                    </div>
-                    <div class="card-highlights">
-                        <span class="highlights-label">Highlights</span>
-                        <div class="highlights">
-                            <span class="highlight-tag">Speedway</span>
-                            <span class="highlight-tag">Affordability</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-details" onclick="openDetails('Concord', '$395K', 18, 58, 'Motorsports city', ['Speedway', 'Affordability'])">View Details</button>
-                        <button class="btn btn-compare" onclick="addToCompare('Concord', '$395K')">Add to Compare</button>
-                    </div>
-                </div>
-
-                <div class="card" data-neighborhood="Harrisburg" data-region="east-cabarrus">
-                    <div class="card-header">
-                        <h3>Harrisburg</h3>
-                        <p class="card-description">Growing suburb</p>
-                    </div>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">$435K</div>
-                            <div class="stat-label">Median Price</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">16</div>
-                            <div class="stat-label">Days on Market</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">42</div>
-                            <div class="stat-label">Listings</div>
-                        </div>
-                    </div>
-                    <div class="card-highlights">
-                        <span class="highlights-label">Highlights</span>
-                        <div class="highlights">
-                            <span class="highlight-tag">New construction</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-details" onclick="openDetails('Harrisburg', '$435K', 16, 42, 'Growing suburb', ['New construction'])">View Details</button>
-                        <button class="btn btn-compare" onclick="addToCompare('Harrisburg', '$435K')">Add to Compare</button>
-                    </div>
-                </div>
-
-                <div class="card" data-neighborhood="Mint Hill" data-region="east-cabarrus">
-                    <div class="card-header">
-                        <h3>Mint Hill</h3>
-                        <p class="card-description">Small town feel</p>
-                    </div>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">$415K</div>
-                            <div class="stat-label">Median Price</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">20</div>
-                            <div class="stat-label">Days on Market</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">36</div>
-                            <div class="stat-label">Listings</div>
-                        </div>
-                    </div>
-                    <div class="card-highlights">
-                        <span class="highlights-label">Highlights</span>
-                        <div class="highlights">
-                            <span class="highlight-tag">Community</span>
-                            <span class="highlight-tag">Value</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-details" onclick="openDetails('Mint Hill', '$415K', 20, 36, 'Small town feel', ['Community', 'Value'])">View Details</button>
-                        <button class="btn btn-compare" onclick="addToCompare('Mint Hill', '$415K')">Add to Compare</button>
-                    </div>
-                </div>
-
-                <div class="card" data-neighborhood="Matthews" data-region="east-cabarrus">
-                    <div class="card-header">
-                        <h3>Matthews</h3>
-                        <p class="card-description">Walkable downtown</p>
-                    </div>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">$445K</div>
-                            <div class="stat-label">Median Price</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">17</div>
-                            <div class="stat-label">Days on Market</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">45</div>
-                            <div class="stat-label">Listings</div>
-                        </div>
-                    </div>
-                    <div class="card-highlights">
-                        <span class="highlights-label">Highlights</span>
-                        <div class="highlights">
-                            <span class="highlight-tag">Historic downtown</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-details" onclick="openDetails('Matthews', '$445K', 17, 45, 'Walkable downtown', ['Historic downtown'])">View Details</button>
-                        <button class="btn btn-compare" onclick="addToCompare('Matthews', '$445K')">Add to Compare</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- West / Gaston County -->
-        <section class="region-section" data-region="west-gaston">
-            <div class="region-header west-gaston">
-                <h2>West / Gaston County</h2>
-            </div>
-            <div class="neighborhoods-grid">
-                <div class="card" data-neighborhood="Belmont" data-region="west-gaston">
-                    <div class="card-header">
-                        <h3>Belmont</h3>
-                        <p class="card-description">River district</p>
-                    </div>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">$385K</div>
-                            <div class="stat-label">Median Price</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">19</div>
-                            <div class="stat-label">Days on Market</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">38</div>
-                            <div class="stat-label">Listings</div>
-                        </div>
-                    </div>
-                    <div class="card-highlights">
-                        <span class="highlights-label">Highlights</span>
-                        <div class="highlights">
-                            <span class="highlight-tag">Catawba River</span>
-                            <span class="highlight-tag">Growth</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-details" onclick="openDetails('Belmont', '$385K', 19, 38, 'River district', ['Catawba River', 'Growth'])">View Details</button>
-                        <button class="btn btn-compare" onclick="addToCompare('Belmont', '$385K')">Add to Compare</button>
-                    </div>
-                </div>
-
-                <div class="card" data-neighborhood="Mount Holly" data-region="west-gaston">
-                    <div class="card-header">
-                        <h3>Mount Holly</h3>
-                        <p class="card-description">Affordable charm</p>
-                    </div>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">$325K</div>
-                            <div class="stat-label">Median Price</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">22</div>
-                            <div class="stat-label">Days on Market</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">29</div>
-                            <div class="stat-label">Listings</div>
-                        </div>
-                    </div>
-                    <div class="card-highlights">
-                        <span class="highlights-label">Highlights</span>
-                        <div class="highlights">
-                            <span class="highlight-tag">Value</span>
-                            <span class="highlight-tag">River access</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-details" onclick="openDetails('Mount Holly', '$325K', 22, 29, 'Affordable charm', ['Value', 'River access'])">View Details</button>
-                        <button class="btn btn-compare" onclick="addToCompare('Mount Holly', '$325K')">Add to Compare</button>
-                    </div>
-                </div>
-
-                <div class="card" data-neighborhood="Gastonia" data-region="west-gaston">
-                    <div class="card-header">
-                        <h3>Gastonia</h3>
-                        <p class="card-description">County seat</p>
-                    </div>
-                    <div class="card-stats">
-                        <div class="stat">
-                            <div class="stat-value">$295K</div>
-                            <div class="stat-label">Median Price</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">25</div>
-                            <div class="stat-label">Days on Market</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">51</div>
-                            <div class="stat-label">Listings</div>
-                        </div>
-                    </div>
-                    <div class="card-highlights">
-                        <span class="highlights-label">Highlights</span>
-                        <div class="highlights">
-                            <span class="highlight-tag">Most affordable</span>
-                            <span class="highlight-tag">Space</span>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-details" onclick="openDetails('Gastonia', '$295K', 25, 51, 'County seat', ['Most affordable', 'Space'])">View Details</button>
-                        <button class="btn btn-compare" onclick="addToCompare('Gastonia', '$295K')">Add to Compare</button>
-                    </div>
-                </div>
-            </div>
-        </section>
+<!-- Navigation -->
+<nav id="mainNav">
+    <a href="/" class="nav-logo">
+        <img src="https://charlotte-sell-iluh5wd7.manus.space/logo_cropped.webp" alt="Charlotte Seller's Guide">
+    </a>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="/">Home</a></li>
+        <li><a href="/quiz/">Seller Quiz</a></li>
+        <li><a href="/home-selling-score/">Home Score</a></li>
+        <li><a href="/neighborhoods/">Neighborhoods</a></li>
+        <li><a href="/compare/">Compare Areas</a></li>
+        <li><a href="/market-heatmap/">Market Data</a></li>
+        <li><a href="/thank-you/">Bonuses</a></li>
+    </ul>
+    <div class="nav-cta">
+        <a href="/quiz/">Get Started</a>
     </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+</nav>
 
-    <!-- Modal -->
-    <div id="detailsModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="modalTitle"></h2>
-                <button class="close-modal" onclick="closeDetails()">&times;</button>
+<!-- Hero -->
+<section class="hero">
+    <h1>Neighborhood Guide</h1>
+    <p>Explore Charlotte's most sought-after neighborhoods with real-time market data</p>
+</section>
+
+<!-- Search -->
+<div class="search-section">
+    <div class="search-wrapper">
+        <input type="text" id="searchInput" placeholder="Search neighborhoods..." autocomplete="off">
+    </div>
+</div>
+
+<!-- Tabs -->
+<div class="tabs-section">
+    <div class="tabs-container">
+        <button class="tab-btn active" data-region="charlotte-core">Charlotte Core</button>
+        <button class="tab-btn" data-region="south-charlotte">South Charlotte</button>
+        <button class="tab-btn" data-region="fort-mill">Fort Mill / Indian Land</button>
+        <button class="tab-btn" data-region="waxhaw">Waxhaw / Union County</button>
+        <button class="tab-btn" data-region="lake-norman">Lake Norman / North</button>
+    </div>
+</div>
+
+<!-- Cards -->
+<div class="cards-section" id="cardsSection">
+
+    <!-- Charlotte Core -->
+    <div class="region-panel active" data-region="charlotte-core">
+        <div class="cards-grid">
+            <div class="card" data-name="Dilworth">
+                <h3>Dilworth</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$725,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">18 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+5.2%</span></div>
+                </div>
+                <p class="card-desc">Historic charm meets modern luxury in this walkable neighborhood known for tree-lined streets and Latta Park.</p>
             </div>
-            <div class="modal-details">
-                <div class="modal-detail-item">
-                    <div class="modal-detail-label">Description</div>
-                    <div class="modal-detail-value" id="modalDescription"></div>
+            <div class="card" data-name="Myers Park">
+                <h3>Myers Park</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$1,250,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">22 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+3.8%</span></div>
                 </div>
-                <div class="modal-detail-item">
-                    <div class="modal-detail-label">Median Price</div>
-                    <div class="modal-detail-value" id="modalPrice"></div>
+                <p class="card-desc">Charlotte's premier address featuring grand estates, mature trees, and top-rated schools.</p>
+            </div>
+            <div class="card" data-name="South End">
+                <h3>South End</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$485,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">12 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+7.1%</span></div>
                 </div>
-                <div class="modal-detail-item">
-                    <div class="modal-detail-label">Days on Market</div>
-                    <div class="modal-detail-value" id="modalDays"></div>
+                <p class="card-desc">Urban living at its finest with breweries, restaurants, and direct light rail access to Uptown.</p>
+            </div>
+            <div class="card" data-name="NoDa">
+                <h3>NoDa</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$395,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">14 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+6.3%</span></div>
                 </div>
-                <div class="modal-detail-item">
-                    <div class="modal-detail-label">Active Listings</div>
-                    <div class="modal-detail-value" id="modalListings"></div>
+                <p class="card-desc">Charlotte's arts district offering eclectic galleries, live music venues, and creative energy.</p>
+            </div>
+            <div class="card" data-name="Plaza Midwood">
+                <h3>Plaza Midwood</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$425,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">15 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+4.5%</span></div>
                 </div>
-                <div class="modal-detail-item">
-                    <div class="modal-detail-label">Highlights</div>
-                    <div id="modalHighlights"></div>
+                <p class="card-desc">Vibrant neighborhood with local shops, diverse dining, and strong community character.</p>
+            </div>
+            <div class="card" data-name="Elizabeth">
+                <h3>Elizabeth</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$575,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">16 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+4.1%</span></div>
                 </div>
+                <p class="card-desc">Charming residential area near hospitals and Uptown with beautiful historic homes.</p>
+            </div>
+            <div class="card" data-name="Uptown">
+                <h3>Uptown</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$465,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">20 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+3.5%</span></div>
+                </div>
+                <p class="card-desc">Charlotte's city center offering luxury condos, cultural venues, and walkable urban lifestyle.</p>
+            </div>
+            <div class="card" data-name="Wesley Heights">
+                <h3>Wesley Heights</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$485,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">17 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+5.8%</span></div>
+                </div>
+                <p class="card-desc">Up-and-coming historic district with renovated bungalows and proximity to Uptown.</p>
             </div>
         </div>
     </div>
 
-    <!-- Comparison List -->
-    <div id="compareList" class="compare-list">
-        <h3>Compare Neighborhoods</h3>
-        <ul class="compare-items" id="compareItems"></ul>
-        <div class="compare-actions">
-            <button class="compare-btn compare-btn-view" onclick="viewComparison()">View Comparison</button>
-            <button class="compare-btn compare-btn-clear" onclick="clearComparison()">Clear All</button>
+    <!-- South Charlotte -->
+    <div class="region-panel" data-region="south-charlotte">
+        <div class="cards-grid">
+            <div class="card" data-name="Ballantyne">
+                <h3>Ballantyne</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$625,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">20 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+3.2%</span></div>
+                </div>
+                <p class="card-desc">Master-planned community with excellent schools, corporate hub, and resort-style amenities.</p>
+            </div>
+            <div class="card" data-name="Pineville">
+                <h3>Pineville</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$385,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">19 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+4.0%</span></div>
+                </div>
+                <p class="card-desc">Affordable charm with easy access to shopping, dining, and major highways.</p>
+            </div>
+            <div class="card" data-name="Steele Creek">
+                <h3>Steele Creek</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$415,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">16 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+5.1%</span></div>
+                </div>
+                <p class="card-desc">Fast-growing area with new construction, family-friendly parks, and Lake Wylie access.</p>
+            </div>
+            <div class="card" data-name="Arboretum">
+                <h3>Arboretum</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$525,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">18 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+3.6%</span></div>
+                </div>
+                <p class="card-desc">Established community near shopping and dining with mature landscaping and great schools.</p>
+            </div>
+            <div class="card" data-name="Providence Plantation">
+                <h3>Providence Plantation</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$575,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">21 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+2.9%</span></div>
+                </div>
+                <p class="card-desc">Upscale neighborhood with large lots, swim/tennis clubs, and top Providence schools.</p>
+            </div>
+            <div class="card" data-name="Marvin">
+                <h3>Marvin</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$725,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">24 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+2.5%</span></div>
+                </div>
+                <p class="card-desc">Rural luxury with estate-sized lots, equestrian properties, and award-winning Union County schools.</p>
+            </div>
+            <div class="card" data-name="Weddington">
+                <h3>Weddington</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$685,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">23 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+2.8%</span></div>
+                </div>
+                <p class="card-desc">Prestigious community known for excellent schools, large homes, and country club lifestyle.</p>
+            </div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <p><strong>2026 Charlotte Seller's Guide</strong></p>
-        <p class="footer-copyright">&copy; 2026 Home Grown Property Group. All rights reserved.</p>
-    </footer>
+    <!-- Fort Mill / Indian Land -->
+    <div class="region-panel" data-region="fort-mill">
+        <div class="cards-grid">
+            <div class="card" data-name="Fort Mill Downtown">
+                <h3>Fort Mill Downtown</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$475,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">16 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+4.8%</span></div>
+                </div>
+                <p class="card-desc">Charming SC town with top-rated schools, historic Main Street, and growing restaurant scene.</p>
+            </div>
+            <div class="card" data-name="Tega Cay">
+                <h3>Tega Cay</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$525,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">15 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+4.2%</span></div>
+                </div>
+                <p class="card-desc">Lakefront peninsula community with water sports, golf, and strong community events.</p>
+            </div>
+            <div class="card" data-name="Baxter">
+                <h3>Baxter</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$495,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">14 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+5.0%</span></div>
+                </div>
+                <p class="card-desc">Mixed-use community with walkable village center, diverse housing, and excellent amenities.</p>
+            </div>
+            <div class="card" data-name="Indian Land">
+                <h3>Indian Land</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$425,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">14 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+5.5%</span></div>
+                </div>
+                <p class="card-desc">Rapidly growing area with new construction, family neighborhoods, and Sun City active adult community.</p>
+            </div>
+            <div class="card" data-name="Sun City">
+                <h3>Sun City</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$385,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">18 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+3.8%</span></div>
+                </div>
+                <p class="card-desc">Premier 55+ active adult community with resort amenities, clubs, and maintenance-free living.</p>
+            </div>
+            <div class="card" data-name="Lake Ridge">
+                <h3>Lake Ridge</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$455,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">17 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+4.3%</span></div>
+                </div>
+                <p class="card-desc">Established Fort Mill neighborhood with swim, tennis, and convenient access to I-77.</p>
+            </div>
+        </div>
+    </div>
 
-    <script>
-        // Data for neighborhoods
-        const neighborhoods = {
-            'Dilworth': { price: '$725K', region: 'charlotte-core' },
-            'Myers Park': { price: '$1.25M', region: 'charlotte-core' },
-            'South End': { price: '$485K', region: 'charlotte-core' },
-            'Plaza Midwood': { price: '$425K', region: 'charlotte-core' },
-            'NoDa': { price: '$395K', region: 'charlotte-core' },
-            'Elizabeth': { price: '$575K', region: 'charlotte-core' },
-            'Ballantyne': { price: '$625K', region: 'south-charlotte' },
-            'Pineville': { price: '$385K', region: 'south-charlotte' },
-            'Marvin': { price: '$850K', region: 'south-charlotte' },
-            'Weddington': { price: '$750K', region: 'south-charlotte' },
-            'Providence': { price: '$695K', region: 'south-charlotte' },
-            'Fort Mill': { price: '$475K', region: 'fort-mill' },
-            'Indian Land': { price: '$425K', region: 'fort-mill' },
-            'Tega Cay': { price: '$520K', region: 'fort-mill' },
-            'Baxter Village': { price: '$545K', region: 'fort-mill' },
-            'Waxhaw': { price: '$550K', region: 'waxhaw' },
-            'Wesley Chapel': { price: '$495K', region: 'waxhaw' },
-            'Stallings': { price: '$465K', region: 'waxhaw' },
-            'Mineral Springs': { price: '$620K', region: 'waxhaw' },
-            'Mooresville': { price: '$485K', region: 'lake-norman' },
-            'Cornelius': { price: '$565K', region: 'lake-norman' },
-            'Davidson': { price: '$650K', region: 'lake-norman' },
-            'Huntersville': { price: '$475K', region: 'lake-norman' },
-            'Concord': { price: '$395K', region: 'east-cabarrus' },
-            'Harrisburg': { price: '$435K', region: 'east-cabarrus' },
-            'Mint Hill': { price: '$415K', region: 'east-cabarrus' },
-            'Matthews': { price: '$445K', region: 'east-cabarrus' },
-            'Belmont': { price: '$385K', region: 'west-gaston' },
-            'Mount Holly': { price: '$325K', region: 'west-gaston' },
-            'Gastonia': { price: '$295K', region: 'west-gaston' }
-        };
+    <!-- Waxhaw / Union County -->
+    <div class="region-panel" data-region="waxhaw">
+        <div class="cards-grid">
+            <div class="card" data-name="Waxhaw Downtown">
+                <h3>Waxhaw Downtown</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$545,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">19 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+3.9%</span></div>
+                </div>
+                <p class="card-desc">Historic small town with antique shops, farm-to-table dining, and family-friendly festivals.</p>
+            </div>
+            <div class="card" data-name="Marvin">
+                <h3>Marvin</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$725,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">24 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+2.5%</span></div>
+                </div>
+                <p class="card-desc">Luxury living with sprawling lots and highly rated Marvin Ridge schools.</p>
+            </div>
+            <div class="card" data-name="Weddington">
+                <h3>Weddington</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$685,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">23 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+2.8%</span></div>
+                </div>
+                <p class="card-desc">Upscale community with large custom homes and access to Weddington schools.</p>
+            </div>
+            <div class="card" data-name="Wesley Chapel">
+                <h3>Wesley Chapel</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$485,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">18 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+4.1%</span></div>
+                </div>
+                <p class="card-desc">Growing area with new construction, community parks, and convenient shopping.</p>
+            </div>
+            <div class="card" data-name="Stallings">
+                <h3>Stallings</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$445,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">17 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+3.7%</span></div>
+                </div>
+                <p class="card-desc">Family-oriented town with greenways, community events, and Union County schools.</p>
+            </div>
+            <div class="card" data-name="Mint Hill">
+                <h3>Mint Hill</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$435,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">16 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+4.0%</span></div>
+                </div>
+                <p class="card-desc">Small-town feel near Charlotte with parks, local businesses, and quality Mecklenburg schools.</p>
+            </div>
+        </div>
+    </div>
 
-        let compareList = [];
+    <!-- Lake Norman / North -->
+    <div class="region-panel" data-region="lake-norman">
+        <div class="cards-grid">
+            <div class="card" data-name="Huntersville">
+                <h3>Huntersville</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$475,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">16 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+3.9%</span></div>
+                </div>
+                <p class="card-desc">Family-friendly town with Birkdale Village, greenways, and excellent CMS schools.</p>
+            </div>
+            <div class="card" data-name="Cornelius">
+                <h3>Cornelius</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$525,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">17 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+3.5%</span></div>
+                </div>
+                <p class="card-desc">Lakeside living with boutique shopping, waterfront dining, and Jetton Park access.</p>
+            </div>
+            <div class="card" data-name="Davidson">
+                <h3>Davidson</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$625,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">19 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+3.2%</span></div>
+                </div>
+                <p class="card-desc">College town charm with walkable downtown, local shops, and strong community values.</p>
+            </div>
+            <div class="card" data-name="Mooresville">
+                <h3>Mooresville</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$485,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">20 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+4.2%</span></div>
+                </div>
+                <p class="card-desc">Race City USA offering lakefront properties, outlet shopping, and growing tech hub.</p>
+            </div>
+            <div class="card" data-name="Lake Norman Waterfront">
+                <h3>Lake Norman Waterfront</h3>
+                <div class="card-stats">
+                    <div class="stat"><span class="stat-label">Median Price</span><span class="stat-value price">$950,000</span></div>
+                    <div class="stat"><span class="stat-label">Avg DOM</span><span class="stat-value">28 days</span></div>
+                    <div class="stat"><span class="stat-label">YoY Change</span><span class="stat-value positive">+2.8%</span></div>
+                </div>
+                <p class="card-desc">Premium waterfront living with private docks, panoramic lake views, and luxury amenities.</p>
+            </div>
+        </div>
+    </div>
 
-        // Search and filter functionality
-        const searchInput = document.getElementById('searchInput');
-        const regionFilter = document.getElementById('regionFilter');
+    <!-- Search Results -->
+    <div class="search-results" id="searchResults">
+        <div class="cards-grid" id="searchGrid"></div>
+        <div class="no-results" id="noResults" style="display:none;">No neighborhoods found matching your search.</div>
+    </div>
 
-        searchInput.addEventListener('input', filterCards);
-        regionFilter.addEventListener('change', filterCards);
+</div>
 
-        function filterCards() {
-            const searchTerm = searchInput.value.toLowerCase();
-            const selectedRegion = regionFilter.value;
-            const cards = document.querySelectorAll('.card');
+<!-- Footer -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <img src="https://charlotte-sell-iluh5wd7.manus.space/homegrown-logo.png" alt="Homegrown Property Group">
+            <p>2026 Charlotte Seller's Guide</p>
+        </div>
+        <div class="footer-info">
+            <h4>Service Areas</h4>
+            <p>Charlotte, Ballantyne, South Charlotte, Fort Mill, Indian Land, Waxhaw, Weddington, Marvin, Lake Norman, Huntersville, Cornelius, Davidson, Mooresville</p>
+        </div>
+        <div class="footer-info">
+            <h4>Contact</h4>
+            <p><a href="tel:7046779191">(704) 677-9191</a></p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2026 Charlotte Seller's Guide. All rights reserved.
+    </div>
+</footer>
 
-            cards.forEach(card => {
-                const neighborhood = card.getAttribute('data-neighborhood').toLowerCase();
-                const region = card.getAttribute('data-region');
+<script>
+(function() {
+    // Navigation scroll shadow
+    var nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', function() {
+        nav.classList.toggle('scrolled', window.scrollY > 10);
+    });
 
-                const matchesSearch = neighborhood.includes(searchTerm);
-                const matchesRegion = !selectedRegion || region === selectedRegion;
+    // Hamburger
+    var hamburger = document.getElementById('hamburger');
+    var navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', function() {
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('open');
+    });
 
-                if (matchesSearch && matchesRegion) {
-                    card.classList.remove('hidden');
-                } else {
-                    card.classList.add('hidden');
-                }
+    // Close mobile nav on link click
+    navLinks.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('open');
+        });
+    });
+
+    // Tabs
+    var tabBtns = document.querySelectorAll('.tab-btn');
+    var panels = document.querySelectorAll('.region-panel');
+
+    tabBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var region = btn.getAttribute('data-region');
+            tabBtns.forEach(function(b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+            panels.forEach(function(p) {
+                p.classList.toggle('active', p.getAttribute('data-region') === region);
             });
+        });
+    });
 
-            // Check if any cards are visible, show empty state if not
-            const visibleCards = document.querySelectorAll('.card:not(.hidden)');
-            if (visibleCards.length === 0) {
-                // Could add empty state here
-            }
+    // Search
+    var searchInput = document.getElementById('searchInput');
+    var cardsSection = document.getElementById('cardsSection');
+    var searchResults = document.getElementById('searchResults');
+    var searchGrid = document.getElementById('searchGrid');
+    var noResults = document.getElementById('noResults');
+    var allCards = document.querySelectorAll('.region-panel .card');
+
+    searchInput.addEventListener('input', function() {
+        var query = searchInput.value.trim().toLowerCase();
+
+        if (!query) {
+            cardsSection.classList.remove('search-active');
+            searchGrid.innerHTML = '';
+            noResults.style.display = 'none';
+            return;
         }
 
-        // Modal functions
-        function openDetails(name, price, days, listings, description, highlights) {
-            document.getElementById('modalTitle').textContent = name;
-            document.getElementById('modalDescription').textContent = description;
-            document.getElementById('modalPrice').textContent = price;
-            document.getElementById('modalDays').textContent = days + ' days';
-            document.getElementById('modalListings').textContent = listings + ' active listings';
+        cardsSection.classList.add('search-active');
+        searchGrid.innerHTML = '';
+        var count = 0;
 
-            const highlightsHtml = highlights.map(h => `<span class="highlight-tag">${h}</span>`).join('');
-            document.getElementById('modalHighlights').innerHTML = `<div class="highlights">${highlightsHtml}</div>`;
-
-            document.getElementById('detailsModal').classList.add('show');
-        }
-
-        function closeDetails() {
-            document.getElementById('detailsModal').classList.remove('show');
-        }
-
-        // Close modal when clicking outside
-        window.addEventListener('click', function(event) {
-            const modal = document.getElementById('detailsModal');
-            if (event.target === modal) {
-                modal.classList.remove('show');
+        allCards.forEach(function(card) {
+            var name = (card.getAttribute('data-name') || '').toLowerCase();
+            var desc = (card.querySelector('.card-desc') || {}).textContent || '';
+            if (name.indexOf(query) !== -1 || desc.toLowerCase().indexOf(query) !== -1) {
+                searchGrid.appendChild(card.cloneNode(true));
+                count++;
             }
         });
 
-        // Comparison functions
-        function addToCompare(name, price) {
-            if (!compareList.find(item => item.name === name)) {
-                compareList.push({ name, price });
-                updateCompareList();
-            }
-        }
+        noResults.style.display = count === 0 ? 'block' : 'none';
+    });
+})();
+</script>
 
-        function removeFromCompare(name) {
-            compareList = compareList.filter(item => item.name !== name);
-            updateCompareList();
-        }
-
-        function updateCompareList() {
-            const compareItems = document.getElementById('compareItems');
-            const compareListDiv = document.getElementById('compareList');
-
-            if (compareList.length === 0) {
-                compareListDiv.classList.remove('show');
-                return;
-            }
-
-            compareListDiv.classList.add('show');
-
-            compareItems.innerHTML = compareList.map(item => `
-                <li class="compare-item">
-                    <span>${item.name} - ${item.price}</span>
-                    <button class="remove-compare" onclick="removeFromCompare('${item.name}')">×</button>
-                </li>
-            `).join('');
-
-            // Update button states
-            document.querySelectorAll('.btn-compare').forEach(btn => {
-                const card = btn.closest('.card');
-                const neighborhood = card.getAttribute('data-neighborhood');
-                if (compareList.find(item => item.name === neighborhood)) {
-                    btn.classList.add('added');
-                    btn.textContent = 'Added to Compare';
-                } else {
-                    btn.classList.remove('added');
-                    btn.textContent = 'Add to Compare';
-                }
-            });
-        }
-
-        function viewComparison() {
-            if (compareList.length > 0) {
-                // Could navigate to a comparison page or open a detailed comparison view
-                const names = compareList.map(item => item.name).join(', ');
-                alert('Comparing: ' + names + '\n\nIn a full implementation, this would show a detailed comparison table.');
-            }
-        }
-
-        function clearComparison() {
-            compareList = [];
-            updateCompareList();
-        }
-    </script>
 </body>
 </html>
