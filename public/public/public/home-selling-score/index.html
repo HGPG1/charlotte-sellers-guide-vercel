@@ -1,259 +1,195 @@
+<!-- /* Last Updated: 2026-04-10 */ -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Selling Score - 2026 Charlotte Seller's Guide</title>
+    <meta name="description" content="Get your personalized home selling readiness assessment for Charlotte's 2026 real estate market.">
     <link href="https://fonts.googleapis.com/css2?family=Sansita:ital,wght@0,400;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body {
-            font-family: "Cooper Hewitt", system-ui, -apple-system, sans-serif;
-            background-color: #F0F0F0;
-            color: #1a1a1a;
-            line-height: 1.6;
-        }
-        h1, h2, h3, h4, h5, h6 {
-            font-family: "Sansita", system-ui, -apple-system, sans-serif;
-        }
+        body { font-family: 'Cooper Hewitt', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #333; background-color: #f7f7f7; line-height: 1.6; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Sansita', system-ui, -apple-system, sans-serif; color: #2A384C; }
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+        :root { --navy: #2A384C; --steel: #A0B2C2; --light-steel: #D1D9DF; --off-white: #F0F0F0; --white: #FFFFFF; }
 
-        /* ── Navigation ── */
-        nav {
-            position: sticky; top: 0; z-index: 1000;
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid transparent;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-        nav.scrolled {
-            border-bottom-color: #e5e7eb;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
-        .nav-container {
-            max-width: 1280px; margin: 0 auto; padding: 0 24px;
-            display: flex; justify-content: space-between; align-items: center; height: 70px;
-        }
+        /* Navigation */
+        nav { position: sticky; top: 0; z-index: 1000; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid transparent; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+        nav.scrolled { border-bottom-color: #e5e7eb; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .nav-container { max-width: 1280px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 70px; }
         .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #1a1a1a; }
         .nav-logo img { height: 40px; width: auto; }
         .nav-logo-text { display: flex; flex-direction: column; gap: 2px; }
-        .nav-logo-main { font-family: "Sansita", sans-serif; font-weight: 700; font-size: 14px; line-height: 1; }
+        .nav-logo-main { font-family: 'Sansita', system-ui, -apple-system, sans-serif; font-weight: 700; font-size: 14px; line-height: 1; }
         .nav-logo-badge { font-size: 10px; color: #666; }
         .nav-links { display: flex; gap: 20px; list-style: none; white-space: nowrap; }
-        .nav-links a { text-decoration: none; color: #1a1a1a; font-size: 13px; font-weight: 500; transition: color 0.3s; }
-        .nav-links a:hover { color: #A0B2C2; }
-        .nav-cta {
-            background-color: #2A384C; color: white; border: none; padding: 10px 24px;
-            border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer;
-            text-decoration: none; transition: background-color 0.3s;
-        }
+        .nav-links a { text-decoration: none; color: #1a1a1a; font-size: 13px; font-weight: 500; transition: color 0.3s ease; }
+        .nav-links a:hover, .nav-links a.active { color: #A0B2C2; }
+        .nav-right { display: flex; align-items: center; gap: 16px; }
+        .nav-cta { background-color: #2A384C; color: white; border: none; padding: 10px 24px; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none; transition: background-color 0.3s ease; }
         .nav-cta:hover { background-color: #1F2D3D; }
-
-        /* Hamburger */
-        .hamburger {
-            display: none; background: none; border: none; cursor: pointer; padding: 4px;
-            flex-direction: column; gap: 5px; z-index: 1100;
-        }
-        .hamburger span {
-            display: block; width: 24px; height: 2px; background: #2A384C;
-            border-radius: 2px; transition: all 0.3s ease;
-        }
-        .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-        .hamburger.active span:nth-child(2) { opacity: 0; }
-        .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-        /* Mobile menu overlay */
-        .mobile-menu {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255,255,255,0.98); z-index: 1050;
-            flex-direction: column; align-items: center; justify-content: center; gap: 24px;
-        }
-        .mobile-menu.open { display: flex; }
-        .mobile-menu a {
-            text-decoration: none; color: #2A384C; font-size: 20px; font-weight: 600;
-            font-family: "Sansita", sans-serif; transition: color 0.3s;
-        }
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+        .hamburger span { display: block; width: 24px; height: 2px; background-color: #2A384C; border-radius: 2px; transition: all 0.3s ease; }
+        .mobile-menu { display: none; position: absolute; top: 70px; left: 0; right: 0; background: white; border-bottom: 1px solid #e5e7eb; box-shadow: 0 4px 12px rgba(0,0,0,0.08); padding: 20px 24px; z-index: 999; }
+        .mobile-menu.active { display: block; }
+        .mobile-menu a { display: block; padding: 12px 0; text-decoration: none; color: #1a1a1a; font-size: 15px; font-weight: 500; border-bottom: 1px solid #f0f0f0; transition: color 0.3s ease; }
+        .mobile-menu a:last-child { border-bottom: none; }
         .mobile-menu a:hover { color: #A0B2C2; }
-        .mobile-menu .nav-cta {
-            margin-top: 12px; padding: 14px 32px; font-size: 16px;
-            display: inline-block; border-radius: 8px;
-        }
+        .mobile-menu .mobile-cta { display: block; margin-top: 16px; background-color: #2A384C; color: white; text-align: center; padding: 12px 24px; border-radius: 6px; font-weight: 600; text-decoration: none; }
 
-        @media (max-width: 900px) {
-            .nav-links, .nav-container > .nav-cta { display: none; }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-cta { display: none; }
             .hamburger { display: flex; }
             .nav-container { height: 60px; }
             .nav-logo img { height: 32px; }
+            .mobile-menu { top: 60px; }
         }
 
-        /* ── Hero ── */
-        .hero {
-            background: linear-gradient(135deg, #2A384C 0%, #3A4D63 100%);
-            color: white; padding: 60px 20px; text-align: center;
-        }
-        .hero h1 { font-size: 42px; font-weight: 800; margin-bottom: 12px; }
-        .hero p { font-size: 18px; color: #D1D9DF; max-width: 620px; margin: 0 auto; }
+        /* Hero */
+        .hero { background: linear-gradient(135deg, #2A384C, #3A4D63); color: white; padding: 60px 20px; text-align: center; }
+        .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 15px; letter-spacing: -0.5px; color: #fff; }
+        .hero p { font-size: 18px; color: #D1D9DF; max-width: 600px; margin: 0 auto; font-weight: 400; }
+
         @media (max-width: 768px) {
-            .hero { padding: 40px 20px; }
-            .hero h1 { font-size: 28px; }
+            .hero h1 { font-size: 36px; }
             .hero p { font-size: 16px; }
         }
+        @media (max-width: 480px) {
+            .hero { padding: 40px 15px; }
+            .hero h1 { font-size: 28px; }
+        }
 
-        /* ── Container ── */
+        /* Container */
         .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
 
-        /* ── Progress Bar ── */
-        .progress-section { margin-bottom: 32px; }
-        .progress-text { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px; color: #666; }
-        .progress-bar-bg { width: 100%; height: 8px; background: #D1D9DF; border-radius: 4px; overflow: hidden; }
-        .progress-bar-fill {
-            height: 100%; background: linear-gradient(90deg, #A0B2C2, #2A384C);
-            transition: width 0.4s ease; border-radius: 4px;
+        /* Step Progress Indicator */
+        .step-indicator { display: flex; justify-content: center; align-items: center; gap: 0; margin-bottom: 40px; }
+        .step-dot { width: 40px; height: 40px; border-radius: 50%; background: #e0e0e0; color: #999; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; transition: all 0.3s ease; position: relative; z-index: 1; }
+        .step-dot.active { background: var(--steel); color: white; }
+        .step-dot.completed { background: var(--navy); color: white; }
+        .step-connector { width: 80px; height: 3px; background: #e0e0e0; transition: background 0.3s ease; }
+        .step-connector.completed { background: var(--navy); }
+        .step-labels { display: flex; justify-content: center; gap: 42px; margin-top: 10px; margin-bottom: 10px; }
+        .step-label { font-size: 12px; color: #999; text-align: center; width: 80px; transition: color 0.3s ease; }
+        .step-label.active { color: var(--navy); font-weight: 600; }
+
+        /* Form Card */
+        .form-card { background: white; border-radius: 8px; padding: 40px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 30px; animation: fadeIn 0.4s ease; }
+        .form-card h2 { font-size: 28px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+        .form-card .form-subtitle { font-size: 15px; color: #666; margin-bottom: 30px; }
+
+        /* Form Fields */
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+        .form-group label .required { color: #c0392b; }
+        .form-group input, .form-group select { width: 100%; padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 6px; font-size: 15px; font-family: inherit; transition: border-color 0.3s ease; background: #f9f9f9; color: #333; }
+        .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--steel); background: white; }
+        .form-group input.error, .form-group select.error { border-color: #c0392b; }
+        .form-group .error-msg { font-size: 12px; color: #c0392b; margin-top: 4px; display: none; }
+        .form-group .error-msg.show { display: block; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+        @media (max-width: 600px) {
+            .form-row { grid-template-columns: 1fr; }
         }
 
-        /* ── Card ── */
-        .card {
-            background: white; border-radius: 12px; padding: 40px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 30px;
-            animation: fadeIn 0.4s ease;
-        }
+        /* Quiz-style options for Step 3 */
+        .question-block { margin-bottom: 30px; }
+        .question-block:last-child { margin-bottom: 0; }
+        .question-number { color: var(--steel); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+        .question-text { font-family: 'Sansita', sans-serif; font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 16px; line-height: 1.3; }
+        .options-list { list-style: none; }
+        .option-item { margin-bottom: 10px; }
+        .option-input { display: none; }
+        .option-label { display: flex; align-items: center; padding: 14px 16px; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; background-color: #f9f9f9; }
+        .option-label:hover { border-color: var(--steel); background-color: #f5f8fa; }
+        .option-input:checked + .option-label { border-color: var(--steel); background-color: #f0f4f8; font-weight: 600; }
+        .custom-radio { width: 18px; height: 18px; border: 2px solid var(--steel); border-radius: 50%; margin-right: 14px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
+        .option-input:checked + .option-label .custom-radio { background-color: var(--steel); box-shadow: 0 0 0 3px rgba(160,178,194,0.15); }
+        .option-text { font-size: 15px; color: var(--navy); }
+
+        /* Controls */
+        .form-controls { display: flex; justify-content: space-between; gap: 15px; margin-top: 30px; }
+        .btn { padding: 12px 28px; border: none; border-radius: 4px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-block; text-align: center; }
+        .btn-secondary { background-color: #e0e0e0; color: var(--navy); }
+        .btn-secondary:hover { background-color: #d0d0d0; }
+        .btn-primary { background-color: var(--steel); color: white; flex: 1; }
+        .btn-primary:hover { background-color: #8A9DB0; }
+        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        /* Results */
+        .results-container { display: none; animation: fadeIn 0.5s ease; }
+        .results-card { background: white; border-radius: 8px; padding: 60px 40px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); text-align: center; }
+        .score-circle { width: 200px; height: 200px; margin: 0 auto 30px; position: relative; display: flex; align-items: center; justify-content: center; }
+        .score-circle svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+        .score-circle .track { fill: none; stroke: #e0e0e0; stroke-width: 10; }
+        .score-circle .fill { fill: none; stroke: var(--steel); stroke-width: 10; stroke-linecap: round; stroke-dasharray: 565.48; stroke-dashoffset: 565.48; transition: stroke-dashoffset 1.5s ease-out; }
+        .score-inner { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .score-number { font-family: 'Sansita', sans-serif; font-size: 56px; font-weight: 800; color: var(--steel); }
+        .score-max { font-size: 14px; color: #999; margin-top: -4px; }
+        .score-label { font-size: 12px; color: #999; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+
+        .results-badge { display: inline-block; padding: 6px 20px; border-radius: 20px; font-size: 14px; font-weight: 700; margin-bottom: 16px; }
+        .results-badge.ready { background: #e8f0f7; color: var(--navy); }
+        .results-badge.improve { background: #fef3e2; color: #b35c00; }
+
+        .results-heading { font-family: 'Sansita', sans-serif; font-size: 32px; font-weight: 700; color: var(--navy); margin: 10px 0 16px; }
+        .results-text { font-size: 17px; color: #666; line-height: 1.8; margin-bottom: 36px; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+        /* Score Breakdown */
+        .breakdown-title { font-family: 'Sansita', sans-serif; font-size: 22px; color: var(--navy); margin-bottom: 20px; text-align: left; }
+        .breakdown-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 36px; text-align: left; }
+        .breakdown-item { background: #f9f9f9; border-radius: 8px; padding: 18px; border: 1px solid #e5e7eb; }
+        .breakdown-label { font-size: 13px; color: #666; margin-bottom: 6px; }
+        .breakdown-bar-bg { height: 8px; background: #e0e0e0; border-radius: 4px; overflow: hidden; margin-bottom: 6px; }
+        .breakdown-bar-fill { height: 100%; background: var(--steel); border-radius: 4px; transition: width 1s ease-out; }
+        .breakdown-score { font-size: 14px; font-weight: 700; color: var(--navy); }
+
+        .results-cta { display: inline-block; background-color: var(--steel); color: white; padding: 14px 40px; border-radius: 4px; text-decoration: none; font-weight: 600; font-size: 16px; transition: background-color 0.3s ease; margin: 0 8px 8px; }
+        .results-cta:hover { background-color: #8A9DB0; }
+        .results-cta.secondary { background-color: var(--navy); }
+        .results-cta.secondary:hover { background-color: #1F2D3D; }
+
+        /* Hidden */
+        .hidden { display: none; }
+
+        /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .card h2 { font-size: 24px; color: #2A384C; margin-bottom: 6px; }
-        .card .subtitle { color: #666; margin-bottom: 24px; font-size: 15px; }
 
-        /* ── Form Styles ── */
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-        .form-row.full { grid-template-columns: 1fr; }
-        .form-group { display: flex; flex-direction: column; }
-        .form-group label { font-weight: 600; font-size: 14px; color: #2A384C; margin-bottom: 6px; }
-        .form-group label .req { color: #A0B2C2; }
-        .form-group input {
-            width: 100%; padding: 12px 14px; border: 2px solid #D1D9DF; border-radius: 6px;
-            font-family: inherit; font-size: 15px; transition: border-color 0.3s;
-            background: #fafafa;
-        }
-        .form-group input:focus { outline: none; border-color: #A0B2C2; background: #fff; }
-        .form-group input.error { border-color: #d32f2f; }
-        .error-msg { color: #d32f2f; font-size: 13px; margin-top: 4px; display: none; }
-        .error-msg.show { display: block; }
-        @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+        /* Footer */
+        footer { background: #2A384C; color: #ccc; padding: 40px 20px; text-align: center; margin-top: 60px; }
+        .footer-container { max-width: 1200px; margin: 0 auto; }
+        .footer-logo { max-width: 160px; height: auto; margin: 0 auto 16px; }
+        footer h4 { font-family: 'Sansita', system-ui, -apple-system, sans-serif; font-size: 16px; color: white; margin-bottom: 8px; }
+        .footer-areas { font-size: 13px; color: #A0B2C2; margin-bottom: 12px; line-height: 1.8; }
+        .footer-contact { font-size: 14px; color: #D1D9DF; margin-bottom: 16px; }
+        .footer-contact a { color: #D1D9DF; text-decoration: none; }
+        .footer-contact a:hover { color: white; }
+        .footer-copyright { font-size: 13px; color: #999; margin-top: 16px; }
 
-        /* ── Quiz Styles ── */
-        .step-label { color: #A0B2C2; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
-        .question-text { font-family: "Sansita", sans-serif; font-size: 26px; font-weight: 700; color: #2A384C; margin-bottom: 28px; line-height: 1.3; }
-        .options-list { list-style: none; }
-        .option-item { margin-bottom: 14px; }
-        .option-input { display: none; }
-        .option-label {
-            display: flex; align-items: center; padding: 16px; border: 2px solid #D1D9DF;
-            border-radius: 8px; cursor: pointer; transition: all 0.2s; background: #fafafa;
-        }
-        .option-label:hover { border-color: #A0B2C2; background: #f0f4f7; }
-        .option-input:checked + .option-label { border-color: #A0B2C2; background: #f0f4f7; font-weight: 600; }
-        .option-radio {
-            width: 22px; height: 22px; border: 2px solid #A0B2C2; border-radius: 50%;
-            margin-right: 14px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
-            transition: all 0.2s;
-        }
-        .option-input:checked + .option-label .option-radio {
-            background: #A0B2C2; box-shadow: inset 0 0 0 3px white;
-        }
-        .option-text { font-size: 15px; color: #2A384C; }
-
-        /* ── Buttons ── */
-        .btn-row { display: flex; gap: 12px; margin-top: 28px; align-items: center; }
-        .btn {
-            padding: 14px 28px; border: none; border-radius: 6px; font-size: 16px;
-            font-weight: 600; cursor: pointer; transition: all 0.3s; font-family: inherit;
-            text-align: center;
-        }
-        .btn-primary { background: #2A384C; color: white; flex: 1; }
-        .btn-primary:hover { background: #1F2D3D; }
-        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
-        .btn-secondary { background: #D1D9DF; color: #2A384C; }
-        .btn-secondary:hover { background: #c0cad3; }
-        .btn-secondary:disabled { opacity: 0.5; cursor: not-allowed; }
-        .btn-accent { background: #A0B2C2; color: white; flex: 1; }
-        .btn-accent:hover { background: #8A9DB0; }
-        .demo-link {
-            background: none; border: none; color: #A0B2C2; font-size: 14px;
-            cursor: pointer; text-decoration: underline; font-family: inherit;
-            padding: 0; transition: color 0.3s;
-        }
-        .demo-link:hover { color: #2A384C; }
-
-        /* ── Score Results ── */
-        .score-section { text-align: center; animation: fadeIn 0.6s ease; }
-        .score-ring-wrapper { position: relative; width: 200px; height: 200px; margin: 0 auto 24px; }
-        .score-ring-bg {
-            position: absolute; width: 100%; height: 100%; border-radius: 50%;
-            background: conic-gradient(#A0B2C2 0deg, #A0B2C2 var(--angle, 0deg), #D1D9DF var(--angle, 0deg), #D1D9DF 360deg);
-            transition: --angle 1s ease;
-        }
-        .score-ring-inner {
-            position: absolute; top: 15px; left: 15px; width: 170px; height: 170px; background: white;
-            border-radius: 50%; display: flex; flex-direction: column; align-items: center;
-            justify-content: center; z-index: 2;
-        }
-        .score-number { font-family: "Sansita", sans-serif; font-size: 56px; font-weight: 800; color: #2A384C; line-height: 1; }
-        .score-out-of { font-size: 13px; color: #999; text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
-        .score-title { font-family: "Sansita", sans-serif; font-size: 32px; color: #2A384C; margin-bottom: 12px; }
-        .score-desc { font-size: 16px; color: #666; max-width: 550px; margin: 0 auto 32px; line-height: 1.7; }
-        .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0; text-align: left; }
-        .metric-card {
-            background: #F0F0F0; border-radius: 8px; padding: 16px; display: flex;
-            justify-content: space-between; align-items: center;
-        }
-        .metric-name { font-weight: 600; color: #2A384C; font-size: 14px; }
-        .metric-score { color: #A0B2C2; font-weight: 700; font-size: 16px; }
-        @media (max-width: 600px) { .metrics-grid { grid-template-columns: 1fr; } }
-
-        /* ── Features Section ── */
-        .features-section { margin-top: 48px; }
-        .features-section h3 { font-size: 22px; color: #2A384C; text-align: center; margin-bottom: 24px; }
-        .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .feature-card {
-            background: white; padding: 28px 24px; border-radius: 10px; text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: transform 0.3s;
-        }
-        .feature-card:hover { transform: translateY(-4px); }
-        .feature-icon {
-            width: 48px; height: 48px; margin: 0 auto 14px;
-            background: #F0F0F0; border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .feature-icon svg { width: 24px; height: 24px; stroke: #2A384C; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-        .feature-card h4 { font-size: 16px; color: #2A384C; margin-bottom: 6px; }
-        .feature-card p { font-size: 13px; color: #666; line-height: 1.5; }
-        @media (max-width: 768px) { .features-grid { grid-template-columns: 1fr; } }
-
-        /* ── Footer ── */
-        footer {
-            background: #2A384C; color: #ccc; padding: 48px 20px 32px; text-align: center; margin-top: 60px;
-        }
-        .footer-inner { max-width: 800px; margin: 0 auto; }
-        .footer-logo { max-width: 120px; height: auto; margin-bottom: 16px; }
-        footer h4 { font-family: "Sansita", sans-serif; font-size: 18px; color: white; margin-bottom: 16px; }
-        .footer-areas { font-size: 14px; color: #A0B2C2; margin-bottom: 12px; line-height: 1.8; }
-        .footer-areas span { white-space: nowrap; }
-        .footer-areas .sep { margin: 0 6px; color: #4a5e72; }
-        .footer-phone {
-            display: inline-block; color: white; text-decoration: none; font-size: 16px;
-            font-weight: 600; margin: 12px 0 8px; transition: color 0.3s;
-        }
-        .footer-phone:hover { color: #A0B2C2; }
-        .footer-copyright { font-size: 13px; color: #6b7f92; margin-top: 20px; }
-
-        /* ── Utility ── */
-        .hidden { display: none !important; }
-
-        @media (max-width: 480px) {
-            .card { padding: 24px 18px; }
-            .question-text { font-size: 22px; }
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .form-card { padding: 30px 20px; }
+            .form-card h2 { font-size: 22px; }
+            .question-text { font-size: 18px; }
+            .form-controls { flex-direction: column; }
+            .btn { width: 100%; }
+            .results-card { padding: 40px 20px; }
+            .score-circle { width: 160px; height: 160px; }
+            .score-number { font-size: 44px; }
+            .results-heading { font-size: 26px; }
+            .results-text { font-size: 15px; }
+            .breakdown-grid { grid-template-columns: 1fr; }
+            .container { padding: 30px 15px; }
+            .step-connector { width: 50px; }
+            .step-labels { gap: 20px; }
         }
     </style>
 </head>
@@ -264,139 +200,299 @@
             <a href="/" class="nav-logo">
                 <img src="https://charlotte-sell-iluh5wd7.manus.space/logo_cropped.webp" alt="Home Grown Property Group">
                 <div class="nav-logo-text">
-                    <div class="nav-logo-main">Home Grown Property Group</div>
-                    <div class="nav-logo-badge">2026 Seller's Guide</div>
+                    <span class="nav-logo-main">Home Grown Property Group</span>
+                    <span class="nav-logo-badge">2026 Seller's Guide</span>
                 </div>
             </a>
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="/quiz">Seller Quiz</a></li>
-                <li><a href="/home-selling-score">Home Score</a></li>
+                <li><a href="/home-selling-score" class="active">Home Score</a></li>
                 <li><a href="/neighborhoods">Neighborhoods</a></li>
                 <li><a href="/compare">Compare Areas</a></li>
                 <li><a href="/market-heatmap">Market Data</a></li>
                 <li><a href="/thank-you">Bonuses</a></li>
             </ul>
-            <a href="/home-selling-score" class="nav-cta">Get Started</a>
-            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-                <span></span><span></span><span></span>
-            </button>
+            <div class="nav-right">
+                <a href="/home-selling-score" class="nav-cta">Get Started</a>
+                <button class="hamburger" id="hamburger-btn" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="/">Home</a>
+            <a href="/quiz">Seller Quiz</a>
+            <a href="/home-selling-score">Home Score</a>
+            <a href="/neighborhoods">Neighborhoods</a>
+            <a href="/compare">Compare Areas</a>
+            <a href="/market-heatmap">Market Data</a>
+            <a href="/thank-you">Bonuses</a>
+            <a href="/home-selling-score" class="mobile-cta">Get Started</a>
         </div>
     </nav>
 
-    <!-- Mobile Menu Overlay -->
-    <div class="mobile-menu" id="mobile-menu">
-        <a href="/" onclick="closeMobileMenu()">Home</a>
-        <a href="/quiz" onclick="closeMobileMenu()">Seller Quiz</a>
-        <a href="/home-selling-score" onclick="closeMobileMenu()">Home Score</a>
-        <a href="/neighborhoods" onclick="closeMobileMenu()">Neighborhoods</a>
-        <a href="/compare" onclick="closeMobileMenu()">Compare Areas</a>
-        <a href="/market-heatmap" onclick="closeMobileMenu()">Market Data</a>
-        <a href="/thank-you" onclick="closeMobileMenu()">Bonuses</a>
-        <a href="/home-selling-score" class="nav-cta" onclick="closeMobileMenu()">Get Started</a>
+    <!-- Hero -->
+    <div class="hero">
+        <h1>Home Selling Score</h1>
+        <p>Get your personalized home selling readiness assessment</p>
     </div>
 
-    <!-- Hero -->
-    <section class="hero">
-        <h1>Home Selling Score</h1>
-        <p>Get a comprehensive assessment of your home's market readiness with personalized recommendations</p>
-    </section>
-
+    <!-- Main Content -->
     <div class="container">
-        <!-- Progress -->
-        <div class="progress-section">
-            <div class="progress-text">
-                <span id="progress-label">Step 1 of 7</span>
-                <span id="progress-pct">14%</span>
+        <!-- Step Progress -->
+        <div id="step-progress">
+            <div class="step-indicator">
+                <div class="step-dot active" id="dot-1">1</div>
+                <div class="step-connector" id="conn-1"></div>
+                <div class="step-dot" id="dot-2">2</div>
+                <div class="step-connector" id="conn-2"></div>
+                <div class="step-dot" id="dot-3">3</div>
             </div>
-            <div class="progress-bar-bg">
-                <div class="progress-bar-fill" id="progress-bar" style="width:14%"></div>
-            </div>
-        </div>
-
-        <!-- STEP 0: Lead Capture -->
-        <div id="step-0" class="card">
-            <h2>Your Information</h2>
-            <p class="subtitle">Tell us about yourself and your property to get started</p>
-            <form id="lead-form" onsubmit="return false;">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Your Name <span class="req">*</span></label>
-                        <input type="text" id="f-name" placeholder="John Smith" required>
-                        <div class="error-msg" id="e-name">Please enter your name</div>
-                    </div>
-                    <div class="form-group">
-                        <label>Email <span class="req">*</span></label>
-                        <input type="email" id="f-email" placeholder="john@example.com" required>
-                        <div class="error-msg" id="e-email">Please enter a valid email</div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Phone</label>
-                        <input type="tel" id="f-phone" placeholder="(704) 555-0000">
-                    </div>
-                    <div class="form-group">
-                        <label>Property Address <span class="req">*</span></label>
-                        <input type="text" id="f-address" placeholder="123 Main St, Charlotte, NC" required>
-                        <div class="error-msg" id="e-address">Please enter a property address</div>
-                    </div>
-                </div>
-                <div class="btn-row">
-                    <button class="btn btn-primary" onclick="submitLeadForm()">Start Assessment &rarr;</button>
-                    <button type="button" class="demo-link" onclick="startDemo()">Try Demo</button>
-                </div>
-            </form>
-        </div>
-
-        <!-- STEP 1-6: Quiz Questions -->
-        <div id="quiz-container" class="hidden"></div>
-
-        <!-- STEP 7: Results -->
-        <div id="results-container" class="hidden">
-            <div class="card score-section">
-                <div class="score-ring-wrapper">
-                    <div class="score-ring-bg" id="score-ring"></div>
-                    <div class="score-ring-inner">
-                        <div class="score-number" id="score-val">0</div>
-                        <div class="score-out-of">out of 100</div>
-                    </div>
-                </div>
-                <h2 class="score-title" id="score-title">Calculating...</h2>
-                <p class="score-desc" id="score-desc"></p>
-                <div class="metrics-grid" id="metrics-grid"></div>
-                <div class="btn-row" style="justify-content:center;">
-                    <button class="btn btn-accent" onclick="window.location.href='/thank-you?unlocked=true'" style="max-width:360px;">
-                        Unlock Your Exclusive Bonuses &rarr;
-                    </button>
-                </div>
+            <div class="step-labels">
+                <div class="step-label active" id="label-1">Contact</div>
+                <div class="step-label" id="label-2">Property</div>
+                <div class="step-label" id="label-3">Readiness</div>
             </div>
         </div>
 
-        <!-- Features -->
-        <div class="features-section" id="features-section">
-            <h3>What's Included in Your Assessment</h3>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 6-6"/><circle cx="21" cy="10" r="1" fill="#2A384C" stroke="none"/></svg>
-                    </div>
-                    <h4>Market Analysis</h4>
-                    <p>Current Charlotte market trends and local demand insights for your home's competitive position.</p>
+        <!-- Step 1: Contact Information -->
+        <div class="form-card" id="step-1">
+            <h2>Contact Information</h2>
+            <p class="form-subtitle">Tell us a bit about yourself so we can personalize your score.</p>
+            <div class="form-group">
+                <label>First Name <span class="required">*</span></label>
+                <input type="text" id="first-name" placeholder="Enter your first name" required>
+                <div class="error-msg" id="err-first-name">Please enter your first name</div>
+            </div>
+            <div class="form-group">
+                <label>Email Address <span class="required">*</span></label>
+                <input type="email" id="email" placeholder="Enter your email address" required>
+                <div class="error-msg" id="err-email">Please enter a valid email address</div>
+            </div>
+            <div class="form-group">
+                <label>Phone Number <span class="required">*</span></label>
+                <input type="tel" id="phone" placeholder="(555) 555-5555">
+                <div class="error-msg" id="err-phone">Please enter your phone number</div>
+            </div>
+            <div class="form-controls">
+                <div></div>
+                <button class="btn btn-primary" onclick="goToStep(2)">Next</button>
+            </div>
+        </div>
+
+        <!-- Step 2: Property Details -->
+        <div class="form-card hidden" id="step-2">
+            <h2>Property Details</h2>
+            <p class="form-subtitle">Tell us about your property to refine your selling score.</p>
+            <div class="form-group">
+                <label>Street Address <span class="required">*</span></label>
+                <input type="text" id="address" placeholder="123 Main Street, Charlotte, NC" required>
+                <div class="error-msg" id="err-address">Please enter your street address</div>
+            </div>
+            <div class="form-group">
+                <label>Subdivision / Neighborhood</label>
+                <input type="text" id="subdivision" placeholder="e.g., Ballantyne, Dilworth, Myers Park">
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Bedrooms</label>
+                    <select id="bedrooms">
+                        <option value="">Select</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6+</option>
+                    </select>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/><path d="M9 10h.01"/><path d="M15 10h.01"/></svg>
-                    </div>
-                    <h4>Comparable Sales</h4>
-                    <p>Recent sales of similar homes in your area to establish realistic pricing strategies.</p>
+                <div class="form-group">
+                    <label>Bathrooms</label>
+                    <select id="bathrooms">
+                        <option value="">Select</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5+</option>
+                    </select>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M4.93 19.07l2.83-2.83"/><path d="M16.24 7.76l2.83-2.83"/></svg>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Square Feet</label>
+                    <input type="number" id="sqft" placeholder="e.g., 2000">
+                </div>
+                <div class="form-group">
+                    <label>Year Built</label>
+                    <input type="number" id="year-built" placeholder="e.g., 2005">
+                </div>
+            </div>
+            <div class="form-controls">
+                <button class="btn btn-secondary" onclick="goToStep(1)">Back</button>
+                <button class="btn btn-primary" onclick="goToStep(3)">Next</button>
+            </div>
+        </div>
+
+        <!-- Step 3: Selling Readiness -->
+        <div class="form-card hidden" id="step-3">
+            <h2>Selling Readiness</h2>
+            <p class="form-subtitle">Answer these questions to determine your readiness to sell.</p>
+
+            <!-- Q1 -->
+            <div class="question-block">
+                <div class="question-number">Question 1 of 5</div>
+                <div class="question-text">When are you planning to sell your home?</div>
+                <ul class="options-list">
+                    <li class="option-item">
+                        <input type="radio" id="q1-a" name="q1" class="option-input" value="10">
+                        <label for="q1-a" class="option-label"><div class="custom-radio"></div><span class="option-text">Within 1-3 months</span></label>
+                    </li>
+                    <li class="option-item">
+                        <input type="radio" id="q1-b" name="q1" class="option-input" value="8">
+                        <label for="q1-b" class="option-label"><div class="custom-radio"></div><span class="option-text">Within 3-6 months</span></label>
+                    </li>
+                    <li class="option-item">
+                        <input type="radio" id="q1-c" name="q1" class="option-input" value="5">
+                        <label for="q1-c" class="option-label"><div class="custom-radio"></div><span class="option-text">Within 6-12 months</span></label>
+                    </li>
+                    <li class="option-item">
+                        <input type="radio" id="q1-d" name="q1" class="option-input" value="2">
+                        <label for="q1-d" class="option-label"><div class="custom-radio"></div><span class="option-text">Just exploring options</span></label>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Q2 -->
+            <div class="question-block">
+                <div class="question-number">Question 2 of 5</div>
+                <div class="question-text">What's the current condition of your home?</div>
+                <ul class="options-list">
+                    <li class="option-item">
+                        <input type="radio" id="q2-a" name="q2" class="option-input" value="10">
+                        <label for="q2-a" class="option-label"><div class="custom-radio"></div><span class="option-text">Move-in ready, recently updated</span></label>
+                    </li>
+                    <li class="option-item">
+                        <input type="radio" id="q2-b" name="q2" class="option-input" value="7">
+                        <label for="q2-b" class="option-label"><div class="custom-radio"></div><span class="option-text">Good condition, minor updates needed</span></label>
+                    </li>
+                    <li class="option-item">
+                        <input type="radio" id="q2-c" name="q2" class="option-input" value="4">
+                        <label for="q2-c" class="option-label"><div class="custom-radio"></div><span class="option-text">Needs some repairs and updates</span></label>
+                    </li>
+                    <li class="option-item">
+                        <input type="radio" id="q2-d" name="q2" class="option-input" value="2">
+                        <label for="q2-d" class="option-label"><div class="custom-radio"></div><span class="option-text">Significant repairs needed</span></label>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Q3 -->
+            <div class="question-block">
+                <div class="question-number">Question 3 of 5</div>
+                <div class="question-text">What's your primary motivation for selling?</div>
+                <ul class="options-list">
+                    <li class="option-item">
+                        <input type="radio" id="q3-a" name="q3" class="option-input" value="9">
+                        <label for="q3-a" class="option-label"><div class="custom-radio"></div><span class="option-text">Job relocation</span></label>
+                    </li>
+                    <li class="option-item">
+                        <input type="radio" id="q3-b" name="q3" class="option-input" value="8">
+                        <label for="q3-b" class="option-label"><div class="custom-radio"></div><span class="option-text">Upgrading to larger home</span></label>
+                    </li>
+                    <li class="option-item">
+                        <input type="radio" id="q3-c" name="q3" class="option-input" value="8">
+                        <label for="q3-c" class="option-label"><div class="custom-radio"></div><span class="option-text">Downsizing</span></label>
+                    </li>
+                    <li class="option-item">
+                        <input type="radio" id="q3-d" name="q3" class="option-input" value="7">
+                        <label for="q3-d" class="option-label"><div class="custom-radio"></div><span class="option-text">Financial reasons</span></label>
+                    </li>
+                    <li class="option-item">
+                        <input type="radio" id="q3-e" name="q3" class="option-input" value="6">
+                        <label for="q3-e" class="option-label"><div class="custom-radio"></div><span class="option-text">Lifestyle change</span></label>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Q4 -->
+            <div class="question-block">
+                <div class="question-number">Question 4 of 5</div>
+                <div class="question-text">How prepared are you to sell?</div>
+                <ul class="options-list">
+                    <li class="option-item">
+                        <input type="radio" id="q4-a" name="q4" class="option-input" value="10">
+                        <label for="q4-a" class="option-label"><div class="custom-radio"></div><span class="option-text">I've already started preparing</span></label>
+                    </li>
+                    <li class="option-item">
+                        <input type="radio" id="q4-b" name="q4" class="option-input" value="7">
+                        <label for="q4-b" class="option-label"><div class="custom-radio"></div><span class="option-text">I know what needs to be done</span></label>
+                    </li>
+                    <li class="option-item">
+                        <input type="radio" id="q4-c" name="q4" class="option-input" value="4">
+                        <label for="q4-c" class="option-label"><div class="custom-radio"></div><span class="option-text">Still learning about the process</span></label>
+                    </li>
+                    <li class="option-item">
+                        <input type="radio" id="q4-d" name="q4" class="option-input" value="2">
+                        <label for="q4-d" class="option-label"><div class="custom-radio"></div><span class="option-text">Not sure where to start</span></label>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Q5 -->
+            <div class="question-block">
+                <div class="question-number">Question 5 of 5</div>
+                <div class="question-text">Do you have a realistic price expectation?</div>
+                <ul class="options-list">
+                    <li class="option-item">
+                        <input type="radio" id="q5-a" name="q5" class="option-input" value="10">
+                        <label for="q5-a" class="option-label"><div class="custom-radio"></div><span class="option-text">Yes, I've researched comparable sales</span></label>
+                    </li>
+                    <li class="option-item">
+                        <input type="radio" id="q5-b" name="q5" class="option-input" value="6">
+                        <label for="q5-b" class="option-label"><div class="custom-radio"></div><span class="option-text">I have a rough estimate</span></label>
+                    </li>
+                    <li class="option-item">
+                        <input type="radio" id="q5-c" name="q5" class="option-input" value="3">
+                        <label for="q5-c" class="option-label"><div class="custom-radio"></div><span class="option-text">Not sure what my home is worth</span></label>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="form-controls">
+                <button class="btn btn-secondary" onclick="goToStep(2)">Back</button>
+                <button class="btn btn-primary" onclick="calculateScore()">Get My Score</button>
+            </div>
+        </div>
+
+        <!-- Results -->
+        <div id="results-container" class="results-container">
+            <div class="results-card">
+                <div class="score-circle">
+                    <svg viewBox="0 0 200 200">
+                        <circle class="track" cx="100" cy="100" r="90"></circle>
+                        <circle class="fill" id="score-fill" cx="100" cy="100" r="90"></circle>
+                    </svg>
+                    <div class="score-inner">
+                        <div class="score-number" id="final-score">0</div>
+                        <div class="score-max" id="score-max">/ 143</div>
+                        <div class="score-label" id="score-pct">0%</div>
                     </div>
-                    <h4>Strategic Pricing</h4>
-                    <p>Actionable insights on positioning your home for maximum appeal and optimal price.</p>
+                </div>
+
+                <div class="results-badge" id="results-badge">Market Ready</div>
+                <h2 class="results-heading" id="results-title">Your Home Selling Score</h2>
+                <p class="results-text" id="results-message"></p>
+
+                <div class="breakdown-title">Score Breakdown</div>
+                <div class="breakdown-grid" id="breakdown-grid"></div>
+
+                <div>
+                    <a href="/neighborhoods" class="results-cta">Explore Neighborhoods</a>
+                    <a href="tel:7046779191" class="results-cta secondary">Schedule a Consultation</a>
                 </div>
             </div>
         </div>
@@ -404,338 +500,284 @@
 
     <!-- Footer -->
     <footer>
-        <div class="footer-inner">
+        <div class="footer-container">
             <img src="https://charlotte-sell-iluh5wd7.manus.space/homegrown-logo.png" alt="Home Grown Property Group" class="footer-logo">
             <h4>2026 Charlotte Seller's Guide</h4>
-            <div class="footer-areas">
-                <span>Charlotte</span><span class="sep">&bull;</span>
-                <span>Fort Mill</span><span class="sep">&bull;</span>
-                <span>Indian Land</span><span class="sep">&bull;</span>
-                <span>Waxhaw</span><span class="sep">&bull;</span>
-                <span>Pineville</span><span class="sep">&bull;</span>
-                <span>Huntersville</span><span class="sep">&bull;</span>
-                <span>Cornelius</span><span class="sep">&bull;</span>
-                <span>Matthews</span><span class="sep">&bull;</span>
-                <span>Ballantyne</span>
-            </div>
-            <a href="tel:7046779191" class="footer-phone">(704) 677-9191</a>
+            <p class="footer-areas">Charlotte | Fort Mill | Indian Land | Waxhaw | Pineville | Huntersville | Cornelius | Matthews | Ballantyne</p>
+            <p class="footer-contact"><a href="tel:7046779191">(704) 677-9191</a></p>
             <div class="footer-copyright">&copy; 2026 Home Grown Property Group. All rights reserved.</div>
         </div>
     </footer>
 
     <script>
-    // ═══════════════════════════════════════════════
-    // NAVIGATION
-    // ═══════════════════════════════════════════════
-    (function() {
-        var nav = document.getElementById('main-nav');
+        // Nav scroll behavior
         window.addEventListener('scroll', function() {
-            if (window.scrollY > 10) nav.classList.add('scrolled');
-            else nav.classList.remove('scrolled');
+            var nav = document.getElementById('main-nav');
+            if (window.scrollY > 10) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
         });
 
-        var hamburger = document.getElementById('hamburger');
+        // Mobile hamburger
+        var hamburgerBtn = document.getElementById('hamburger-btn');
         var mobileMenu = document.getElementById('mobile-menu');
-        hamburger.addEventListener('click', function() {
-            hamburger.classList.toggle('active');
-            mobileMenu.classList.toggle('open');
-            document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
-        });
-    })();
-
-    function closeMobileMenu() {
-        document.getElementById('hamburger').classList.remove('active');
-        document.getElementById('mobile-menu').classList.remove('open');
-        document.body.style.overflow = '';
-    }
-
-    // ═══════════════════════════════════════════════
-    // QUIZ DATA
-    // ═══════════════════════════════════════════════
-    var quizData = [
-        {
-            category: "Property Condition",
-            question: "How would you describe the overall condition of your home?",
-            options: [
-                { text: "Fully updated \u2014 move-in ready with modern finishes", score: 25 },
-                { text: "Mostly updated \u2014 minor cosmetic items needed", score: 20 },
-                { text: "Average condition \u2014 functional but dated", score: 14 },
-                { text: "Needs significant work \u2014 major repairs or updates required", score: 8 }
-            ]
-        },
-        {
-            category: "Recent Improvements",
-            question: "What updates or improvements have you made in the last 3 years?",
-            options: [
-                { text: "Major renovation (kitchen, bathrooms, addition)", score: 25 },
-                { text: "Moderate updates (new flooring, paint, fixtures, appliances)", score: 20 },
-                { text: "Basic maintenance (HVAC service, minor repairs)", score: 14 },
-                { text: "No significant updates", score: 8 }
-            ]
-        },
-        {
-            category: "Location & Demand",
-            question: "How would you rate buyer demand in your neighborhood?",
-            options: [
-                { text: "Very high \u2014 homes sell within days with multiple offers", score: 25 },
-                { text: "Strong \u2014 steady interest, homes sell within a few weeks", score: 20 },
-                { text: "Moderate \u2014 some interest but homes sit for 30\u201360 days", score: 14 },
-                { text: "Low \u2014 limited activity, homes take 60+ days to sell", score: 8 }
-            ]
-        },
-        {
-            category: "Selling Timeline",
-            question: "When are you looking to sell your home?",
-            options: [
-                { text: "Within 30 days \u2014 ready to list now", score: 25 },
-                { text: "1\u20133 months \u2014 preparing to list soon", score: 22 },
-                { text: "3\u20136 months \u2014 exploring my options", score: 16 },
-                { text: "Not sure yet \u2014 just getting information", score: 10 }
-            ]
-        },
-        {
-            category: "Pricing Knowledge",
-            question: "How confident are you in your home\u2019s current market value?",
-            options: [
-                { text: "Very confident \u2014 I\u2019ve had a recent appraisal or CMA", score: 25 },
-                { text: "Somewhat confident \u2014 I track neighborhood sales", score: 20 },
-                { text: "Unsure \u2014 I have a rough idea but need guidance", score: 14 },
-                { text: "No idea \u2014 I haven\u2019t looked into it", score: 8 }
-            ]
-        },
-        {
-            category: "Curb Appeal",
-            question: "How prepared is your home for showings and photos?",
-            options: [
-                { text: "Showcase ready \u2014 professionally staged or decluttered", score: 25 },
-                { text: "Mostly ready \u2014 clean and organized, minor touch-ups needed", score: 20 },
-                { text: "Needs work \u2014 cluttered or dated, would benefit from staging", score: 14 },
-                { text: "Not prepared at all \u2014 significant decluttering and prep needed", score: 8 }
-            ]
-        }
-    ];
-
-    var resultTiers = [
-        { min: 90, title: "Market Ready!", msg: "Your home is in an excellent position to sell. With the right pricing strategy and marketing plan, you could see strong offers quickly. Let\u2019s connect to build your custom listing strategy and maximize your return." },
-        { min: 75, title: "Strong Position", msg: "You\u2019re well-prepared for a successful sale. A few targeted improvements could push your score even higher. Our team can identify the specific upgrades that deliver the best ROI for your property." },
-        { min: 60, title: "Good Foundation", msg: "You have a solid starting point. With some strategic preparation and market guidance, your home can compete effectively. We recommend a consultation to create a targeted improvement plan." },
-        { min: 45, title: "Room to Grow", msg: "There\u2019s real potential here, but some preparation work will make a meaningful difference in your sale price and timeline. Let us help you prioritize the improvements that matter most." },
-        { min: 0, title: "Getting Started", msg: "Every successful home sale starts with a plan. We\u2019ll help you build a roadmap from preparation through closing day, so you\u2019re fully confident when the time comes to list." }
-    ];
-
-    // ═══════════════════════════════════════════════
-    // STATE
-    // ═══════════════════════════════════════════════
-    var currentStep = 0; // 0 = lead form, 1-6 = quiz, 7 = results
-    var answers = [];
-    var leadData = {};
-
-    // ═══════════════════════════════════════════════
-    // PROGRESS HELPER
-    // ═══════════════════════════════════════════════
-    function updateProgress(step, total) {
-        var pct = Math.round((step / total) * 100);
-        document.getElementById('progress-bar').style.width = pct + '%';
-        document.getElementById('progress-label').textContent = 'Step ' + step + ' of ' + total;
-        document.getElementById('progress-pct').textContent = pct + '%';
-    }
-
-    // ═══════════════════════════════════════════════
-    // LEAD FORM
-    // ═══════════════════════════════════════════════
-    function submitLeadForm() {
-        var name = document.getElementById('f-name').value.trim();
-        var email = document.getElementById('f-email').value.trim();
-        var address = document.getElementById('f-address').value.trim();
-        var valid = true;
-
-        // Reset errors
-        document.querySelectorAll('.error-msg').forEach(function(e) { e.classList.remove('show'); });
-        document.querySelectorAll('input.error').forEach(function(e) { e.classList.remove('error'); });
-
-        if (!name) {
-            document.getElementById('e-name').classList.add('show');
-            document.getElementById('f-name').classList.add('error');
-            valid = false;
-        }
-        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            document.getElementById('e-email').classList.add('show');
-            document.getElementById('f-email').classList.add('error');
-            valid = false;
-        }
-        if (!address) {
-            document.getElementById('e-address').classList.add('show');
-            document.getElementById('f-address').classList.add('error');
-            valid = false;
-        }
-        if (!valid) return;
-
-        leadData = {
-            name: name,
-            email: email,
-            address: address,
-            phone: document.getElementById('f-phone').value.trim()
-        };
-
-        try { localStorage.setItem('hgpg_lead', JSON.stringify(leadData)); } catch(e) {}
-        console.log('Lead captured:', leadData);
-
-        startQuiz();
-    }
-
-    function startDemo() {
-        leadData = {
-            name: 'Demo User',
-            email: 'demo@example.com',
-            address: '123 Demo St, Charlotte, NC',
-            phone: ''
-        };
-        try { localStorage.setItem('hgpg_lead', JSON.stringify(leadData)); } catch(e) {}
-        startQuiz();
-    }
-
-    function startQuiz() {
-        document.getElementById('step-0').classList.add('hidden');
-        document.getElementById('quiz-container').classList.remove('hidden');
-        currentStep = 1;
-        renderQuestion();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // ═══════════════════════════════════════════════
-    // QUIZ RENDERING
-    // ═══════════════════════════════════════════════
-    function renderQuestion() {
-        var idx = currentStep - 1;
-        var q = quizData[idx];
-        var totalSteps = quizData.length + 1; // +1 for lead form step
-
-        updateProgress(currentStep + 1, totalSteps + 1);
-
-        var optionsHTML = '';
-        q.options.forEach(function(opt, i) {
-            var id = 'q' + idx + '-o' + i;
-            optionsHTML +=
-                '<li class="option-item">' +
-                    '<input type="radio" id="' + id + '" name="q' + idx + '" class="option-input" data-index="' + i + '"' + (answers[idx] === i ? ' checked' : '') + '>' +
-                    '<label for="' + id + '" class="option-label">' +
-                        '<div class="option-radio"></div>' +
-                        '<span class="option-text">' + opt.text + '</span>' +
-                    '</label>' +
-                '</li>';
+        hamburgerBtn.addEventListener('click', function() {
+            mobileMenu.classList.toggle('active');
         });
 
-        var isLast = currentStep === quizData.length;
-        document.getElementById('quiz-container').innerHTML =
-            '<div class="card">' +
-                '<div class="step-label">' + q.category + ' \u2014 Question ' + currentStep + ' of ' + quizData.length + '</div>' +
-                '<h2 class="question-text">' + q.question + '</h2>' +
-                '<ul class="options-list">' + optionsHTML + '</ul>' +
-                '<div class="btn-row">' +
-                    '<button class="btn btn-secondary" onclick="prevQuestion()"' + (currentStep === 1 ? ' disabled' : '') + '>Back</button>' +
-                    '<button class="btn btn-primary" onclick="nextQuestion()">' + (isLast ? 'See My Score' : 'Next &rarr;') + '</button>' +
-                '</div>' +
-            '</div>';
+        var currentStep = 1;
 
-        // Bind radio listeners
-        document.querySelectorAll('input[name="q' + idx + '"]').forEach(function(input) {
-            input.addEventListener('change', function(e) {
-                answers[idx] = parseInt(e.target.dataset.index);
+        function updateStepIndicator(step) {
+            for (var i = 1; i <= 3; i++) {
+                var dot = document.getElementById('dot-' + i);
+                var label = document.getElementById('label-' + i);
+                dot.classList.remove('active', 'completed');
+                label.classList.remove('active');
+
+                if (i < step) {
+                    dot.classList.add('completed');
+                } else if (i === step) {
+                    dot.classList.add('active');
+                    label.classList.add('active');
+                }
+            }
+            for (var j = 1; j <= 2; j++) {
+                var conn = document.getElementById('conn-' + j);
+                conn.classList.remove('completed');
+                if (j < step) {
+                    conn.classList.add('completed');
+                }
+            }
+        }
+
+        function clearErrors() {
+            var errors = document.querySelectorAll('.error');
+            for (var i = 0; i < errors.length; i++) {
+                errors[i].classList.remove('error');
+            }
+            var msgs = document.querySelectorAll('.error-msg.show');
+            for (var j = 0; j < msgs.length; j++) {
+                msgs[j].classList.remove('show');
+            }
+        }
+
+        function showError(fieldId) {
+            var field = document.getElementById(fieldId);
+            var errMsg = document.getElementById('err-' + fieldId);
+            if (field) field.classList.add('error');
+            if (errMsg) errMsg.classList.add('show');
+        }
+
+        function validateStep1() {
+            clearErrors();
+            var valid = true;
+            var firstName = document.getElementById('first-name').value.trim();
+            var email = document.getElementById('email').value.trim();
+            var phone = document.getElementById('phone').value.trim();
+
+            if (!firstName) { showError('first-name'); valid = false; }
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError('email'); valid = false; }
+            if (!phone) { showError('phone'); valid = false; }
+            return valid;
+        }
+
+        function validateStep2() {
+            clearErrors();
+            var address = document.getElementById('address').value.trim();
+            if (!address) { showError('address'); return false; }
+            return true;
+        }
+
+        function goToStep(step) {
+            if (step > currentStep) {
+                if (currentStep === 1 && !validateStep1()) return;
+                if (currentStep === 2 && !validateStep2()) return;
+            }
+
+            for (var i = 1; i <= 3; i++) {
+                document.getElementById('step-' + i).classList.add('hidden');
+            }
+
+            document.getElementById('step-' + step).classList.remove('hidden');
+            currentStep = step;
+            updateStepIndicator(step);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function getRadioValue(name) {
+            var selected = document.querySelector('input[name="' + name + '"]:checked');
+            return selected ? parseInt(selected.value) : 0;
+        }
+
+        function calculateScore() {
+            var q1 = getRadioValue('q1');
+            var q2 = getRadioValue('q2');
+            var q3 = getRadioValue('q3');
+            var q4 = getRadioValue('q4');
+            var q5 = getRadioValue('q5');
+
+            var quizTotal = q1 + q2 + q3 + q4 + q5;
+
+            // Property scoring
+            var bedroomVal = document.getElementById('bedrooms').value;
+            var bathroomVal = document.getElementById('bathrooms').value;
+            var sqftVal = parseInt(document.getElementById('sqft').value) || 0;
+            var yearVal = parseInt(document.getElementById('year-built').value) || 0;
+            var subdivisionVal = document.getElementById('subdivision').value.trim();
+
+            // Bedroom score (max 18)
+            var bedroomScore = 0;
+            if (bedroomVal === '1') bedroomScore = 8;
+            else if (bedroomVal === '2') bedroomScore = 12;
+            else if (bedroomVal === '3') bedroomScore = 16;
+            else if (bedroomVal === '4' || bedroomVal === '5' || bedroomVal === '6') bedroomScore = 18;
+
+            // Bathroom score (max 15)
+            var bathroomScore = 0;
+            if (bathroomVal === '1') bathroomScore = 8;
+            else if (bathroomVal === '2') bathroomScore = 12;
+            else if (bathroomVal === '3' || bathroomVal === '4' || bathroomVal === '5') bathroomScore = 15;
+
+            // Sqft score (max 20)
+            var sqftScore = 0;
+            if (sqftVal > 0) {
+                if (sqftVal < 1000) sqftScore = 8;
+                else if (sqftVal <= 1500) sqftScore = 12;
+                else if (sqftVal <= 2500) sqftScore = 17;
+                else sqftScore = 20;
+            }
+
+            // Year built score (max 20)
+            var yearScore = 0;
+            if (yearVal > 0) {
+                if (yearVal >= 2020) yearScore = 20;
+                else if (yearVal >= 2010) yearScore = 17;
+                else if (yearVal >= 2000) yearScore = 14;
+                else if (yearVal >= 1990) yearScore = 11;
+                else yearScore = 8;
+            }
+
+            // Subdivision bonus (max 21)
+            var subdivisionScore = subdivisionVal ? 21 : 0;
+
+            var propertyTotal = bedroomScore + bathroomScore + sqftScore + yearScore + subdivisionScore;
+            var totalScore = quizTotal + propertyTotal;
+            var maxScore = 143;
+            var pct = Math.round((totalScore / maxScore) * 100);
+
+            // Save lead data to localStorage
+            var leadData = {
+                firstName: document.getElementById('first-name').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
+                address: document.getElementById('address').value.trim(),
+                subdivision: subdivisionVal,
+                bedrooms: bedroomVal,
+                bathrooms: bathroomVal,
+                sqft: sqftVal,
+                yearBuilt: yearVal,
+                score: totalScore,
+                maxScore: maxScore,
+                percentage: pct,
+                timestamp: new Date().toISOString()
+            };
+            try { localStorage.setItem('hgpg_lead', JSON.stringify(leadData)); } catch(e) {}
+
+            showResults(totalScore, maxScore, pct, {
+                quiz: { score: quizTotal, max: 49 },
+                bedrooms: { score: bedroomScore, max: 18 },
+                bathrooms: { score: bathroomScore, max: 15 },
+                sqft: { score: sqftScore, max: 20 },
+                yearBuilt: { score: yearScore, max: 20 },
+                subdivision: { score: subdivisionScore, max: 21 }
             });
-        });
-    }
-
-    function nextQuestion() {
-        var idx = currentStep - 1;
-        if (answers[idx] === undefined) {
-            // Brief shake animation on the options
-            var card = document.querySelector('#quiz-container .card');
-            card.style.animation = 'none';
-            card.offsetHeight; // trigger reflow
-            card.style.animation = '';
-            return;
         }
-        if (currentStep === quizData.length) {
-            showResults();
-        } else {
-            currentStep++;
-            renderQuestion();
+
+        function showResults(total, max, pct, breakdown) {
+            document.getElementById('step-3').classList.add('hidden');
+            document.getElementById('step-progress').classList.add('hidden');
+
+            var resultsEl = document.getElementById('results-container');
+            resultsEl.style.display = 'block';
+
+            // Animate score number
+            var scoreEl = document.getElementById('final-score');
+            var pctEl = document.getElementById('score-pct');
+            animateNumber(scoreEl, 0, total, 1200);
+            setTimeout(function() { pctEl.textContent = pct + '%'; }, 1300);
+
+            // Animate SVG gauge
+            var circumference = 2 * Math.PI * 90;
+            var offset = circumference - (pct / 100) * circumference;
+            setTimeout(function() {
+                document.getElementById('score-fill').style.strokeDashoffset = offset;
+            }, 100);
+
+            // Badge and message
+            var badgeEl = document.getElementById('results-badge');
+            var titleEl = document.getElementById('results-title');
+            var msgEl = document.getElementById('results-message');
+
+            if (pct >= 85) {
+                badgeEl.textContent = 'Market Ready';
+                badgeEl.className = 'results-badge ready';
+                titleEl.textContent = 'Your Home Is Market Ready!';
+                msgEl.textContent = 'Your home scores above the 85% threshold, indicating it\'s in excellent condition for the market. You\'re ready to list with confidence. Contact us to discuss your personalized selling strategy.';
+            } else {
+                badgeEl.textContent = 'Needs Improvements';
+                badgeEl.className = 'results-badge improve';
+                titleEl.textContent = 'Room for Improvement';
+                msgEl.textContent = 'Your home scored below the 85% market-ready threshold. Focus on the areas highlighted below to improve your score before listing. We can help you create a plan to maximize your home\'s value.';
+            }
+
+            // Breakdown grid
+            var gridEl = document.getElementById('breakdown-grid');
+            var items = [
+                { label: 'Readiness Score', score: breakdown.quiz.score, max: breakdown.quiz.max },
+                { label: 'Bedrooms', score: breakdown.bedrooms.score, max: breakdown.bedrooms.max },
+                { label: 'Bathrooms', score: breakdown.bathrooms.score, max: breakdown.bathrooms.max },
+                { label: 'Square Footage', score: breakdown.sqft.score, max: breakdown.sqft.max },
+                { label: 'Year Built', score: breakdown.yearBuilt.score, max: breakdown.yearBuilt.max },
+                { label: 'Neighborhood', score: breakdown.subdivision.score, max: breakdown.subdivision.max }
+            ];
+
+            var html = '';
+            for (var i = 0; i < items.length; i++) {
+                var itemPct = items[i].max > 0 ? Math.round((items[i].score / items[i].max) * 100) : 0;
+                html += '<div class="breakdown-item">' +
+                    '<div class="breakdown-label">' + items[i].label + '</div>' +
+                    '<div class="breakdown-bar-bg"><div class="breakdown-bar-fill" style="width: 0%;" data-width="' + itemPct + '%"></div></div>' +
+                    '<div class="breakdown-score">' + items[i].score + ' / ' + items[i].max + '</div>' +
+                    '</div>';
+            }
+            gridEl.innerHTML = html;
+
+            // Animate breakdown bars
+            setTimeout(function() {
+                var bars = gridEl.querySelectorAll('.breakdown-bar-fill');
+                for (var j = 0; j < bars.length; j++) {
+                    bars[j].style.width = bars[j].getAttribute('data-width');
+                }
+            }, 300);
+
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-    }
 
-    function prevQuestion() {
-        if (currentStep > 1) {
-            currentStep--;
-            renderQuestion();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        function animateNumber(el, start, end, duration) {
+            var startTime = null;
+            function step(timestamp) {
+                if (!startTime) startTime = timestamp;
+                var progress = Math.min((timestamp - startTime) / duration, 1);
+                var current = Math.round(start + (end - start) * progress);
+                el.textContent = current;
+                if (progress < 1) {
+                    requestAnimationFrame(step);
+                }
+            }
+            requestAnimationFrame(step);
         }
-    }
-
-    // ═══════════════════════════════════════════════
-    // RESULTS
-    // ═══════════════════════════════════════════════
-    function showResults() {
-        var totalScore = 0;
-        var categoryScores = [];
-        answers.forEach(function(ansIdx, qIdx) {
-            var score = quizData[qIdx].options[ansIdx].score;
-            totalScore += score;
-            categoryScores.push({ name: quizData[qIdx].category, score: score, max: 25 });
-        });
-
-        var maxPossible = quizData.length * 25;
-        var normalizedScore = Math.round((totalScore / maxPossible) * 100);
-
-        var tier = resultTiers.find(function(t) { return normalizedScore >= t.min; });
-
-        // Update progress to 100%
-        document.getElementById('progress-bar').style.width = '100%';
-        document.getElementById('progress-label').textContent = 'Complete!';
-        document.getElementById('progress-pct').textContent = '100%';
-
-        // Hide quiz, show results
-        document.getElementById('quiz-container').classList.add('hidden');
-        document.getElementById('features-section').classList.add('hidden');
-        document.getElementById('results-container').classList.remove('hidden');
-
-        // Animate score counter and ring
-        var scoreEl = document.getElementById('score-val');
-        var ringEl = document.getElementById('score-ring');
-        var current = 0;
-        var duration = 1200; // ms
-        var frameInterval = Math.max(duration / normalizedScore, 12);
-        var interval = setInterval(function() {
-            current++;
-            if (current > normalizedScore) { clearInterval(interval); return; }
-            scoreEl.textContent = current;
-            var angle = (current / 100) * 360;
-            ringEl.style.background = 'conic-gradient(#A0B2C2 0deg, #A0B2C2 ' + angle + 'deg, #D1D9DF ' + angle + 'deg, #D1D9DF 360deg)';
-        }, frameInterval);
-
-        document.getElementById('score-title').textContent = tier.title;
-        document.getElementById('score-desc').textContent = tier.msg;
-
-        // Metrics grid
-        var metricsHTML = '';
-        categoryScores.forEach(function(cat) {
-            var catPct = Math.round((cat.score / cat.max) * 100);
-            metricsHTML +=
-                '<div class="metric-card">' +
-                    '<span class="metric-name">' + cat.name + '</span>' +
-                    '<span class="metric-score">' + catPct + '/100</span>' +
-                '</div>';
-        });
-        document.getElementById('metrics-grid').innerHTML = metricsHTML;
-
-        // Store completion
-        try {
-            localStorage.setItem('hgpg_score_complete', 'true');
-            localStorage.setItem('hgpg_score_value', normalizedScore.toString());
-        } catch(e) {}
-
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
     </script>
 </body>
 </html>

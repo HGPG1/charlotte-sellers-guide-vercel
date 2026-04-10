@@ -1,1003 +1,474 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charlotte Market Heatmap | 2026 Charlotte Seller's Guide</title>
-    <link href="https://fonts.googleapis.com/css2?family=Sansita:ital,wght@0,400;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
-            color: #2A384C;
-            background-color: #F0F0F0;
-            line-height: 1.6;
-        }
-
-        /* ── Navigation ── */
-        nav {
-            position: sticky;
-            top: 0;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 0.75rem 2rem;
-            z-index: 1000;
-            transition: box-shadow 0.3s;
-        }
-
-        nav.scrolled {
-            box-shadow: 0 2px 16px rgba(42, 56, 76, 0.12);
-        }
-
-        nav .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        nav .logo {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            flex-shrink: 0;
-        }
-
-        nav .logo img {
-            height: 40px;
-            width: auto;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 1.75rem;
-            align-items: center;
-        }
-
-        nav a {
-            color: #2A384C;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: #A0B2C2;
-        }
-
-        .nav-cta {
-            background-color: #2A384C;
-            color: #fff !important;
-            padding: 0.55rem 1.4rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: background-color 0.3s;
-        }
-
-        .nav-cta:hover {
-            background-color: #A0B2C2;
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 4px;
-        }
-
-        .hamburger span {
-            display: block;
-            width: 26px;
-            height: 3px;
-            background-color: #2A384C;
-            border-radius: 2px;
-            transition: all 0.3s;
-        }
-
-        .hamburger.open span:nth-child(1) {
-            transform: translateY(8px) rotate(45deg);
-        }
-
-        .hamburger.open span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.open span:nth-child(3) {
-            transform: translateY(-8px) rotate(-45deg);
-        }
-
-        @media (max-width: 768px) {
-            .hamburger {
-                display: flex;
-            }
-
-            nav ul {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                gap: 0;
-                padding-top: 1rem;
-            }
-
-            nav ul.open {
-                display: flex;
-            }
-
-            nav ul li {
-                width: 100%;
-            }
-
-            nav ul li a {
-                display: block;
-                padding: 0.7rem 0;
-                border-bottom: 1px solid #eee;
-            }
-
-            nav .container {
-                flex-wrap: wrap;
-            }
-        }
-
-        /* ── Hero ── */
-        .hero {
-            background: linear-gradient(135deg, #2A384C 0%, #3a4f6a 100%);
-            color: #fff;
-            padding: 4rem 2rem;
-            text-align: center;
-        }
-
-        .hero .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-family: 'Sansita', sans-serif;
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-        }
-
-        .hero p {
-            font-size: 1.15rem;
-            color: #D1D9DF;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* ── Content Layout ── */
-        .content-wrapper {
-            max-width: 1400px;
-            margin: 2.5rem auto;
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 2rem;
-            padding: 0 2rem;
-        }
-
-        /* ── Sidebar ── */
-        .sidebar {
-            background: #fff;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-            height: fit-content;
-            position: sticky;
-            top: 80px;
-        }
-
-        .sidebar h3 {
-            font-family: 'Sansita', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #2A384C;
-            margin-bottom: 0.4rem;
-        }
-
-        .sidebar > p {
-            font-size: 0.85rem;
-            color: #666;
-            margin-bottom: 1.5rem;
-        }
-
-        .filter-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .filter-group label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 0.4rem;
-            font-size: 0.88rem;
-            color: #2A384C;
-        }
-
-        .filter-group input,
-        .filter-group select {
-            width: 100%;
-            padding: 0.65rem 0.75rem;
-            border: 1px solid #D1D9DF;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            font-family: inherit;
-            color: #2A384C;
-            background: #fff;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
-
-        .filter-group input:focus,
-        .filter-group select:focus {
-            outline: none;
-            border-color: #A0B2C2;
-            box-shadow: 0 0 0 3px rgba(160, 178, 194, 0.15);
-        }
-
-        .price-inputs {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.5rem;
-        }
-
-        .price-range-display {
-            font-size: 0.82rem;
-            color: #666;
-            margin-top: 0.4rem;
-        }
-
-        .reset-button {
-            width: 100%;
-            padding: 0.7rem;
-            background: #F0F0F0;
-            border: 1px solid #D1D9DF;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: #2A384C;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            font-family: inherit;
-        }
-
-        .reset-button:hover {
-            background: #D1D9DF;
-        }
-
-        /* Legend */
-        .legend {
-            margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid #eee;
-        }
-
-        .legend h3 {
-            margin-bottom: 0.75rem;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            margin-bottom: 0.6rem;
-            font-size: 0.88rem;
-            color: #555;
-        }
-
-        .legend-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        .legend-dot.hot { background-color: #A0B2C2; }
-        .legend-dot.warm { background-color: #F5A962; }
-        .legend-dot.moderate { background-color: #999; }
-
-        /* ── Main Content ── */
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            min-width: 0;
-        }
-
-        /* Stat Cards */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.25rem;
-        }
-
-        .stat-card {
-            background: #fff;
-            padding: 1.75rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-            text-align: center;
-        }
-
-        .stat-card .icon {
-            font-size: 2rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .stat-card .value {
-            font-family: 'Sansita', sans-serif;
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #2A384C;
-            margin-bottom: 0.3rem;
-        }
-
-        .stat-card .label {
-            color: #666;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        /* ── Sortable Table ── */
-        .table-section {
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-            overflow: hidden;
-        }
-
-        .table-section h2 {
-            font-family: 'Sansita', sans-serif;
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #2A384C;
-            padding: 1.5rem 1.75rem 0;
-        }
-
-        .table-wrapper {
-            overflow-x: auto;
-            padding: 1rem 1.75rem 1.75rem;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.92rem;
-        }
-
-        thead th {
-            background: #F0F0F0;
-            color: #2A384C;
-            font-weight: 700;
-            font-size: 0.82rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding: 0.85rem 1rem;
-            text-align: left;
-            cursor: pointer;
-            user-select: none;
-            white-space: nowrap;
-            border-bottom: 2px solid #D1D9DF;
-            transition: background 0.2s;
-        }
-
-        thead th:hover {
-            background: #D1D9DF;
-        }
-
-        thead th .sort-arrow {
-            display: inline-block;
-            margin-left: 4px;
-            font-size: 0.7rem;
-            opacity: 0.35;
-            transition: opacity 0.2s;
-        }
-
-        thead th.sorted .sort-arrow {
-            opacity: 1;
-        }
-
-        tbody tr {
-            border-bottom: 1px solid #eee;
-            transition: background 0.15s;
-        }
-
-        tbody tr:nth-child(even) {
-            background: #f9fafb;
-        }
-
-        tbody tr:hover {
-            background: rgba(160, 178, 194, 0.1);
-        }
-
-        tbody td {
-            padding: 0.85rem 1rem;
-            color: #333;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 0.3rem 0.7rem;
-            border-radius: 20px;
-            font-size: 0.72rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #fff;
-        }
-
-        .badge.hot { background-color: #A0B2C2; }
-        .badge.warm { background-color: #F5A962; }
-        .badge.moderate { background-color: #999; }
-
-        .no-results-row td {
-            text-align: center;
-            padding: 2rem;
-            color: #666;
-        }
-
-        /* ── Neighborhood Cards ── */
-        .neighborhoods-section {
-            background: #fff;
-            padding: 2rem 1.75rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-        }
-
-        .neighborhoods-section h2 {
-            font-family: 'Sansita', sans-serif;
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            color: #2A384C;
-        }
-
-        .neighborhoods-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.25rem;
-        }
-
-        .neighborhood-card {
-            border: 1px solid #eee;
-            border-radius: 10px;
-            padding: 1.5rem;
-            transition: transform 0.25s, box-shadow 0.25s;
-            background: #fff;
-        }
-
-        .neighborhood-card:hover {
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-            transform: translateY(-3px);
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-        }
-
-        .neighborhood-card h3 {
-            font-family: 'Sansita', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #2A384C;
-        }
-
-        .card-price {
-            font-family: 'Sansita', sans-serif;
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: #2A384C;
-            margin-bottom: 0.25rem;
-        }
-
-        .card-listings {
-            font-size: 0.88rem;
-            color: #666;
-            margin-bottom: 1rem;
-        }
-
-        .card-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        .card-stat {
-            border-top: 1px solid #eee;
-            padding-top: 0.85rem;
-        }
-
-        .card-stat .label {
-            font-size: 0.82rem;
-            color: #888;
-            margin-bottom: 0.15rem;
-        }
-
-        .card-stat .value {
-            font-family: 'Sansita', sans-serif;
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: #2A384C;
-        }
-
-        .no-results {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 2rem;
-            color: #666;
-        }
-
-        /* ── Footer ── */
-        footer {
-            background-color: #2A384C;
-            color: #f7f7f7;
-            text-align: center;
-            padding: 3rem 2rem;
-            margin-top: 4rem;
-        }
-
-        footer .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        footer .footer-logo {
-            margin-bottom: 1rem;
-        }
-
-        footer .footer-logo img {
-            height: 50px;
-            width: auto;
-        }
-
-        footer h4 {
-            font-family: 'Sansita', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        footer p {
-            font-size: 0.88rem;
-            color: #A0B2C2;
-            margin-bottom: 0.25rem;
-        }
-
-        footer a {
-            color: #A0B2C2;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            color: #D1D9DF;
-        }
-
-        /* ── Responsive ── */
-        @media (max-width: 1024px) {
-            .content-wrapper {
-                grid-template-columns: 260px 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .content-wrapper {
-                grid-template-columns: 1fr;
-                padding: 0 1rem;
-            }
-
-            .sidebar {
-                position: static;
-            }
-
-            .stats {
-                grid-template-columns: 1fr;
-            }
-
-            .neighborhoods-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .price-inputs {
-                grid-template-columns: 1fr;
-            }
-
-            .table-wrapper {
-                padding: 0.75rem;
-            }
-
-            table {
-                font-size: 0.82rem;
-            }
-
-            thead th,
-            tbody td {
-                padding: 0.65rem 0.6rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            nav {
-                padding: 0.75rem 1rem;
-            }
-
-            .hero {
-                padding: 2.5rem 1rem;
-            }
-
-            .hero h1 {
-                font-size: 1.6rem;
-            }
-
-            .stat-card .value {
-                font-size: 1.8rem;
-            }
-
-            .card-price {
-                font-size: 1.3rem;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Heatmap - 2026 Charlotte Seller's Guide</title>
+<meta name="description" content="Interactive market activity visualization for the Charlotte metro area. See which neighborhoods are hot, warm, or moderate in 2026.">
+<link href="https://fonts.googleapis.com/css2?family=Sansita:ital,wght@0,400;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+/* Last Updated: 2026-04-10 */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#2A384C;--steel:#A0B2C2;--light-steel:#D1D9DF;--off-white:#F0F0F0;--white:#FFFFFF}
+html{scroll-behavior:smooth}
+body{font-family:'Cooper Hewitt',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#333;background:var(--off-white);line-height:1.6;overflow-x:hidden}
+h1,h2,h3,h4,h5,h6{font-family:'Sansita',serif;color:var(--navy)}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,0.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:box-shadow .3s}
+.nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1)}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:10px 24px}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-brand img{height:40px;width:auto}
+.nav-brand-text{display:flex;flex-direction:column}
+.nav-brand-name{font-family:'Sansita',serif;font-weight:700;font-size:1rem;color:var(--navy);line-height:1.2}
+.nav-brand-badge{font-size:.65rem;background:var(--light-steel);color:var(--navy);padding:1px 8px;border-radius:10px;width:fit-content;font-weight:600}
+.nav-links{display:flex;align-items:center;gap:6px;list-style:none}
+.nav-links a{font-size:.85rem;color:var(--navy);padding:6px 10px;border-radius:6px;transition:background .2s,color .2s;font-weight:500}
+.nav-links a:hover,.nav-links a.active{background:var(--off-white);color:var(--navy)}
+.nav-cta{background:var(--navy);color:#fff!important;padding:10px 22px!important;border-radius:24px;font-weight:700;font-size:.85rem;transition:opacity .2s}
+.nav-cta:hover{opacity:.88}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px}
+.hamburger span{display:block;width:24px;height:2.5px;background:var(--navy);border-radius:2px;transition:transform .3s,opacity .3s}
+.hamburger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+
+@media(max-width:768px){
+  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(255,255,255,0.98);backdrop-filter:blur(10px);flex-direction:column;padding:16px 24px;box-shadow:0 8px 24px rgba(0,0,0,0.1)}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:12px 10px;width:100%}
+  .hamburger{display:flex}
+  .nav-brand-name{font-size:.85rem}
+}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#2A384C 0%,#3A4D63 100%);padding:140px 24px 80px;text-align:center;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to top,rgba(255,255,255,0.05),transparent)}
+.hero h1{font-family:'Sansita',serif;font-size:3.2rem;color:#fff;font-weight:800;max-width:800px;margin:0 auto 20px;line-height:1.15}
+.hero p{color:rgba(255,255,255,0.8);font-size:1.15rem;max-width:650px;margin:0 auto;line-height:1.7}
+
+@media(max-width:600px){
+  .hero{padding:120px 20px 60px}
+  .hero h1{font-size:2rem}
+  .hero p{font-size:1rem}
+}
+
+/* MAIN LAYOUT */
+.main-layout{max-width:1200px;margin:0 auto;padding:40px 24px;display:flex;gap:32px;align-items:flex-start}
+
+/* SIDEBAR */
+.sidebar{width:300px;flex-shrink:0;position:sticky;top:90px;background:var(--white);border-radius:14px;padding:28px;box-shadow:0 2px 16px rgba(0,0,0,0.06);border:1px solid #e5e7eb}
+.sidebar h3{font-size:1.15rem;margin-bottom:20px}
+.filter-group{margin-bottom:20px}
+.filter-group label{display:block;font-size:.82rem;font-weight:600;color:var(--navy);margin-bottom:6px}
+.filter-input,.filter-select{width:100%;padding:10px 14px;border:1px solid var(--light-steel);border-radius:8px;font-size:.9rem;font-family:inherit;background:var(--white);color:var(--navy);outline:none;transition:border-color .2s}
+.filter-input:focus,.filter-select:focus{border-color:var(--steel)}
+.filter-input::placeholder{color:var(--steel)}
+.reset-btn{width:100%;padding:10px;background:var(--off-white);color:var(--navy);border:1px solid var(--light-steel);border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;transition:background .2s;font-family:inherit}
+.reset-btn:hover{background:var(--light-steel)}
+
+.legend{margin-top:24px;padding-top:20px;border-top:1px solid #e5e7eb}
+.legend h4{font-size:.9rem;margin-bottom:12px;color:var(--navy)}
+.legend-item{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:.85rem;color:#555}
+.legend-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0}
+.legend-dot.hot{background:var(--navy)}
+.legend-dot.warm{background:var(--steel)}
+.legend-dot.moderate{background:var(--light-steel)}
+
+/* MAIN CONTENT */
+.main-content{flex:1;min-width:0}
+
+/* SUMMARY CARDS */
+.summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px}
+.summary-card{background:var(--white);border-radius:12px;padding:24px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,0.05);border:1px solid #e5e7eb;transition:transform .3s,box-shadow .3s}
+.summary-card:hover{transform:translateY(-3px);box-shadow:0 6px 24px rgba(0,0,0,0.1)}
+.summary-card .label{font-size:.82rem;color:#666;margin-bottom:6px;font-weight:500}
+.summary-card .value{font-family:'Sansita',serif;font-size:2rem;font-weight:800;color:var(--navy)}
+
+/* NEIGHBORHOOD GRID */
+.hood-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.hood-card{background:var(--white);border-radius:12px;padding:24px;border:1px solid #e5e7eb;box-shadow:0 2px 12px rgba(0,0,0,0.05);transition:transform .3s,box-shadow .3s}
+.hood-card:hover{transform:translateY(-3px);box-shadow:0 6px 24px rgba(0,0,0,0.1)}
+.hood-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.hood-name{font-family:'Sansita',serif;font-size:1.15rem;font-weight:700;color:var(--navy)}
+.activity-badge{padding:4px 12px;border-radius:20px;font-size:.75rem;font-weight:700;letter-spacing:.3px;text-transform:uppercase}
+.activity-badge.hot{background:var(--navy);color:#fff}
+.activity-badge.warm{background:var(--steel);color:#fff}
+.activity-badge.moderate{background:var(--light-steel);color:var(--navy)}
+.hood-price{font-family:'Sansita',serif;font-size:1.6rem;font-weight:800;color:var(--navy);margin-bottom:14px}
+.hood-stats{display:flex;gap:16px;flex-wrap:wrap}
+.hood-stat{display:flex;flex-direction:column}
+.hood-stat .stat-val{font-weight:700;font-size:.95rem;color:var(--navy)}
+.hood-stat .stat-lbl{font-size:.72rem;color:#888;text-transform:uppercase;letter-spacing:.3px}
+.hood-card.hidden{display:none}
+
+/* NO RESULTS */
+.no-results{text-align:center;padding:60px 20px;color:#888;font-size:1rem;display:none}
+.no-results.show{display:block}
+
+/* CTA SECTION */
+.cta-section{background:linear-gradient(135deg,#2A384C 0%,#3A4D63 100%);padding:80px 24px;text-align:center;margin-top:60px}
+.cta-section h2{font-size:2.2rem;color:#fff;margin-bottom:12px}
+.cta-section p{color:rgba(255,255,255,0.8);font-size:1.05rem;max-width:550px;margin:0 auto 32px;line-height:1.7}
+.cta-btn{display:inline-block;background:var(--steel);color:#fff;padding:16px 40px;border-radius:30px;font-size:1.05rem;font-weight:700;transition:transform .2s,box-shadow .2s}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.25)}
+
+/* FOOTER */
+.footer{background:var(--navy);color:rgba(255,255,255,0.8);padding:60px 24px 30px;text-align:center}
+.footer-inner{max-width:900px;margin:0 auto}
+.footer img{max-width:160px;margin:0 auto 20px}
+.footer h3{color:#fff;font-family:'Sansita',serif;font-size:1.3rem;margin-bottom:20px}
+.footer-areas{margin-bottom:20px;font-size:.85rem;line-height:1.8}
+.footer-contact{margin-bottom:20px;font-size:.95rem}
+.footer-contact a{color:var(--steel);font-weight:600}
+.footer-copy{font-size:.78rem;color:rgba(255,255,255,0.5);border-top:1px solid rgba(255,255,255,0.1);padding-top:20px;margin-top:20px}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .main-layout{flex-direction:column}
+  .sidebar{width:100%;position:static;order:-1}
+  .summary-grid{grid-template-columns:repeat(3,1fr)}
+  .hood-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  .summary-grid{grid-template-columns:1fr}
+  .hood-grid{grid-template-columns:1fr}
+  .hood-stats{gap:12px}
+}
+</style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav id="main-nav">
-        <div class="container">
-            <a href="/" class="logo">
-                <img src="https://charlotte-sell-iluh5wd7.manus.space/logo_cropped.webp" alt="Home Grown Property Group">
-            </a>
-            <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul id="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/quiz">Seller Quiz</a></li>
-                <li><a href="/home-selling-score">Home Score</a></li>
-                <li><a href="/neighborhoods">Neighborhoods</a></li>
-                <li><a href="/compare">Compare Areas</a></li>
-                <li><a href="/market-heatmap">Market Data</a></li>
-                <li><a href="/thank-you">Bonuses</a></li>
-                <li><a href="/home-selling-score" class="nav-cta">Get Started</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <!-- Hero -->
-    <section class="hero">
-        <div class="container">
-            <h1>Charlotte Market Heatmap</h1>
-            <p>Interactive market activity visualization for the Charlotte metro area</p>
-        </div>
-    </section>
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">
+      <img src="https://charlotte-sell-iluh5wd7.manus.space/logo_cropped.webp" alt="Home Grown Property Group Logo">
+      <div class="nav-brand-text">
+        <span class="nav-brand-name">Home Grown Property Group</span>
+        <span class="nav-brand-badge">2026 Seller's Guide</span>
+      </div>
+    </a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/">Home</a></li>
+      <li><a href="/quiz">Seller Quiz</a></li>
+      <li><a href="/home-selling-score">Home Score</a></li>
+      <li><a href="/neighborhoods">Neighborhoods</a></li>
+      <li><a href="/compare">Compare Areas</a></li>
+      <li><a href="/market-heatmap" class="active">Market Data</a></li>
+      <li><a href="/thank-you">Bonuses</a></li>
+      <li><a href="/home-selling-score" class="nav-cta">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
 
-    <!-- Main Content -->
-    <div class="content-wrapper">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <h3>Refine Your Search</h3>
-            <p>Filter neighborhoods by criteria</p>
+<!-- HERO -->
+<section class="hero">
+  <h1>Charlotte Market Heatmap</h1>
+  <p>Interactive market activity visualization for the Charlotte metro area</p>
+</section>
 
-            <div class="filter-group">
-                <label for="neighborhood-search">Search Neighborhood</label>
-                <input type="text" id="neighborhood-search" placeholder="Search neighborhood...">
-            </div>
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
 
-            <div class="filter-group">
-                <label>Price Range</label>
-                <div class="price-inputs">
-                    <input type="number" id="price-min" placeholder="Min ($k)" value="0" min="0" step="50">
-                    <input type="number" id="price-max" placeholder="Max ($k)" value="2000" min="0" step="50">
-                </div>
-                <div class="price-range-display"><span id="price-display">$0k &ndash; $2,000k</span></div>
-            </div>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h3>Refine Your Search</h3>
 
-            <div class="filter-group">
-                <label for="market-activity">Market Activity</label>
-                <select id="market-activity">
-                    <option value="">All Activity</option>
-                    <option value="hot">Hot Markets</option>
-                    <option value="warm">Warm Markets</option>
-                    <option value="moderate">Moderate Markets</option>
-                </select>
-            </div>
-
-            <button class="reset-button" id="reset-btn">Reset Filters</button>
-
-            <div class="legend">
-                <h3>Legend</h3>
-                <div class="legend-item"><div class="legend-dot hot"></div><span>Hot Market</span></div>
-                <div class="legend-item"><div class="legend-dot warm"></div><span>Warm Market</span></div>
-                <div class="legend-item"><div class="legend-dot moderate"></div><span>Moderate Market</span></div>
-            </div>
-        </aside>
-
-        <!-- Main Content Area -->
-        <main class="main-content">
-            <!-- Summary Stats -->
-            <div class="stats">
-                <div class="stat-card">
-                    <div class="icon">&#127968;</div>
-                    <div class="value" id="stat-listings">447</div>
-                    <div class="label">Total Listings</div>
-                </div>
-                <div class="stat-card">
-                    <div class="icon">&#128176;</div>
-                    <div class="value" id="stat-price">$588,125</div>
-                    <div class="label">Average Price</div>
-                </div>
-                <div class="stat-card">
-                    <div class="icon">&#128200;</div>
-                    <div class="value" id="stat-hot">3</div>
-                    <div class="label">Hot Markets</div>
-                </div>
-            </div>
-
-            <!-- Sortable Table -->
-            <div class="table-section">
-                <h2 id="table-title">Neighborhood Market Data</h2>
-                <div class="table-wrapper">
-                    <table id="market-table">
-                        <thead>
-                            <tr>
-                                <th data-key="name">Name <span class="sort-arrow">&#9650;&#9660;</span></th>
-                                <th data-key="medianPrice">Median Price <span class="sort-arrow">&#9650;&#9660;</span></th>
-                                <th data-key="dom">DOM <span class="sort-arrow">&#9650;&#9660;</span></th>
-                                <th data-key="yoy">YoY Change <span class="sort-arrow">&#9650;&#9660;</span></th>
-                                <th data-key="listings">Inventory <span class="sort-arrow">&#9650;&#9660;</span></th>
-                                <th data-key="activity">Heat Score <span class="sort-arrow">&#9650;&#9660;</span></th>
-                            </tr>
-                        </thead>
-                        <tbody id="table-body"></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Neighborhood Cards -->
-            <section class="neighborhoods-section">
-                <h2 id="neighborhoods-title">Filtered Neighborhoods (8)</h2>
-                <div class="neighborhoods-grid" id="neighborhoods-grid"></div>
-            </section>
-        </main>
+    <div class="filter-group">
+      <label for="searchInput">Search</label>
+      <input type="text" id="searchInput" class="filter-input" placeholder="Search neighborhoods...">
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-logo">
-                <img src="https://charlotte-sell-iluh5wd7.manus.space/homegrown-logo.png" alt="Home Grown Property Group">
-            </div>
-            <h4>2026 Charlotte Seller's Guide</h4>
-            <p>Serving Charlotte, Huntersville, Cornelius, Davidson, Mooresville, Concord, Matthews &amp; beyond</p>
-            <p style="margin-top:0.5rem;"><a href="tel:7046779191">(704) 677-9191</a></p>
-            <p style="margin-top:1rem; font-size:0.8rem; color:#6c8096;">&copy; 2026 Home Grown Property Group. All rights reserved.</p>
+    <div class="filter-group">
+      <label for="regionFilter">Region</label>
+      <select id="regionFilter" class="filter-select">
+        <option value="all">All Areas</option>
+        <option value="charlotte-core">Charlotte Core</option>
+        <option value="south-charlotte">South Charlotte</option>
+        <option value="fort-mill">Fort Mill / Indian Land</option>
+        <option value="waxhaw">Waxhaw / Union County</option>
+        <option value="lake-norman">Lake Norman / North</option>
+        <option value="east-cabarrus">East / Cabarrus</option>
+        <option value="west-gaston">West / Gaston County</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="activityFilter">Activity Level</label>
+      <select id="activityFilter" class="filter-select">
+        <option value="all">All Activity</option>
+        <option value="hot">Hot Markets</option>
+        <option value="warm">Warm Markets</option>
+        <option value="moderate">Moderate Markets</option>
+      </select>
+    </div>
+
+    <button class="reset-btn" id="resetBtn">Reset Filters</button>
+
+    <div class="legend">
+      <h4>Legend</h4>
+      <div class="legend-item"><span class="legend-dot hot"></span> Hot Market</div>
+      <div class="legend-item"><span class="legend-dot warm"></span> Warm Market</div>
+      <div class="legend-item"><span class="legend-dot moderate"></span> Moderate Market</div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+
+    <!-- SUMMARY CARDS -->
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="label">Total Active Listings</div>
+        <div class="value" id="totalListings">447</div>
+      </div>
+      <div class="summary-card">
+        <div class="label">Average Price</div>
+        <div class="value" id="avgPrice">$487K</div>
+      </div>
+      <div class="summary-card">
+        <div class="label">Hot Markets</div>
+        <div class="value" id="hotCount">3</div>
+      </div>
+    </div>
+
+    <!-- NEIGHBORHOOD GRID -->
+    <div class="hood-grid" id="hoodGrid">
+
+      <div class="hood-card" data-name="Dilworth" data-activity="hot" data-region="charlotte-core" data-price="725000" data-listings="45" data-dom="18" data-yoy="5.2">
+        <div class="hood-header">
+          <span class="hood-name">Dilworth</span>
+          <span class="activity-badge hot">Hot</span>
         </div>
-    </footer>
+        <div class="hood-price">$725,000</div>
+        <div class="hood-stats">
+          <div class="hood-stat"><span class="stat-val">45</span><span class="stat-lbl">Active Listings</span></div>
+          <div class="hood-stat"><span class="stat-val">18</span><span class="stat-lbl">Avg DOM</span></div>
+          <div class="hood-stat"><span class="stat-val">+5.2%</span><span class="stat-lbl">YoY Change</span></div>
+        </div>
+      </div>
 
-    <script>
-        /* ── Data ── */
-        const neighborhoods = [
-            { name: 'Dilworth',         medianPrice: 725000,  dom: 18, yoy: 5.2, listings: 45, activity: 'hot' },
-            { name: 'Myers Park',       medianPrice: 1250000, dom: 22, yoy: 3.8, listings: 32, activity: 'hot' },
-            { name: 'South End',        medianPrice: 485000,  dom: 12, yoy: 7.1, listings: 78, activity: 'hot' },
-            { name: 'Plaza Midwood',    medianPrice: 425000,  dom: 15, yoy: 4.5, listings: 56, activity: 'warm' },
-            { name: 'NoDa',             medianPrice: 395000,  dom: 14, yoy: 6.3, listings: 42, activity: 'warm' },
-            { name: 'Ballantyne',       medianPrice: 625000,  dom: 20, yoy: 3.2, listings: 89, activity: 'warm' },
-            { name: 'Cotswold',         medianPrice: 475000,  dom: 19, yoy: 3.8, listings: 38, activity: 'moderate' },
-            { name: 'University City',  medianPrice: 325000,  dom: 24, yoy: 4.1, listings: 67, activity: 'moderate' }
-        ];
+      <div class="hood-card" data-name="Myers Park" data-activity="hot" data-region="charlotte-core" data-price="1250000" data-listings="32" data-dom="22" data-yoy="3.8">
+        <div class="hood-header">
+          <span class="hood-name">Myers Park</span>
+          <span class="activity-badge hot">Hot</span>
+        </div>
+        <div class="hood-price">$1,250,000</div>
+        <div class="hood-stats">
+          <div class="hood-stat"><span class="stat-val">32</span><span class="stat-lbl">Active Listings</span></div>
+          <div class="hood-stat"><span class="stat-val">22</span><span class="stat-lbl">Avg DOM</span></div>
+          <div class="hood-stat"><span class="stat-val">+3.8%</span><span class="stat-lbl">YoY Change</span></div>
+        </div>
+      </div>
 
-        /* ── State ── */
-        let currentSort = { key: null, asc: true };
-        let filteredData = [...neighborhoods];
+      <div class="hood-card" data-name="South End" data-activity="hot" data-region="charlotte-core" data-price="485000" data-listings="78" data-dom="12" data-yoy="7.1">
+        <div class="hood-header">
+          <span class="hood-name">South End</span>
+          <span class="activity-badge hot">Hot</span>
+        </div>
+        <div class="hood-price">$485,000</div>
+        <div class="hood-stats">
+          <div class="hood-stat"><span class="stat-val">78</span><span class="stat-lbl">Active Listings</span></div>
+          <div class="hood-stat"><span class="stat-val">12</span><span class="stat-lbl">Avg DOM</span></div>
+          <div class="hood-stat"><span class="stat-val">+7.1%</span><span class="stat-lbl">YoY Change</span></div>
+        </div>
+      </div>
 
-        /* ── DOM refs ── */
-        const searchInput   = document.getElementById('neighborhood-search');
-        const priceMin      = document.getElementById('price-min');
-        const priceMax      = document.getElementById('price-max');
-        const activitySelect = document.getElementById('market-activity');
-        const priceDisplay  = document.getElementById('price-display');
-        const tableBody     = document.getElementById('table-body');
-        const grid          = document.getElementById('neighborhoods-grid');
+      <div class="hood-card" data-name="Plaza Midwood" data-activity="warm" data-region="charlotte-core" data-price="425000" data-listings="56" data-dom="15" data-yoy="4.5">
+        <div class="hood-header">
+          <span class="hood-name">Plaza Midwood</span>
+          <span class="activity-badge warm">Warm</span>
+        </div>
+        <div class="hood-price">$425,000</div>
+        <div class="hood-stats">
+          <div class="hood-stat"><span class="stat-val">56</span><span class="stat-lbl">Active Listings</span></div>
+          <div class="hood-stat"><span class="stat-val">15</span><span class="stat-lbl">Avg DOM</span></div>
+          <div class="hood-stat"><span class="stat-val">+4.5%</span><span class="stat-lbl">YoY Change</span></div>
+        </div>
+      </div>
 
-        /* ── Helpers ── */
-        const fmt = n => '$' + n.toLocaleString('en-US');
-        const activityRank = { hot: 1, warm: 2, moderate: 3 };
+      <div class="hood-card" data-name="NoDa" data-activity="warm" data-region="charlotte-core" data-price="395000" data-listings="42" data-dom="14" data-yoy="6.3">
+        <div class="hood-header">
+          <span class="hood-name">NoDa</span>
+          <span class="activity-badge warm">Warm</span>
+        </div>
+        <div class="hood-price">$395,000</div>
+        <div class="hood-stats">
+          <div class="hood-stat"><span class="stat-val">42</span><span class="stat-lbl">Active Listings</span></div>
+          <div class="hood-stat"><span class="stat-val">14</span><span class="stat-lbl">Avg DOM</span></div>
+          <div class="hood-stat"><span class="stat-val">+6.3%</span><span class="stat-lbl">YoY Change</span></div>
+        </div>
+      </div>
 
-        /* ── Filtering ── */
-        function applyFilters() {
-            const term   = searchInput.value.toLowerCase().trim();
-            const minP   = (parseInt(priceMin.value) || 0) * 1000;
-            const maxP   = (parseInt(priceMax.value) || Infinity) * 1000;
-            const act    = activitySelect.value;
+      <div class="hood-card" data-name="Ballantyne" data-activity="warm" data-region="south-charlotte" data-price="625000" data-listings="89" data-dom="20" data-yoy="3.2">
+        <div class="hood-header">
+          <span class="hood-name">Ballantyne</span>
+          <span class="activity-badge warm">Warm</span>
+        </div>
+        <div class="hood-price">$625,000</div>
+        <div class="hood-stats">
+          <div class="hood-stat"><span class="stat-val">89</span><span class="stat-lbl">Active Listings</span></div>
+          <div class="hood-stat"><span class="stat-val">20</span><span class="stat-lbl">Avg DOM</span></div>
+          <div class="hood-stat"><span class="stat-val">+3.2%</span><span class="stat-lbl">YoY Change</span></div>
+        </div>
+      </div>
 
-            filteredData = neighborhoods.filter(n => {
-                if (term && !n.name.toLowerCase().includes(term)) return false;
-                if (n.medianPrice < minP || n.medianPrice > maxP) return false;
-                if (act && n.activity !== act) return false;
-                return true;
-            });
+      <div class="hood-card" data-name="Cotswold" data-activity="moderate" data-region="charlotte-core" data-price="475000" data-listings="38" data-dom="19" data-yoy="3.8">
+        <div class="hood-header">
+          <span class="hood-name">Cotswold</span>
+          <span class="activity-badge moderate">Moderate</span>
+        </div>
+        <div class="hood-price">$475,000</div>
+        <div class="hood-stats">
+          <div class="hood-stat"><span class="stat-val">38</span><span class="stat-lbl">Active Listings</span></div>
+          <div class="hood-stat"><span class="stat-val">19</span><span class="stat-lbl">Avg DOM</span></div>
+          <div class="hood-stat"><span class="stat-val">+3.8%</span><span class="stat-lbl">YoY Change</span></div>
+        </div>
+      </div>
 
-            if (currentSort.key) {
-                sortData(currentSort.key, currentSort.asc, false);
-            }
+      <div class="hood-card" data-name="University City" data-activity="moderate" data-region="charlotte-core" data-price="325000" data-listings="67" data-dom="24" data-yoy="4.1">
+        <div class="hood-header">
+          <span class="hood-name">University City</span>
+          <span class="activity-badge moderate">Moderate</span>
+        </div>
+        <div class="hood-price">$325,000</div>
+        <div class="hood-stats">
+          <div class="hood-stat"><span class="stat-val">67</span><span class="stat-lbl">Active Listings</span></div>
+          <div class="hood-stat"><span class="stat-val">24</span><span class="stat-lbl">Avg DOM</span></div>
+          <div class="hood-stat"><span class="stat-val">+4.1%</span><span class="stat-lbl">YoY Change</span></div>
+        </div>
+      </div>
 
-            render();
-        }
+    </div>
 
-        /* ── Sorting ── */
-        function sortData(key, asc, toggle) {
-            if (toggle) {
-                if (currentSort.key === key) {
-                    asc = !currentSort.asc;
-                } else {
-                    asc = (key === 'name') ? true : false;
-                }
-            }
-            currentSort = { key, asc };
+    <!-- NO RESULTS -->
+    <div class="no-results" id="noResults">No neighborhoods match your current filters. Try adjusting your search criteria.</div>
 
-            filteredData.sort((a, b) => {
-                let va = a[key], vb = b[key];
-                if (key === 'activity') { va = activityRank[va]; vb = activityRank[vb]; }
-                if (typeof va === 'string') { va = va.toLowerCase(); vb = vb.toLowerCase(); }
-                if (va < vb) return asc ? -1 : 1;
-                if (va > vb) return asc ? 1 : -1;
-                return 0;
-            });
+  </div>
+</div>
 
-            /* update header classes */
-            document.querySelectorAll('#market-table thead th').forEach(th => {
-                th.classList.remove('sorted');
-                const arrow = th.querySelector('.sort-arrow');
-                arrow.innerHTML = '&#9650;&#9660;';
-            });
-            const activeTh = document.querySelector(`th[data-key="${key}"]`);
-            if (activeTh) {
-                activeTh.classList.add('sorted');
-                activeTh.querySelector('.sort-arrow').innerHTML = asc ? '&#9650;' : '&#9660;';
-            }
-        }
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Get Your Home Selling Score</h2>
+  <p>Find out what your home is worth in today's Charlotte market and get a personalized selling strategy.</p>
+  <a href="/home-selling-score" class="cta-btn">Get Started</a>
+</section>
 
-        /* ── Render ── */
-        function render() {
-            renderTable();
-            renderCards();
-            updateStats();
-        }
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <img src="https://charlotte-sell-iluh5wd7.manus.space/homegrown-logo.png" alt="Home Grown Property Group">
+    <h3>2026 Charlotte Seller's Guide</h3>
+    <div class="footer-areas">
+      Charlotte &middot; Fort Mill &middot; Indian Land &middot; Waxhaw &middot; Pineville &middot; Huntersville &middot; Cornelius &middot; Matthews &middot; Ballantyne
+    </div>
+    <div class="footer-contact">
+      <a href="tel:7046779191">(704) 677-9191</a>
+    </div>
+    <div class="footer-copy">
+      &copy; 2026 Home Grown Property Group. All rights reserved.
+    </div>
+  </div>
+</footer>
 
-        function renderTable() {
-            if (filteredData.length === 0) {
-                tableBody.innerHTML = '<tr class="no-results-row"><td colspan="6">No neighborhoods match your filters.</td></tr>';
-                return;
-            }
-            tableBody.innerHTML = filteredData.map(n => `
-                <tr>
-                    <td><strong>${n.name}</strong></td>
-                    <td>${fmt(n.medianPrice)}</td>
-                    <td>${n.dom}</td>
-                    <td>+${n.yoy}%</td>
-                    <td>${n.listings}</td>
-                    <td><span class="badge ${n.activity}">${n.activity.toUpperCase()}</span></td>
-                </tr>
-            `).join('');
-        }
+<script>
+// Nav scroll effect
+var nav = document.getElementById('nav');
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 20) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+});
 
-        function renderCards() {
-            if (filteredData.length === 0) {
-                grid.innerHTML = '<div class="no-results">No neighborhoods match your filters. Try adjusting your criteria.</div>';
-                document.getElementById('neighborhoods-title').textContent = 'Filtered Neighborhoods (0)';
-                return;
-            }
-            grid.innerHTML = filteredData.map(n => `
-                <div class="neighborhood-card">
-                    <div class="card-header">
-                        <h3>${n.name}</h3>
-                        <span class="badge ${n.activity}">${n.activity.toUpperCase()}</span>
-                    </div>
-                    <div class="card-price">${fmt(n.medianPrice)}</div>
-                    <div class="card-listings">${n.listings} active listings</div>
-                    <div class="card-stats">
-                        <div class="card-stat">
-                            <div class="label">Avg Price</div>
-                            <div class="value">${fmt(n.medianPrice)}</div>
-                        </div>
-                        <div class="card-stat">
-                            <div class="label">Listings</div>
-                            <div class="value">${n.listings}</div>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-            document.getElementById('neighborhoods-title').textContent = `Filtered Neighborhoods (${filteredData.length})`;
-        }
+// Hamburger menu
+var hamburger = document.getElementById('hamburger');
+var navLinks = document.getElementById('navLinks');
+hamburger.addEventListener('click', function() {
+  hamburger.classList.toggle('open');
+  navLinks.classList.toggle('open');
+});
 
-        function updateStats() {
-            const data = filteredData;
-            const totalListings = data.reduce((s, n) => s + n.listings, 0);
-            const avgPrice = data.length ? Math.round(data.reduce((s, n) => s + n.medianPrice, 0) / data.length) : 0;
-            const hotCount = data.filter(n => n.activity === 'hot').length;
+// Close menu on link click
+navLinks.querySelectorAll('a').forEach(function(link) {
+  link.addEventListener('click', function() {
+    hamburger.classList.remove('open');
+    navLinks.classList.remove('open');
+  });
+});
 
-            document.getElementById('stat-listings').textContent = totalListings.toLocaleString('en-US');
-            document.getElementById('stat-price').textContent = fmt(avgPrice);
-            document.getElementById('stat-hot').textContent = hotCount;
-        }
+// Filter logic
+var searchInput = document.getElementById('searchInput');
+var regionFilter = document.getElementById('regionFilter');
+var activityFilter = document.getElementById('activityFilter');
+var resetBtn = document.getElementById('resetBtn');
+var cards = document.querySelectorAll('.hood-card');
+var noResults = document.getElementById('noResults');
 
-        function updatePriceDisplay() {
-            const minV = priceMin.value || '0';
-            const maxV = priceMax.value || '2,000';
-            priceDisplay.textContent = `$${parseInt(minV).toLocaleString('en-US')}k \u2013 $${parseInt(maxV).toLocaleString('en-US')}k`;
-        }
+function applyFilters() {
+  var search = searchInput.value.toLowerCase().trim();
+  var region = regionFilter.value;
+  var activity = activityFilter.value;
+  var visibleCount = 0;
+  var totalListings = 0;
+  var totalPrice = 0;
+  var hotCount = 0;
 
-        /* ── Reset ── */
-        function resetFilters() {
-            searchInput.value = '';
-            priceMin.value = '0';
-            priceMax.value = '2000';
-            activitySelect.value = '';
-            priceDisplay.textContent = '$0k \u2013 $2,000k';
-            currentSort = { key: null, asc: true };
-            document.querySelectorAll('#market-table thead th').forEach(th => {
-                th.classList.remove('sorted');
-                th.querySelector('.sort-arrow').innerHTML = '&#9650;&#9660;';
-            });
-            filteredData = [...neighborhoods];
-            render();
-        }
+  cards.forEach(function(card) {
+    var name = card.getAttribute('data-name').toLowerCase();
+    var cardRegion = card.getAttribute('data-region');
+    var cardActivity = card.getAttribute('data-activity');
+    var matchSearch = !search || name.indexOf(search) !== -1;
+    var matchRegion = region === 'all' || cardRegion === region;
+    var matchActivity = activity === 'all' || cardActivity === activity;
 
-        /* ── Event Listeners ── */
-        searchInput.addEventListener('input', applyFilters);
-        activitySelect.addEventListener('change', applyFilters);
-        priceMin.addEventListener('input', () => { updatePriceDisplay(); applyFilters(); });
-        priceMax.addEventListener('input', () => { updatePriceDisplay(); applyFilters(); });
-        document.getElementById('reset-btn').addEventListener('click', resetFilters);
+    if (matchSearch && matchRegion && matchActivity) {
+      card.classList.remove('hidden');
+      visibleCount++;
+      totalListings += parseInt(card.getAttribute('data-listings'));
+      totalPrice += parseInt(card.getAttribute('data-price'));
+      if (cardActivity === 'hot') hotCount++;
+    } else {
+      card.classList.add('hidden');
+    }
+  });
 
-        /* Table header sort */
-        document.querySelectorAll('#market-table thead th').forEach(th => {
-            th.addEventListener('click', () => {
-                const key = th.getAttribute('data-key');
-                sortData(key, true, true);
-                render();
-            });
-        });
+  // Update summary cards
+  document.getElementById('totalListings').textContent = visibleCount > 0 ? totalListings : '0';
+  document.getElementById('hotCount').textContent = hotCount;
+  if (visibleCount > 0) {
+    var avg = Math.round(totalPrice / visibleCount / 1000);
+    document.getElementById('avgPrice').textContent = '$' + avg + 'K';
+  } else {
+    document.getElementById('avgPrice').textContent = '$0';
+  }
 
-        /* Hamburger */
-        const hamburger = document.getElementById('hamburger');
-        const navLinks  = document.getElementById('nav-links');
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('open');
-            navLinks.classList.toggle('open');
-        });
+  // No results message
+  if (visibleCount === 0) {
+    noResults.classList.add('show');
+  } else {
+    noResults.classList.remove('show');
+  }
+}
 
-        /* Nav scroll shadow */
-        const mainNav = document.getElementById('main-nav');
-        window.addEventListener('scroll', () => {
-            mainNav.classList.toggle('scrolled', window.scrollY > 10);
-        }, { passive: true });
+searchInput.addEventListener('input', applyFilters);
+regionFilter.addEventListener('change', applyFilters);
+activityFilter.addEventListener('change', applyFilters);
 
-        /* ── Init ── */
-        render();
-    </script>
+resetBtn.addEventListener('click', function() {
+  searchInput.value = '';
+  regionFilter.value = 'all';
+  activityFilter.value = 'all';
+  applyFilters();
+});
+</script>
 </body>
 </html>

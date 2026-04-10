@@ -1,981 +1,437 @@
+<!-- /* Last Updated: 2026-04-10 */ -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seller Readiness Quiz - 2026 Charlotte Seller's Guide</title>
-    <link href="https://fonts.googleapis.com/css2?family=Sansita:ital,wght@0,400;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: system-ui, -apple-system, sans-serif;
-            color: #333;
-            background-color: #f7f7f7;
-            line-height: 1.6;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: "Sansita", system-ui, -apple-system, sans-serif;
-        }
-
-        /* Navigation */
-        nav {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid transparent;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        nav.scrolled {
-            border-bottom-color: #e5e7eb;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-        }
-
-        .nav-container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px;
-        }
-
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            color: #1a1a1a;
-        }
-
-        .nav-logo img {
-            height: 40px;
-            width: auto;
-        }
-
-        .nav-logo-text {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .nav-logo-main {
-            font-family: "Sansita", system-ui, -apple-system, sans-serif;
-            font-weight: 700;
-            font-size: 14px;
-            line-height: 1;
-        }
-
-        .nav-logo-badge {
-            font-size: 10px;
-            color: #666;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 20px;
-            list-style: none;
-            white-space: nowrap;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #1a1a1a;
-            font-size: 13px;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: #A0B2C2;
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .nav-cta {
-            background-color: #2A384C;
-            color: white;
-            border: none;
-            padding: 10px 24px;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-        }
-
-        .nav-cta:hover {
-            background-color: #1F2D3D;
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 4px;
-        }
-
-        .hamburger span {
-            display: block;
-            width: 24px;
-            height: 2px;
-            background-color: #2A384C;
-            border-radius: 2px;
-            transition: all 0.3s ease;
-        }
-
-        .mobile-menu {
-            display: none;
-            position: absolute;
-            top: 70px;
-            left: 0;
-            right: 0;
-            background: white;
-            border-bottom: 1px solid #e5e7eb;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            padding: 20px 24px;
-            z-index: 999;
-        }
-
-        .mobile-menu.active {
-            display: block;
-        }
-
-        .mobile-menu a {
-            display: block;
-            padding: 12px 0;
-            text-decoration: none;
-            color: #1a1a1a;
-            font-size: 15px;
-            font-weight: 500;
-            border-bottom: 1px solid #f0f0f0;
-            transition: color 0.3s ease;
-        }
-
-        .mobile-menu a:last-child {
-            border-bottom: none;
-        }
-
-        .mobile-menu a:hover {
-            color: #A0B2C2;
-        }
-
-        .mobile-menu .mobile-cta {
-            display: block;
-            margin-top: 16px;
-            background-color: #2A384C;
-            color: white;
-            text-align: center;
-            padding: 12px 24px;
-            border-radius: 6px;
-            font-weight: 600;
-            text-decoration: none;
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .nav-cta {
-                display: none;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-
-            .nav-container {
-                height: 60px;
-            }
-
-            .nav-logo img {
-                height: 32px;
-            }
-
-            .mobile-menu {
-                top: 60px;
-            }
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #2A384C, #3A4D63);
-            color: white;
-            padding: 60px 20px;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 48px;
-            font-weight: 800;
-            margin-bottom: 15px;
-            letter-spacing: -0.5px;
-        }
-
-        .hero p {
-            font-size: 18px;
-            color: #D1D9DF;
-            max-width: 600px;
-            margin: 0 auto;
-            font-weight: 400;
-        }
-
-        /* Main Container */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        /* Progress Bar */
-        .progress-section {
-            margin-bottom: 40px;
-        }
-
-        .progress-text {
-            display: flex;
-            justify-content: space-between;
-            font-size: 14px;
-            margin-bottom: 10px;
-            color: #666;
-        }
-
-        .progress-bar-container {
-            width: 100%;
-            height: 8px;
-            background-color: #e0e0e0;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .progress-bar-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #A0B2C2, #8A9DB0);
-            transition: width 0.4s ease;
-            border-radius: 4px;
-        }
-
-        /* Quiz Card */
-        .quiz-card {
-            background: white;
-            border-radius: 8px;
-            padding: 40px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            margin-bottom: 30px;
-            min-height: 400px;
-            display: flex;
-            flex-direction: column;
-            animation: fadeIn 0.4s ease;
-        }
-
-        .question-number {
-            color: #A0B2C2;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .question-text {
-            font-family: 'Sansita', sans-serif;
-            font-size: 28px;
-            font-weight: 700;
-            color: #2A384C;
-            margin-bottom: 30px;
-            line-height: 1.3;
-        }
-
-        .options-list {
-            list-style: none;
-            flex: 1;
-        }
-
-        .option-item {
-            margin-bottom: 16px;
-        }
-
-        .option-input {
-            display: none;
-        }
-
-        .option-label {
-            display: flex;
-            align-items: center;
-            padding: 16px;
-            border: 2px solid #e0e0e0;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background-color: #f9f9f9;
-        }
-
-        .option-label:hover {
-            border-color: #A0B2C2;
-            background-color: #f5f8fa;
-        }
-
-        .option-input:checked + .option-label {
-            border-color: #A0B2C2;
-            background-color: #f0f4f8;
-            font-weight: 600;
-        }
-
-        .custom-radio {
-            width: 20px;
-            height: 20px;
-            border: 2px solid #A0B2C2;
-            border-radius: 50%;
-            margin-right: 16px;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .option-input:checked + .option-label .custom-radio {
-            background-color: #A0B2C2;
-            box-shadow: 0 0 0 3px rgba(160, 178, 194, 0.15);
-        }
-
-        .option-text {
-            font-size: 16px;
-            color: #2A384C;
-        }
-
-        /* Controls */
-        .quiz-controls {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        .btn {
-            padding: 12px 28px;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-        }
-
-        .btn-secondary {
-            background-color: #e0e0e0;
-            color: #2A384C;
-        }
-
-        .btn-secondary:hover {
-            background-color: #d0d0d0;
-        }
-
-        .btn-secondary:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .btn-primary {
-            background-color: #A0B2C2;
-            color: white;
-            flex: 1;
-        }
-
-        .btn-primary:hover {
-            background-color: #8A9DB0;
-        }
-
-        .btn-primary:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        /* Results Page */
-        .results-container {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .results-card {
-            background: white;
-            border-radius: 8px;
-            padding: 60px 40px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            text-align: center;
-        }
-
-        .score-circle {
-            width: 180px;
-            height: 180px;
-            margin: 0 auto 30px;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-
-        .score-circle-bg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: conic-gradient(#A0B2C2 0deg, #A0B2C2 var(--score-angle), #e0e0e0 var(--score-angle), #e0e0e0 360deg);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .score-inner {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 150px;
-            height: 150px;
-            background-color: white;
-            border-radius: 50%;
-        }
-
-        .score-number {
-            font-family: 'Sansita', sans-serif;
-            font-size: 56px;
-            font-weight: 800;
-            color: #A0B2C2;
-        }
-
-        .score-label {
-            font-size: 12px;
-            color: #999;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 5px;
-        }
-
-        .results-heading {
-            font-family: 'Sansita', sans-serif;
-            font-size: 36px;
-            font-weight: 700;
-            color: #2A384C;
-            margin: 30px 0;
-        }
-
-        .results-text {
-            font-size: 18px;
-            color: #666;
-            line-height: 1.8;
-            margin-bottom: 40px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .results-cta {
-            background-color: #A0B2C2;
-            color: white;
-            padding: 14px 40px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 16px;
-            display: inline-block;
-            transition: background-color 0.3s ease;
-            cursor: pointer;
-            border: none;
-        }
-
-        .results-cta:hover {
-            background-color: #8A9DB0;
-        }
-
-        /* Hidden */
-        .hidden {
-            display: none;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Footer */
-        footer {
-            background: #2A384C;
-            color: #ccc;
-            padding: 40px 20px;
-            text-align: center;
-            margin-top: 60px;
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-logo {
-            max-width: 160px;
-            height: auto;
-            margin-bottom: 16px;
-        }
-
-        footer h4 {
-            font-family: "Sansita", system-ui, -apple-system, sans-serif;
-            font-size: 16px;
-            color: white;
-            margin-bottom: 8px;
-        }
-
-        .footer-areas {
-            font-size: 13px;
-            color: #A0B2C2;
-            margin-bottom: 12px;
-            line-height: 1.8;
-        }
-
-        .footer-contact {
-            font-size: 14px;
-            color: #D1D9DF;
-            margin-bottom: 16px;
-        }
-
-        .footer-contact a {
-            color: #D1D9DF;
-            text-decoration: none;
-        }
-
-        .footer-contact a:hover {
-            color: white;
-        }
-
-        .footer-copyright {
-            font-size: 13px;
-            color: #999;
-            margin-top: 16px;
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 36px;
-            }
-
-            .hero p {
-                font-size: 16px;
-            }
-
-            .quiz-card {
-                padding: 30px 20px;
-                min-height: auto;
-            }
-
-            .question-text {
-                font-size: 22px;
-            }
-
-            .option-label {
-                padding: 14px;
-                font-size: 14px;
-            }
-
-            .custom-radio {
-                width: 18px;
-                height: 18px;
-                margin-right: 12px;
-            }
-
-            .quiz-controls {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-            }
-
-            .results-card {
-                padding: 40px 20px;
-            }
-
-            .score-circle {
-                width: 140px;
-                height: 140px;
-                margin-bottom: 20px;
-            }
-
-            .score-inner {
-                width: 120px;
-                height: 120px;
-            }
-
-            .score-number {
-                font-size: 44px;
-            }
-
-            .results-heading {
-                font-size: 28px;
-            }
-
-            .results-text {
-                font-size: 16px;
-            }
-
-            .container {
-                padding: 30px 15px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero {
-                padding: 40px 15px;
-            }
-
-            .hero h1 {
-                font-size: 28px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seller Readiness Quiz | 2026 Charlotte Seller's Guide</title>
+<meta name="description" content="Discover how prepared you are to sell your home in Charlotte's 2026 market with our quick 5-question readiness quiz.">
+<link href="https://fonts.googleapis.com/css2?family=Sansita:ital,wght@0,400;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+/* Last Updated: 2026-04-10 */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#2A384C;--steel:#A0B2C2;--light-steel:#D1D9DF;--off-white:#F0F0F0;--white:#FFFFFF}
+html{scroll-behavior:smooth}
+body{font-family:'Cooper Hewitt',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#333;background:#fff;line-height:1.6;overflow-x:hidden}
+h1,h2,h3,h4,h5,h6{font-family:'Sansita',serif;color:var(--navy)}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,0.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:box-shadow .3s}
+.nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1)}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:10px 24px}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-brand img{height:40px;width:auto}
+.nav-brand-text{display:flex;flex-direction:column}
+.nav-brand-name{font-family:'Sansita',serif;font-weight:700;font-size:1rem;color:var(--navy);line-height:1.2}
+.nav-brand-badge{font-size:.65rem;background:var(--light-steel);color:var(--navy);padding:1px 8px;border-radius:10px;width:fit-content;font-weight:600}
+.nav-links{display:flex;align-items:center;gap:6px;list-style:none}
+.nav-links a{font-size:.85rem;color:var(--navy);padding:6px 10px;border-radius:6px;transition:background .2s,color .2s;font-weight:500}
+.nav-links a:hover,.nav-links a.active{background:var(--off-white);color:var(--navy)}
+.nav-cta{background:var(--navy);color:#fff!important;padding:10px 22px!important;border-radius:24px;font-weight:700;font-size:.85rem;transition:opacity .2s}
+.nav-cta:hover{opacity:.88}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px}
+.hamburger span{display:block;width:24px;height:2.5px;background:var(--navy);border-radius:2px;transition:transform .3s,opacity .3s}
+.hamburger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+
+@media(max-width:768px){
+  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(255,255,255,0.98);backdrop-filter:blur(10px);flex-direction:column;padding:16px 24px;box-shadow:0 8px 24px rgba(0,0,0,0.1)}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:12px 10px;width:100%}
+  .hamburger{display:flex}
+  .nav-brand-name{font-size:.85rem}
+}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#2A384C 0%,#3A4D63 100%);padding:140px 24px 80px;text-align:center;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to top,rgba(255,255,255,0.05),transparent)}
+.hero h1{font-family:'Sansita',serif;font-size:3.2rem;color:#fff;font-weight:800;max-width:800px;margin:0 auto 20px;line-height:1.15}
+.hero p{color:rgba(255,255,255,0.8);font-size:1.15rem;max-width:650px;margin:0 auto;line-height:1.7}
+
+@media(max-width:600px){
+  .hero{padding:120px 20px 60px}
+  .hero h1{font-size:2rem}
+  .hero p{font-size:1rem}
+}
+
+/* QUIZ SECTION */
+.quiz-section{padding:60px 24px 80px;background:var(--off-white)}
+.quiz-container{max-width:700px;margin:0 auto;background:#fff;border-radius:14px;box-shadow:0 2px 16px rgba(0,0,0,0.06);overflow:hidden}
+
+/* PROGRESS BAR */
+.progress-wrapper{padding:24px 32px 0}
+.progress-info{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:.85rem;color:#666;font-weight:500}
+.progress-bar{width:100%;height:8px;background:var(--off-white);border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;background:var(--navy);border-radius:4px;transition:width .4s ease}
+
+/* QUESTION */
+.quiz-body{padding:32px}
+.question-text{font-family:'Sansita',serif;font-size:1.35rem;color:var(--navy);margin-bottom:24px;line-height:1.4}
+
+/* OPTIONS */
+.options-list{list-style:none;display:flex;flex-direction:column;gap:12px}
+.option-item{position:relative}
+.option-item input[type="radio"]{position:absolute;opacity:0;pointer-events:none}
+.option-label{display:flex;align-items:center;gap:14px;padding:16px 20px;border:2px solid #e5e7eb;border-radius:10px;cursor:pointer;transition:border-color .2s,background .2s,box-shadow .2s;font-size:.95rem;color:#333}
+.option-label:hover{border-color:var(--steel);background:rgba(160,178,194,0.05)}
+.option-radio{width:22px;height:22px;min-width:22px;border-radius:50%;border:2px solid var(--light-steel);display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s}
+.option-radio::after{content:'';width:12px;height:12px;border-radius:50%;background:var(--navy);transform:scale(0);transition:transform .2s}
+.option-item input[type="radio"]:checked + .option-label{border-color:var(--navy);background:rgba(42,56,76,0.04);box-shadow:0 0 0 1px var(--navy)}
+.option-item input[type="radio"]:checked + .option-label .option-radio{border-color:var(--navy)}
+.option-item input[type="radio"]:checked + .option-label .option-radio::after{transform:scale(1)}
+
+/* BUTTONS */
+.quiz-buttons{display:flex;justify-content:space-between;align-items:center;margin-top:32px;gap:16px}
+.btn{padding:12px 32px;border-radius:24px;font-size:.95rem;font-weight:700;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s,opacity .2s;font-family:inherit}
+.btn-back{background:var(--off-white);color:var(--navy)}
+.btn-back:hover{background:var(--light-steel)}
+.btn-next{background:var(--navy);color:#fff}
+.btn-next:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 4px 16px rgba(42,56,76,0.3)}
+.btn-next:disabled{opacity:.4;cursor:not-allowed}
+
+/* RESULTS */
+.results-container{display:none;text-align:center;padding:48px 32px}
+.score-gauge{position:relative;width:180px;height:180px;margin:0 auto 28px}
+.score-gauge svg{transform:rotate(-90deg)}
+.score-gauge .bg-circle{fill:none;stroke:var(--off-white);stroke-width:12}
+.score-gauge .score-circle{fill:none;stroke-width:12;stroke-linecap:round;transition:stroke-dashoffset 1.5s ease}
+.score-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.score-value{font-family:'Sansita',serif;font-size:2.4rem;font-weight:800;color:var(--navy);line-height:1}
+.score-max{font-size:.85rem;color:#999;margin-top:2px}
+.result-title{font-family:'Sansita',serif;font-size:1.8rem;color:var(--navy);margin-bottom:14px}
+.result-desc{color:#666;font-size:1rem;max-width:500px;margin:0 auto 32px;line-height:1.7}
+.btn-cta{display:inline-block;background:var(--navy);color:#fff;padding:14px 36px;border-radius:28px;font-weight:700;font-size:1rem;transition:transform .2s,box-shadow .2s;border:none;cursor:pointer;font-family:inherit}
+.btn-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(42,56,76,0.3)}
+
+/* FOOTER */
+.footer{background:var(--navy);color:rgba(255,255,255,0.8);padding:60px 24px 30px;text-align:center}
+.footer-inner{max-width:900px;margin:0 auto}
+.footer img{max-width:160px;margin:0 auto 20px}
+.footer h3{color:#fff;font-family:'Sansita',serif;font-size:1.3rem;margin-bottom:20px}
+.footer-areas{margin-bottom:20px;font-size:.85rem;line-height:1.8}
+.footer-contact{margin-bottom:20px;font-size:.95rem}
+.footer-contact a{color:var(--steel);font-weight:600}
+.footer-copy{font-size:.78rem;color:rgba(255,255,255,0.5);border-top:1px solid rgba(255,255,255,0.1);padding-top:20px;margin-top:20px}
+
+/* ANIMATIONS */
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+</style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav id="main-nav">
-        <div class="nav-container">
-            <a href="/" class="nav-logo">
-                <img src="https://charlotte-sell-iluh5wd7.manus.space/logo_cropped.webp" alt="Home Grown Property Group">
-                <div class="nav-logo-text">
-                    <span class="nav-logo-main">Home Grown Property Group</span>
-                    <span class="nav-logo-badge">2026 Seller's Guide</span>
-                </div>
-            </a>
-            <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/quiz">Seller Quiz</a></li>
-                <li><a href="/home-selling-score">Home Score</a></li>
-                <li><a href="/neighborhoods">Neighborhoods</a></li>
-                <li><a href="/compare">Compare Areas</a></li>
-                <li><a href="/market-heatmap">Market Data</a></li>
-                <li><a href="/thank-you">Bonuses</a></li>
-            </ul>
-            <div class="nav-right">
-                <a href="/home-selling-score" class="nav-cta">Get Started</a>
-                <button class="hamburger" id="hamburger-btn" aria-label="Toggle menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-        </div>
-        <div class="mobile-menu" id="mobile-menu">
-            <a href="/">Home</a>
-            <a href="/quiz">Seller Quiz</a>
-            <a href="/home-selling-score">Home Score</a>
-            <a href="/neighborhoods">Neighborhoods</a>
-            <a href="/compare">Compare Areas</a>
-            <a href="/market-heatmap">Market Data</a>
-            <a href="/thank-you">Bonuses</a>
-            <a href="/home-selling-score" class="mobile-cta">Get Started</a>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <div class="hero">
-        <h1>Seller Readiness Quiz</h1>
-        <p>Discover how prepared you are to sell your home in Charlotte's 2026 market</p>
+<!-- NAVIGATION -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">
+      <img src="https://charlotte-sell-iluh5wd7.manus.space/logo_cropped.webp" alt="Home Grown Property Group Logo">
+      <div class="nav-brand-text">
+        <span class="nav-brand-name">Home Grown Property Group</span>
+        <span class="nav-brand-badge">2026 Seller's Guide</span>
+      </div>
+    </a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/">Home</a></li>
+      <li><a href="/quiz" class="active">Seller Quiz</a></li>
+      <li><a href="/home-selling-score">Home Score</a></li>
+      <li><a href="/neighborhoods">Neighborhoods</a></li>
+      <li><a href="/compare">Compare Areas</a></li>
+      <li><a href="/market-heatmap">Market Data</a></li>
+      <li><a href="/thank-you">Bonuses</a></li>
+      <li><a href="/home-selling-score" class="nav-cta">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Seller Readiness Quiz</h1>
+  <p>Discover how prepared you are to sell your home in Charlotte's 2026 market</p>
+</section>
+
+<!-- QUIZ -->
+<section class="quiz-section">
+  <div class="quiz-container fade-in" id="quizContainer">
+    <!-- Progress -->
+    <div class="progress-wrapper" id="progressWrapper">
+      <div class="progress-info">
+        <span id="progressLabel">Question 1 of 5</span>
+        <span id="progressPct">20%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width:20%"></div>
+      </div>
     </div>
 
-    <!-- Main Content -->
-    <div class="container">
-        <!-- Progress Section -->
-        <div class="progress-section" id="progress-section">
-            <div class="progress-text">
-                <span id="progress-label">Question 1 of 5</span>
-                <span id="progress-percent">20%</span>
-            </div>
-            <div class="progress-bar-container">
-                <div class="progress-bar-fill" id="progress-bar" style="width: 20%;"></div>
-            </div>
-        </div>
-
-        <!-- Quiz Container -->
-        <div id="quiz-container">
-            <!-- Question cards will be inserted here -->
-        </div>
-
-        <!-- Results Container -->
-        <div id="results-container" class="results-container">
-            <div class="results-card">
-                <div class="score-circle">
-                    <div class="score-circle-bg" id="score-bg"></div>
-                    <div class="score-inner">
-                        <div class="score-number" id="final-score">0</div>
-                        <div class="score-label">out of 100</div>
-                    </div>
-                </div>
-                <h2 class="results-heading" id="results-title"></h2>
-                <p class="results-text" id="results-message"></p>
-                <a href="/home-selling-score" class="results-cta">Get Your Home Selling Score</a>
-            </div>
-        </div>
+    <!-- Quiz Body -->
+    <div class="quiz-body" id="quizBody">
+      <!-- Questions rendered by JS -->
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-container">
-            <img src="https://charlotte-sell-iluh5wd7.manus.space/homegrown-logo.png" alt="Home Grown Property Group" class="footer-logo">
-            <h4>2026 Charlotte Seller's Guide</h4>
-            <p class="footer-areas">Charlotte | Fort Mill | Indian Land | Waxhaw | Pineville | Huntersville | Cornelius | Matthews | Ballantyne</p>
-            <p class="footer-contact"><a href="tel:7046779191">(704) 677-9191</a></p>
-            <div class="footer-copyright">&copy; 2026 Home Grown Property Group. All rights reserved.</div>
+    <!-- Results -->
+    <div class="results-container" id="resultsContainer">
+      <div class="score-gauge">
+        <svg width="180" height="180" viewBox="0 0 180 180">
+          <circle class="bg-circle" cx="90" cy="90" r="78"></circle>
+          <circle class="score-circle" id="scoreCircle" cx="90" cy="90" r="78" stroke-dasharray="490" stroke-dashoffset="490"></circle>
+        </svg>
+        <div class="score-text">
+          <div class="score-value" id="scoreValue">0</div>
+          <div class="score-max">/ 49</div>
         </div>
-    </footer>
+      </div>
+      <h2 class="result-title" id="resultTitle"></h2>
+      <p class="result-desc" id="resultDesc"></p>
+      <a href="/home-selling-score" class="btn-cta">Get Your Home Selling Score</a>
+    </div>
+  </div>
+</section>
 
-    <script>
-        // Scroll-triggered nav border
-        window.addEventListener('scroll', function() {
-            var nav = document.getElementById('main-nav');
-            if (window.scrollY > 10) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <img src="https://charlotte-sell-iluh5wd7.manus.space/homegrown-logo.png" alt="Home Grown Property Group">
+    <h3>2026 Charlotte Seller's Guide</h3>
+    <div class="footer-areas">
+      Charlotte &middot; Fort Mill &middot; Indian Land &middot; Waxhaw &middot; Pineville &middot; Huntersville &middot; Cornelius &middot; Matthews &middot; Ballantyne
+    </div>
+    <div class="footer-contact">
+      <a href="tel:7046779191">(704) 677-9191</a>
+    </div>
+    <div class="footer-copy">
+      &copy; 2026 Home Grown Property Group. All rights reserved.
+    </div>
+  </div>
+</footer>
 
-        // Mobile hamburger toggle
-        var hamburgerBtn = document.getElementById('hamburger-btn');
-        var mobileMenu = document.getElementById('mobile-menu');
+<script>
+// Sticky nav scroll effect
+var nav = document.getElementById('nav');
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 20) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+});
 
-        hamburgerBtn.addEventListener('click', function() {
-            mobileMenu.classList.toggle('active');
-        });
+// Hamburger menu
+var hamburger = document.getElementById('hamburger');
+var navLinks = document.getElementById('navLinks');
+hamburger.addEventListener('click', function() {
+  hamburger.classList.toggle('open');
+  navLinks.classList.toggle('open');
+});
+navLinks.querySelectorAll('a').forEach(function(link) {
+  link.addEventListener('click', function() {
+    hamburger.classList.remove('open');
+    navLinks.classList.remove('open');
+  });
+});
 
-        // Quiz data
-        var quizData = [
-            {
-                id: 1,
-                question: "When are you planning to sell your home?",
-                options: [
-                    "Already listed",
-                    "1-3 months",
-                    "3-6 months",
-                    "6-12 months",
-                    "Just exploring"
-                ],
-                scores: [20, 16, 12, 8, 4]
-            },
-            {
-                id: 2,
-                question: "How would you describe your home's current condition?",
-                options: [
-                    "Move-in ready with modern updates",
-                    "Needs minor cosmetic updates",
-                    "Needs moderate work and updates",
-                    "Needs major renovation",
-                    "Not sure about condition"
-                ],
-                scores: [20, 16, 12, 8, 4]
-            },
-            {
-                id: 3,
-                question: "How familiar are you with the current Charlotte real estate market?",
-                options: [
-                    "Very familiar \u2014 I follow trends regularly",
-                    "Somewhat familiar \u2014 I know the basics",
-                    "Basic understanding only",
-                    "Limited knowledge",
-                    "Not at all familiar"
-                ],
-                scores: [20, 16, 12, 8, 4]
-            },
-            {
-                id: 4,
-                question: "How would you describe your financial readiness to sell?",
-                options: [
-                    "Fully prepared \u2014 finances are in order",
-                    "Mostly prepared \u2014 a few things to finalize",
-                    "Somewhat prepared \u2014 need to review finances",
-                    "Not really prepared \u2014 significant planning needed",
-                    "Haven't considered financial aspects"
-                ],
-                scores: [20, 16, 12, 8, 4]
-            },
-            {
-                id: 5,
-                question: "How emotionally ready are you to sell your home?",
-                options: [
-                    "Completely ready \u2014 excited to move on",
-                    "Mostly ready \u2014 comfortable with the decision",
-                    "Mixed feelings \u2014 some attachment",
-                    "Reluctant \u2014 difficult decision",
-                    "Not ready \u2014 not sure I want to sell"
-                ],
-                scores: [20, 16, 12, 8, 4]
-            }
-        ];
+// Scroll fade-in
+var fadeEls = document.querySelectorAll('.fade-in');
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+fadeEls.forEach(function(el) { observer.observe(el); });
 
-        // Results messages
-        var resultMessages = [
-            { min: 90, max: 100, title: "Excellent!", message: "You're exceptionally well-prepared to sell your home in Charlotte's 2026 market. You have strong market knowledge, financial readiness, and a clear timeline. Let's maximize your home's value with our expert guidance." },
-            { min: 76, max: 89, title: "Well Prepared!", message: "You have a solid understanding of what it takes to sell in Charlotte's market. Consider scheduling a consultation to refine your strategy and address any remaining gaps in your preparation." },
-            { min: 60, max: 75, title: "Good Foundation", message: "You're on the right track with your home selling preparation. A professional market analysis and personalized consultation will help strengthen your position and boost your confidence." },
-            { min: 40, max: 59, title: "Ready to Learn", message: "You have some important preparation steps ahead, but that's completely normal. Let us help you develop a comprehensive selling strategy tailored to Charlotte's 2026 market conditions." },
-            { min: 20, max: 39, title: "Getting Started", message: "You're at the beginning of your home selling journey, and there's no better time to start planning. We're here to guide you through every step, from market evaluation to closing day." }
-        ];
+// QUIZ DATA
+var questions = [
+  {
+    text: "When are you planning to sell your home?",
+    options: [
+      { label: "Within 1-3 months", score: 10 },
+      { label: "Within 3-6 months", score: 8 },
+      { label: "Within 6-12 months", score: 5 },
+      { label: "Just exploring options", score: 2 }
+    ]
+  },
+  {
+    text: "What\u2019s the current condition of your home?",
+    options: [
+      { label: "Move-in ready, recently updated", score: 10 },
+      { label: "Good condition, minor updates needed", score: 7 },
+      { label: "Needs some repairs and updates", score: 4 },
+      { label: "Significant repairs needed", score: 2 }
+    ]
+  },
+  {
+    text: "What\u2019s your primary motivation for selling?",
+    options: [
+      { label: "Job relocation", score: 9 },
+      { label: "Upgrading to larger home", score: 8 },
+      { label: "Downsizing", score: 8 },
+      { label: "Financial reasons", score: 7 },
+      { label: "Lifestyle change", score: 6 }
+    ]
+  },
+  {
+    text: "How prepared are you to sell?",
+    options: [
+      { label: "I\u2019ve already started preparing", score: 10 },
+      { label: "I know what needs to be done", score: 7 },
+      { label: "Still learning about the process", score: 4 },
+      { label: "Not sure where to start", score: 2 }
+    ]
+  },
+  {
+    text: "Do you have a realistic price expectation?",
+    options: [
+      { label: "Yes, I\u2019ve researched comparable sales", score: 10 },
+      { label: "I have a rough estimate", score: 6 },
+      { label: "Not sure what my home is worth", score: 3 }
+    ]
+  }
+];
 
-        // State
-        var currentQuestion = 0;
-        var answers = [];
+var currentQuestion = 0;
+var answers = [];
+var quizBody = document.getElementById('quizBody');
+var resultsContainer = document.getElementById('resultsContainer');
+var progressWrapper = document.getElementById('progressWrapper');
+var progressLabel = document.getElementById('progressLabel');
+var progressPct = document.getElementById('progressPct');
+var progressFill = document.getElementById('progressFill');
 
-        // Initialize quiz
-        function initQuiz() {
-            renderQuestion();
-        }
+function renderQuestion() {
+  var q = questions[currentQuestion];
+  var pct = Math.round(((currentQuestion + 1) / questions.length) * 100);
+  progressLabel.textContent = 'Question ' + (currentQuestion + 1) + ' of ' + questions.length;
+  progressPct.textContent = pct + '%';
+  progressFill.style.width = pct + '%';
 
-        // Render current question
-        function renderQuestion() {
-            var quizContainer = document.getElementById('quiz-container');
-            quizContainer.innerHTML = '';
+  var html = '<h2 class="question-text">' + q.text + '</h2>';
+  html += '<ul class="options-list">';
+  for (var i = 0; i < q.options.length; i++) {
+    var opt = q.options[i];
+    var checked = (answers[currentQuestion] === i) ? ' checked' : '';
+    html += '<li class="option-item">';
+    html += '<input type="radio" name="q' + currentQuestion + '" id="q' + currentQuestion + 'o' + i + '" value="' + i + '"' + checked + '>';
+    html += '<label class="option-label" for="q' + currentQuestion + 'o' + i + '">';
+    html += '<span class="option-radio"></span>';
+    html += '<span>' + opt.label + '</span>';
+    html += '</label>';
+    html += '</li>';
+  }
+  html += '</ul>';
 
-            var question = quizData[currentQuestion];
-            var card = document.createElement('div');
-            card.className = 'quiz-card';
+  html += '<div class="quiz-buttons">';
+  if (currentQuestion > 0) {
+    html += '<button class="btn btn-back" onclick="goBack()">Back</button>';
+  } else {
+    html += '<span></span>';
+  }
+  var nextLabel = (currentQuestion === questions.length - 1) ? 'See Results' : 'Next';
+  var disabled = (answers[currentQuestion] === undefined) ? ' disabled' : '';
+  html += '<button class="btn btn-next" id="btnNext"' + disabled + ' onclick="goNext()">' + nextLabel + '</button>';
+  html += '</div>';
 
-            var optionsHTML = '';
-            for (var i = 0; i < question.options.length; i++) {
-                var optionId = 'option-' + currentQuestion + '-' + i;
-                var checked = answers[currentQuestion] === i ? 'checked' : '';
-                optionsHTML += '<li class="option-item">' +
-                    '<input type="radio" id="' + optionId + '" name="answer" class="option-input" data-index="' + i + '" data-score="' + question.scores[i] + '" ' + checked + '>' +
-                    '<label for="' + optionId + '" class="option-label">' +
-                    '<div class="custom-radio"></div>' +
-                    '<span class="option-text">' + question.options[i] + '</span>' +
-                    '</label>' +
-                    '</li>';
-            }
+  quizBody.innerHTML = html;
 
-            card.innerHTML =
-                '<div class="question-number">Question ' + (currentQuestion + 1) + ' of 5</div>' +
-                '<h2 class="question-text">' + question.question + '</h2>' +
-                '<ul class="options-list">' + optionsHTML + '</ul>' +
-                '<div class="quiz-controls">' +
-                '<button class="btn btn-secondary" id="btn-back" onclick="previousQuestion()" ' + (currentQuestion === 0 ? 'disabled' : '') + '>Back</button>' +
-                '<button class="btn btn-primary" id="btn-next" onclick="nextQuestion()">' + (currentQuestion === 4 ? 'See Results' : 'Next') + '</button>' +
-                '</div>';
+  // Listen for radio changes
+  var radios = quizBody.querySelectorAll('input[type="radio"]');
+  radios.forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      answers[currentQuestion] = parseInt(this.value);
+      document.getElementById('btnNext').disabled = false;
+    });
+  });
+}
 
-            quizContainer.appendChild(card);
+function goNext() {
+  if (answers[currentQuestion] === undefined) return;
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    renderQuestion();
+  } else {
+    showResults();
+  }
+}
 
-            // Add event listeners to radio buttons
-            var inputs = document.querySelectorAll('.option-input');
-            for (var j = 0; j < inputs.length; j++) {
-                inputs[j].addEventListener('change', function(e) {
-                    var index = parseInt(e.target.dataset.index);
-                    answers[currentQuestion] = index;
-                });
-            }
+function goBack() {
+  if (currentQuestion > 0) {
+    currentQuestion--;
+    renderQuestion();
+  }
+}
 
-            updateProgress();
-        }
+function showResults() {
+  var totalScore = 0;
+  for (var i = 0; i < questions.length; i++) {
+    if (answers[i] !== undefined) {
+      totalScore += questions[i].options[answers[i]].score;
+    }
+  }
 
-        // Update progress bar
-        function updateProgress() {
-            var percentage = ((currentQuestion + 1) / 5) * 100;
-            document.getElementById('progress-bar').style.width = percentage + '%';
-            document.getElementById('progress-label').textContent = 'Question ' + (currentQuestion + 1) + ' of 5';
-            document.getElementById('progress-percent').textContent = Math.round(percentage) + '%';
-        }
+  var title, desc, color;
+  if (totalScore >= 40) {
+    title = "You\u2019re Ready to Sell!";
+    desc = "Based on your responses, you\u2019re well-prepared to list your home. Your timeline is clear, and you understand the market. Consider reaching out to an agent to get started.";
+    color = '#2A384C';
+  } else if (totalScore >= 25) {
+    title = "Almost Ready";
+    desc = "You\u2019re on the right track, but there are a few areas to address before listing. Focus on home preparation, pricing research, and timeline planning.";
+    color = '#A0B2C2';
+  } else {
+    title = "Time to Prepare";
+    desc = "You\u2019re in the early stages of your selling journey. Take time to research the market, assess your home\u2019s condition, and develop a realistic timeline. We\u2019re here to help!";
+    color = '#D1D9DF';
+  }
 
-        // Next question
-        function nextQuestion() {
-            if (answers[currentQuestion] === undefined) {
-                alert('Please select an answer before continuing.');
-                return;
-            }
+  // Hide quiz, show results
+  quizBody.style.display = 'none';
+  progressWrapper.style.display = 'none';
+  resultsContainer.style.display = 'block';
 
-            if (currentQuestion === 4) {
-                showResults();
-            } else {
-                currentQuestion++;
-                renderQuestion();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        }
+  document.getElementById('resultTitle').textContent = title;
+  document.getElementById('resultDesc').textContent = desc;
 
-        // Previous question
-        function previousQuestion() {
-            if (currentQuestion > 0) {
-                currentQuestion--;
-                renderQuestion();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        }
+  // Animate score gauge
+  var circumference = 2 * Math.PI * 78;
+  var scoreCircle = document.getElementById('scoreCircle');
+  scoreCircle.style.stroke = color;
+  var offset = circumference - (totalScore / 49) * circumference;
+  scoreCircle.setAttribute('stroke-dasharray', circumference);
+  scoreCircle.setAttribute('stroke-dashoffset', circumference);
 
-        // Calculate and show results
-        function showResults() {
-            var totalScore = 0;
-            for (var i = 0; i < answers.length; i++) {
-                if (answers[i] !== undefined) {
-                    totalScore += quizData[i].scores[answers[i]];
-                }
-            }
+  setTimeout(function() {
+    scoreCircle.style.transition = 'stroke-dashoffset 1.5s ease';
+    scoreCircle.setAttribute('stroke-dashoffset', offset);
+  }, 100);
 
-            // Find matching result message
-            var result = resultMessages[resultMessages.length - 1];
-            for (var j = 0; j < resultMessages.length; j++) {
-                if (totalScore >= resultMessages[j].min && totalScore <= resultMessages[j].max) {
-                    result = resultMessages[j];
-                    break;
-                }
-            }
+  // Animate score number
+  var scoreEl = document.getElementById('scoreValue');
+  var current = 0;
+  var duration = 1500;
+  var startTime = null;
+  function animateScore(timestamp) {
+    if (!startTime) startTime = timestamp;
+    var progress = Math.min((timestamp - startTime) / duration, 1);
+    var val = Math.round(progress * totalScore);
+    scoreEl.textContent = val;
+    if (progress < 1) {
+      requestAnimationFrame(animateScore);
+    }
+  }
+  requestAnimationFrame(animateScore);
 
-            // Update results UI
-            document.getElementById('final-score').textContent = totalScore;
-            document.getElementById('results-title').textContent = result.title;
-            document.getElementById('results-message').textContent = result.message;
+  // Scroll to results
+  resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
 
-            // Calculate and set circular progress angle
-            var scoreAngle = (totalScore / 100) * 360;
-            document.getElementById('score-bg').style.setProperty('--score-angle', scoreAngle + 'deg');
-
-            // Hide quiz and progress, show results
-            document.getElementById('quiz-container').classList.add('hidden');
-            document.getElementById('progress-section').classList.add('hidden');
-            document.getElementById('results-container').style.display = 'block';
-
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Start the quiz
-        initQuiz();
-    </script>
+// Initialize
+renderQuestion();
+</script>
 </body>
 </html>

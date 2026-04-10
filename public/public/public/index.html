@@ -1,3 +1,4 @@
+<!-- /* Last Updated: 2026-04-10 */ -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,167 +6,856 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>2026 Charlotte Seller's Guide | Home Grown Property Group</title>
 <meta name="description" content="Maximize your home sale in the Queen City. An expert-level, interactive guide for navigating the 2026 real estate market across Mecklenburg, Union, York, and Lancaster counties.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sansita:ital,wght@0,400;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--navy:#2A384C;--steel:#A0B2C2;--light-steel:#D1D9DF;--off-white:#F0F0F0;--white:#FFFFFF}
-html{scroll-behavior:smooth}
-body{font-family:'Cooper Hewitt',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#333;background:#fff;line-height:1.6;overflow-x:hidden}
-h1,h2,h3,h4,h5,h6{font-family:'Sansita',serif;color:var(--navy)}
-a{text-decoration:none;color:inherit}
-img{max-width:100%;display:block}
-
-/* NAV */
-.nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,0.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:box-shadow .3s}
-.nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1)}
-.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:10px 24px}
-.nav-brand{display:flex;align-items:center;gap:10px}
-.nav-brand img{height:40px;width:auto}
-.nav-brand-text{display:flex;flex-direction:column}
-.nav-brand-name{font-family:'Sansita',serif;font-weight:700;font-size:1rem;color:var(--navy);line-height:1.2}
-.nav-brand-badge{font-size:.65rem;background:var(--light-steel);color:var(--navy);padding:1px 8px;border-radius:10px;width:fit-content;font-weight:600}
-.nav-links{display:flex;align-items:center;gap:6px;list-style:none}
-.nav-links a{font-size:.85rem;color:var(--navy);padding:6px 10px;border-radius:6px;transition:background .2s,color .2s;font-weight:500}
-.nav-links a:hover,.nav-links a.active{background:var(--off-white);color:var(--navy)}
-.nav-cta{background:var(--navy);color:#fff!important;padding:10px 22px!important;border-radius:24px;font-weight:700;font-size:.85rem;transition:opacity .2s}
-.nav-cta:hover{opacity:.88}
-.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px}
-.hamburger span{display:block;width:24px;height:2.5px;background:var(--navy);border-radius:2px;transition:transform .3s,opacity .3s}
-.hamburger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
-.hamburger.open span:nth-child(2){opacity:0}
-.hamburger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
-
-@media(max-width:768px){
-  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(255,255,255,0.98);backdrop-filter:blur(10px);flex-direction:column;padding:16px 24px;box-shadow:0 8px 24px rgba(0,0,0,0.1)}
-  .nav-links.open{display:flex}
-  .nav-links a{padding:12px 10px;width:100%}
-  .hamburger{display:flex}
-  .nav-brand-name{font-size:.85rem}
+/* Last Updated: 2026-04-10 */
+:root {
+  --navy: #2A384C;
+  --steel: #A0B2C2;
+  --light-steel: #D1D9DF;
+  --off-white: #F0F0F0;
+  --white: #FFFFFF;
 }
 
-/* HERO */
-.hero{background:linear-gradient(135deg,#2A384C 0%,#3A4D63 100%);padding:140px 24px 80px;text-align:center;position:relative;overflow:hidden}
-.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to top,rgba(255,255,255,0.05),transparent)}
-.hero-badge{display:inline-block;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.9);padding:8px 20px;border-radius:50px;font-size:.85rem;margin-bottom:24px;letter-spacing:.3px}
-.hero h1{font-family:'Sansita',serif;font-size:3.2rem;color:#fff;font-weight:800;max-width:800px;margin:0 auto 20px;line-height:1.15}
-.hero p{color:rgba(255,255,255,0.8);font-size:1.15rem;max-width:650px;margin:0 auto 36px;line-height:1.7}
-.hero-cta{display:inline-block;background:var(--steel);color:#fff;padding:16px 40px;border-radius:30px;font-size:1.05rem;font-weight:700;transition:transform .2s,box-shadow .2s}
-.hero-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.25)}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-@media(max-width:600px){
-  .hero{padding:120px 20px 60px}
-  .hero h1{font-size:2rem}
-  .hero p{font-size:1rem}
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Cooper Hewitt', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #333;
+  background: var(--white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* SECTIONS */
-.section{padding:80px 24px}
-.section-alt{background:var(--off-white)}
-.section-inner{max-width:1100px;margin:0 auto}
-.section-heading{text-align:center;margin-bottom:48px}
-.section-heading h2{font-size:2.2rem;margin-bottom:8px}
-.section-heading .badge{display:inline-block;background:var(--light-steel);color:var(--navy);padding:4px 14px;border-radius:20px;font-size:.8rem;font-weight:600;margin-bottom:12px}
-.section-heading p{color:#666;max-width:600px;margin:0 auto;font-size:1rem}
+h1, h2, h3, h4 {
+  font-family: 'Sansita', serif;
+  color: var(--navy);
+  line-height: 1.2;
+}
 
-/* MARKET PULSE */
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.stat-card{background:#fff;border-radius:14px;padding:28px 20px;text-align:center;box-shadow:0 2px 16px rgba(0,0,0,0.06);transition:transform .3s,box-shadow .3s}
-.stat-card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,0.1)}
-.stat-icon{width:48px;height:48px;background:var(--off-white);border-radius:12px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center}
-.stat-icon svg{width:24px;height:24px;stroke:var(--navy);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.stat-value{font-family:'Sansita',serif;font-size:2rem;font-weight:800;color:var(--navy)}
-.stat-label{color:#666;font-size:.85rem;margin-top:4px}
-.stat-badge{display:inline-block;font-size:.65rem;padding:3px 10px;border-radius:10px;margin-top:10px;font-weight:600}
-.stat-badge.live{background:#e8f5e9;color:#2e7d32}
-.stat-badge.info{background:var(--light-steel);color:var(--navy)}
+a { text-decoration: none; color: inherit; }
 
-@media(max-width:768px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:480px){.stats-grid{grid-template-columns:1fr}}
+img { max-width: 100%; display: block; }
 
-/* CARDS GRID */
-.cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.card{background:#fff;border-radius:14px;padding:32px 24px;box-shadow:0 2px 16px rgba(0,0,0,0.06);transition:transform .3s,box-shadow .3s}
-.card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,0.1)}
-.card-icon{width:52px;height:52px;background:var(--off-white);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:18px}
-.card-icon svg{width:26px;height:26px;stroke:var(--navy);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.card h3{font-size:1.15rem;margin-bottom:10px}
-.card p{color:#666;font-size:.9rem;line-height:1.6}
+/* ── NAV ── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid transparent;
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
 
-@media(max-width:768px){.cards-grid{grid-template-columns:1fr}}
+.nav.scrolled {
+  box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+  border-bottom-color: var(--light-steel);
+}
 
-/* TIMELINE */
-.timeline{position:relative;max-width:700px;margin:0 auto}
-.timeline::before{content:'';position:absolute;left:28px;top:0;bottom:0;width:2px;background:var(--light-steel)}
-.timeline-step{display:flex;gap:24px;margin-bottom:40px;position:relative}
-.timeline-step:last-child{margin-bottom:0}
-.timeline-num{width:56px;height:56px;min-width:56px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Sansita',serif;font-weight:800;font-size:1.2rem;position:relative;z-index:1}
-.timeline-content{padding-top:8px}
-.timeline-content .timeframe{display:inline-block;background:var(--light-steel);color:var(--navy);padding:3px 12px;border-radius:10px;font-size:.75rem;font-weight:600;margin-bottom:8px}
-.timeline-content h3{font-size:1.15rem;margin-bottom:6px}
-.timeline-content p{color:#666;font-size:.9rem}
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+}
 
-/* CTA BANNER */
-.cta-banner{background:linear-gradient(135deg,#2A384C 0%,#3A4D63 100%);padding:64px 24px;text-align:center}
-.cta-banner h2{color:#fff;font-size:2rem;margin-bottom:14px}
-.cta-banner p{color:rgba(255,255,255,0.8);max-width:550px;margin:0 auto 28px;font-size:1rem}
-.cta-banner a{display:inline-block;background:var(--steel);color:#fff;padding:14px 36px;border-radius:28px;font-weight:700;font-size:1rem;transition:transform .2s,box-shadow .2s}
-.cta-banner a:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.3)}
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
 
-/* TESTIMONIALS */
-.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.testimonial{background:#fff;border-radius:14px;padding:28px 24px;box-shadow:0 2px 16px rgba(0,0,0,0.06);transition:transform .3s,box-shadow .3s}
-.testimonial:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,0.1)}
-.testimonial-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;flex-wrap:wrap;gap:8px}
-.testimonial-name{font-weight:700;color:var(--navy);font-size:.95rem}
-.testimonial-hood{display:inline-block;background:var(--off-white);color:var(--navy);padding:3px 10px;border-radius:10px;font-size:.7rem;font-weight:600}
-.testimonial-stats{display:flex;gap:14px;margin-bottom:14px}
-.testimonial-stats span{font-size:.8rem;color:#666}
-.testimonial-stats strong{color:var(--navy)}
-.testimonial q{font-style:italic;color:#555;font-size:.9rem;line-height:1.6;display:block}
+.nav-brand img {
+  height: 40px;
+  width: auto;
+}
 
-@media(max-width:768px){.testimonials-grid{grid-template-columns:1fr}}
+.nav-brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
 
-/* RECENT SALES */
-.filter-bar{text-align:center;margin-bottom:32px}
-.filter-bar select{padding:10px 20px;border-radius:10px;border:1.5px solid var(--light-steel);font-size:.9rem;color:var(--navy);background:#fff;cursor:pointer;outline:none}
-.filter-bar select:focus{border-color:var(--steel)}
-.sales-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.sale-card{background:#fff;border-radius:14px;padding:24px;box-shadow:0 2px 16px rgba(0,0,0,0.06);transition:transform .3s,box-shadow .3s}
-.sale-card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,0.1)}
-.sale-card .sale-price{font-family:'Sansita',serif;font-size:1.5rem;font-weight:800;color:var(--navy);margin-bottom:4px}
-.sale-card .sale-address{font-size:.9rem;color:#555;margin-bottom:12px}
-.sale-card .sale-details{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:10px}
-.sale-card .sale-details span{font-size:.78rem;color:#666;background:var(--off-white);padding:3px 10px;border-radius:8px}
-.sale-card .sale-dom{font-size:.8rem;color:var(--navy);font-weight:600}
-.sale-card .sale-date{font-size:.75rem;color:#999;margin-top:6px}
+.nav-brand-name {
+  font-family: 'Sansita', serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--navy);
+}
 
-@media(max-width:768px){.sales-grid{grid-template-columns:1fr}}
+.nav-brand-badge {
+  font-size: 11px;
+  color: var(--steel);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
 
-/* BOTTOM CTA */
-.bottom-cta{padding:80px 24px;text-align:center;background:var(--off-white)}
-.bottom-cta h2{font-size:2rem;margin-bottom:14px}
-.bottom-cta p{color:#666;max-width:550px;margin:0 auto 28px;font-size:1rem}
-.bottom-cta a{display:inline-block;background:var(--navy);color:#fff;padding:16px 40px;border-radius:30px;font-size:1.05rem;font-weight:700;transition:transform .2s,box-shadow .2s}
-.bottom-cta a:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.15)}
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 6px;
+  align-items: center;
+}
 
-/* FOOTER */
-.footer{background:var(--navy);color:rgba(255,255,255,0.8);padding:60px 24px 30px;text-align:center}
-.footer-inner{max-width:900px;margin:0 auto}
-.footer img{max-width:160px;margin:0 auto 20px}
-.footer h3{color:#fff;font-family:'Sansita',serif;font-size:1.3rem;margin-bottom:20px}
-.footer-areas{margin-bottom:20px;font-size:.85rem;line-height:1.8}
-.footer-contact{margin-bottom:20px;font-size:.95rem}
-.footer-contact a{color:var(--steel);font-weight:600}
-.footer-copy{font-size:.78rem;color:rgba(255,255,255,0.5);border-top:1px solid rgba(255,255,255,0.1);padding-top:20px;margin-top:20px}
+.nav-links a {
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
 
-/* ANIMATIONS */
-.fade-in{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
-.fade-in.visible{opacity:1;transform:translateY(0)}
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--navy);
+  background: var(--off-white);
+}
+
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 22px;
+  background: var(--navy);
+  color: var(--white) !important;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.2s;
+  white-space: nowrap;
+}
+
+.nav-cta:hover {
+  background: #1e2c3d;
+  transform: translateY(-1px);
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2.5px;
+  background: var(--navy);
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.hamburger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(135deg, #2A384C 0%, #3A4D63 100%);
+  padding: 140px 24px 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 40%, rgba(160,178,194,0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.12);
+  color: var(--light-steel);
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 24px;
+  backdrop-filter: blur(4px);
+}
+
+.hero h1 {
+  font-size: 52px;
+  color: var(--white);
+  margin-bottom: 20px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.hero p {
+  font-size: 19px;
+  color: var(--light-steel);
+  max-width: 640px;
+  margin: 0 auto 36px;
+  line-height: 1.7;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 36px;
+  background: var(--white);
+  color: var(--navy);
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: 'Sansita', serif;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+}
+
+.btn-navy {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 36px;
+  background: var(--navy);
+  color: var(--white);
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: 'Sansita', serif;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-navy:hover {
+  background: #1e2c3d;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(42,56,76,0.3);
+}
+
+/* ── SECTIONS ── */
+.section {
+  padding: 80px 24px;
+}
+
+.section-alt {
+  background: var(--off-white);
+}
+
+.section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.section-header h2 {
+  font-size: 36px;
+  margin-bottom: 12px;
+  font-weight: 800;
+}
+
+.section-header p {
+  font-size: 17px;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.section-badge {
+  display: inline-block;
+  background: rgba(42,56,76,0.08);
+  color: var(--navy);
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+/* ── MARKET PULSE ── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.stat-card {
+  background: var(--white);
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 28px 24px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 16px;
+  background: var(--off-white);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-icon svg {
+  width: 24px;
+  height: 24px;
+  color: var(--navy);
+}
+
+.stat-value {
+  font-family: 'Sansita', serif;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+.stat-badge {
+  display: inline-block;
+  background: rgba(42,56,76,0.06);
+  color: var(--navy);
+  padding: 4px 10px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.rate-disclaimer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 12px;
+  color: #999;
+  line-height: 1.5;
+}
+
+/* ── FEATURE CARDS ── */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.feature-card {
+  background: var(--white);
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 32px 28px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+}
+
+.feature-icon {
+  width: 52px;
+  height: 52px;
+  background: var(--off-white);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.feature-icon svg {
+  width: 26px;
+  height: 26px;
+  color: var(--navy);
+}
+
+.feature-card h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.feature-card p {
+  font-size: 15px;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* ── TIMELINE ── */
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  position: relative;
+  margin-top: 16px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 28px;
+  left: 12.5%;
+  width: 75%;
+  height: 3px;
+  background: var(--light-steel);
+  z-index: 0;
+}
+
+.timeline-step {
+  text-align: center;
+  padding: 0 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.timeline-dot {
+  width: 56px;
+  height: 56px;
+  background: var(--navy);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  color: var(--white);
+  font-family: 'Sansita', serif;
+  font-weight: 800;
+  font-size: 20px;
+  box-shadow: 0 4px 12px rgba(42,56,76,0.2);
+}
+
+.timeline-step h4 {
+  font-size: 17px;
+  margin-bottom: 4px;
+  font-weight: 700;
+}
+
+.timeline-step .timeline-period {
+  font-size: 13px;
+  color: var(--steel);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.timeline-step p {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* ── CTA BANNER ── */
+.cta-banner {
+  background: linear-gradient(135deg, #2A384C 0%, #3A4D63 100%);
+  padding: 72px 24px;
+  text-align: center;
+}
+
+.cta-banner h2 {
+  font-size: 36px;
+  color: var(--white);
+  margin-bottom: 16px;
+  font-weight: 800;
+}
+
+.cta-banner p {
+  font-size: 17px;
+  color: var(--light-steel);
+  max-width: 600px;
+  margin: 0 auto 32px;
+  line-height: 1.7;
+}
+
+/* ── WHAT'S INCLUDED ── */
+.included-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* ── TESTIMONIALS ── */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.testimonial-card {
+  background: var(--white);
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 28px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+}
+
+.testimonial-stars {
+  color: #f59e0b;
+  font-size: 16px;
+  margin-bottom: 14px;
+  letter-spacing: 2px;
+}
+
+.testimonial-card blockquote {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.testimonial-avatar {
+  width: 44px;
+  height: 44px;
+  background: var(--navy);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-family: 'Sansita', serif;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.testimonial-info h4 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.testimonial-info span {
+  font-size: 13px;
+  color: #999;
+}
+
+.testimonial-stats {
+  display: flex;
+  gap: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.testimonial-stat {
+  text-align: center;
+  flex: 1;
+}
+
+.testimonial-stat .label {
+  font-size: 11px;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.testimonial-stat .value {
+  font-family: 'Sansita', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+/* ── SOLD IN YOUR NEIGHBORHOOD ── */
+.filter-bar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.filter-bar select {
+  padding: 10px 20px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--navy);
+  background: var(--white);
+  cursor: pointer;
+  outline: none;
+  min-width: 200px;
+}
+
+.filter-bar select:focus {
+  border-color: var(--navy);
+}
+
+.sales-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.sale-card {
+  background: var(--white);
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 24px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.sale-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+}
+
+.sale-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.sale-price {
+  font-family: 'Sansita', serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+.sale-dom {
+  background: rgba(42,56,76,0.08);
+  color: var(--navy);
+  padding: 4px 10px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.sale-address {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.sale-details {
+  display: flex;
+  gap: 16px;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.sale-details span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sale-date {
+  font-size: 12px;
+  color: #999;
+}
+
+/* ── BOTTOM CTA ── */
+.bottom-cta {
+  padding: 80px 24px;
+  text-align: center;
+  background: var(--white);
+}
+
+.bottom-cta h2 {
+  font-size: 36px;
+  margin-bottom: 24px;
+  font-weight: 800;
+}
+
+/* ── FOOTER ── */
+.footer {
+  background: var(--navy);
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--light-steel);
+}
+
+.footer-logo {
+  height: 48px;
+  width: auto;
+  margin: 0 auto 16px;
+  opacity: 0.9;
+}
+
+.footer h3 {
+  color: var(--white);
+  font-size: 20px;
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+.footer-areas {
+  font-size: 14px;
+  color: var(--steel);
+  margin-bottom: 12px;
+  line-height: 1.7;
+}
+
+.footer-phone {
+  font-size: 16px;
+  color: var(--white);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.footer-phone a {
+  color: var(--white);
+}
+
+.footer-copy {
+  font-size: 13px;
+  color: var(--steel);
+  opacity: 0.7;
+}
+
+/* ── ANIMATIONS ── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .timeline { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+  .timeline::before { display: none; }
+  .sales-grid { grid-template-columns: repeat(2, 1fr); }
+  .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .nav-links, .nav-cta-desktop { display: none; }
+  .hamburger { display: flex; }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: var(--white);
+    border-bottom: 1px solid var(--light-steel);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    padding: 16px 24px;
+    z-index: 999;
+  }
+
+  .mobile-menu.open { display: block; }
+
+  .mobile-menu a {
+    display: block;
+    padding: 12px 0;
+    font-size: 15px;
+    font-weight: 500;
+    color: #555;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .mobile-menu a:last-child { border-bottom: none; }
+
+  .mobile-menu a.active { color: var(--navy); font-weight: 700; }
+
+  .mobile-menu .mobile-cta {
+    display: block;
+    text-align: center;
+    margin-top: 12px;
+    padding: 12px;
+    background: var(--navy);
+    color: var(--white);
+    border-radius: 50px;
+    font-weight: 700;
+    border-bottom: none;
+  }
+
+  .hero { padding: 120px 24px 60px; }
+  .hero h1 { font-size: 34px; }
+  .hero p { font-size: 16px; }
+
+  .section { padding: 56px 24px; }
+  .section-header h2 { font-size: 28px; }
+
+  .features-grid,
+  .included-grid,
+  .stats-grid,
+  .testimonials-grid,
+  .sales-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline { grid-template-columns: 1fr; gap: 24px; }
+
+  .cta-banner { padding: 48px 24px; }
+  .cta-banner h2 { font-size: 28px; }
+}
 </style>
 </head>
 <body>
 
-<!-- NAVIGATION -->
+<!-- NAV -->
 <nav class="nav" id="nav">
   <div class="nav-inner">
     <a href="/" class="nav-brand">
@@ -175,10 +865,7 @@ img{max-width:100%;display:block}
         <span class="nav-brand-badge">2026 Seller's Guide</span>
       </div>
     </a>
-    <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="nav-links" id="navLinks">
+    <ul class="nav-links">
       <li><a href="/" class="active">Home</a></li>
       <li><a href="/quiz">Seller Quiz</a></li>
       <li><a href="/home-selling-score">Home Score</a></li>
@@ -186,133 +873,145 @@ img{max-width:100%;display:block}
       <li><a href="/compare">Compare Areas</a></li>
       <li><a href="/market-heatmap">Market Data</a></li>
       <li><a href="/thank-you">Bonuses</a></li>
-      <li><a href="/home-selling-score" class="nav-cta">Get Started</a></li>
     </ul>
+    <a href="/home-selling-score" class="nav-cta nav-cta-desktop">Get Started</a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </div>
 </nav>
 
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/" class="active">Home</a>
+  <a href="/quiz">Seller Quiz</a>
+  <a href="/home-selling-score">Home Score</a>
+  <a href="/neighborhoods">Neighborhoods</a>
+  <a href="/compare">Compare Areas</a>
+  <a href="/market-heatmap">Market Data</a>
+  <a href="/thank-you">Bonuses</a>
+  <a href="/home-selling-score" class="mobile-cta">Get Started</a>
+</div>
+
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-badge">2026 Greater Charlotte Seller's Guide</div>
-  <h1>Maximize Your Home Sale in the Queen City</h1>
-  <p>An expert-level, interactive guide for navigating the 2026 real estate market across Mecklenburg, Union, York, and Lancaster counties.</p>
-  <a href="/home-selling-score" class="hero-cta">Get Your Free Guide</a>
+  <div class="hero-content fade-in">
+    <span class="hero-badge">&#x1F4CD; Charlotte Metro Area</span>
+    <h1>Maximize Your Home Sale in the Queen City</h1>
+    <p>An expert-level, interactive guide for navigating the 2026 real estate market across Mecklenburg, Union, York, and Lancaster counties.</p>
+    <a href="/home-selling-score" class="btn-primary">Get Your Free Guide &rarr;</a>
+  </div>
 </section>
 
 <!-- MARKET PULSE -->
-<section class="section section-alt">
+<section class="section" id="market-pulse">
   <div class="section-inner fade-in">
-    <div class="section-heading">
-      <span class="badge">April 2026</span>
-      <h2>Market Pulse</h2>
+    <div class="section-header">
+      <span class="section-badge">LIVE DATA</span>
+      <h2>Charlotte Market Pulse</h2>
     </div>
     <div class="stats-grid">
       <div class="stat-card">
         <div class="stat-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"/></svg>
         </div>
         <div class="stat-value">$424,950</div>
-        <div class="stat-label">Median Price</div>
-        <span class="stat-badge live">Live Data</span>
+        <div class="stat-label">Median Home Price</div>
+        <span class="stat-badge">Live MLS Data</span>
       </div>
       <div class="stat-card">
         <div class="stat-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
         </div>
-        <div class="stat-value">49 days</div>
+        <div class="stat-value">49</div>
         <div class="stat-label">Days on Market</div>
-        <span class="stat-badge live">Live Data</span>
+        <span class="stat-badge">Live MLS Data</span>
       </div>
       <div class="stat-card">
         <div class="stat-icon">
-          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819"/></svg>
         </div>
         <div class="stat-value">9,043</div>
         <div class="stat-label">Active Listings</div>
-        <span class="stat-badge live">Live Data</span>
+        <span class="stat-badge">Live MLS Data</span>
       </div>
       <div class="stat-card">
         <div class="stat-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/></svg>
         </div>
         <div class="stat-value">6.37%</div>
         <div class="stat-label">Mortgage Rate</div>
-        <span class="stat-badge info">National Average</span>
+        <span class="stat-badge">National Average</span>
       </div>
     </div>
+    <p class="rate-disclaimer">Rate disclaimer: National average from Freddie Mac. Actual rates vary by lender, credit score, and loan type.</p>
   </div>
 </section>
 
 <!-- WHY 2026 -->
-<section class="section">
+<section class="section section-alt">
   <div class="section-inner fade-in">
-    <div class="section-heading">
-      <h2>Why 2026 is the Right Time to Sell</h2>
+    <div class="section-header">
+      <h2>Why 2026 Is the Right Time to Sell</h2>
     </div>
-    <div class="cards-grid">
-      <div class="card">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>
         </div>
         <h3>Strong Buyer Demand</h3>
-        <p>Charlotte continues to attract relocating professionals and families, creating sustained demand for quality homes.</p>
+        <p>Charlotte continues to attract new residents and investors. The metro area's job growth and quality of life drive steady demand, giving sellers leverage in negotiations.</p>
       </div>
-      <div class="card">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/></svg>
         </div>
         <h3>Price Appreciation</h3>
-        <p>Home values in the Charlotte metro have shown consistent growth, with strategic pricing yielding excellent returns.</p>
+        <p>Home values across the Charlotte metro have seen consistent year-over-year gains. Current market conditions suggest continued appreciation through 2026.</p>
       </div>
-      <div class="card">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
         </div>
         <h3>Favorable Timing</h3>
-        <p>Spring and summer markets typically see peak activity, making early 2026 preparation crucial for success.</p>
+        <p>With inventory still below historical norms and seasonal demand patterns aligning, spring and summer 2026 present optimal listing windows for Charlotte sellers.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- TIMELINE -->
-<section class="section section-alt">
+<section class="section">
   <div class="section-inner fade-in">
-    <div class="section-heading">
+    <div class="section-header">
       <h2>Complete Selling Timeline</h2>
     </div>
     <div class="timeline">
       <div class="timeline-step">
-        <div class="timeline-num">1</div>
-        <div class="timeline-content">
-          <span class="timeframe">Months 3-4</span>
-          <h3>Preparation</h3>
-          <p>Home improvements, staging, professional photography</p>
-        </div>
+        <div class="timeline-dot">1</div>
+        <h4>Pre-Listing</h4>
+        <div class="timeline-period">Month 1</div>
+        <p>Home evaluation, repairs, staging, photography</p>
       </div>
       <div class="timeline-step">
-        <div class="timeline-num">2</div>
-        <div class="timeline-content">
-          <span class="timeframe">Months 2-3</span>
-          <h3>Pricing Strategy</h3>
-          <p>Market analysis, competitive positioning, pricing decisions</p>
-        </div>
+        <div class="timeline-dot">2</div>
+        <h4>Pricing Strategy</h4>
+        <div class="timeline-period">Week 1-2</div>
+        <p>Market analysis, competitive pricing, listing prep</p>
       </div>
       <div class="timeline-step">
-        <div class="timeline-num">3</div>
-        <div class="timeline-content">
-          <span class="timeframe">Month 1-2</span>
-          <h3>Marketing</h3>
-          <p>Listing launch, showings, open houses, buyer feedback</p>
-        </div>
+        <div class="timeline-dot">3</div>
+        <h4>Marketing</h4>
+        <div class="timeline-period">Month 1-2</div>
+        <p>Listing launch, showings, open houses, buyer feedback</p>
       </div>
       <div class="timeline-step">
-        <div class="timeline-num">4</div>
-        <div class="timeline-content">
-          <span class="timeframe">Final Month</span>
-          <h3>Negotiation &amp; Closing</h3>
-          <p>Offers, inspections, appraisal, final walkthrough</p>
-        </div>
+        <div class="timeline-dot">4</div>
+        <h4>Negotiation &amp; Closing</h4>
+        <div class="timeline-period">Final Month</div>
+        <p>Offers, inspections, appraisal, final walkthrough</p>
       </div>
     </div>
   </div>
@@ -320,59 +1019,61 @@ img{max-width:100%;display:block}
 
 <!-- CTA BANNER -->
 <section class="cta-banner">
-  <h2>Unlock the Complete Seller's Guide</h2>
-  <p>Get personalized market insights, pricing strategies, and expert recommendations tailored to your Charlotte neighborhood.</p>
-  <a href="/home-selling-score">Get Your Home Score</a>
+  <div class="fade-in">
+    <h2>Unlock the Complete Seller's Guide</h2>
+    <p>Get personalized market insights, pricing strategies, and expert recommendations tailored to your Charlotte neighborhood.</p>
+    <a href="/home-selling-score" class="btn-primary">Get Your Home Score &rarr;</a>
+  </div>
 </section>
 
 <!-- WHAT'S INCLUDED -->
 <section class="section">
   <div class="section-inner fade-in">
-    <div class="section-heading">
+    <div class="section-header">
       <h2>What's Included in Your Guide</h2>
     </div>
-    <div class="cards-grid">
-      <div class="card">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+    <div class="included-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"/></svg>
         </div>
         <h3>Interactive Seller Readiness Quiz</h3>
-        <p>Discover exactly how prepared you are to sell with our comprehensive assessment tool.</p>
+        <p>Assess your preparedness to sell with our 5-question quiz and get a personalized readiness score with actionable next steps.</p>
       </div>
-      <div class="card">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>
         </div>
         <h3>Real-Time Market Data</h3>
-        <p>Access up-to-date stats on pricing trends, inventory levels, and buyer activity in your area.</p>
+        <p>Access live MLS data for Charlotte neighborhoods including median prices, days on market, and inventory levels updated regularly.</p>
       </div>
-      <div class="card">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
         </div>
         <h3>Pricing Strategies</h3>
-        <p>Learn proven methods to price your home competitively and maximize your return.</p>
+        <p>Learn proven pricing techniques specific to the Charlotte market, including competitive pricing, value-range pricing, and more.</p>
       </div>
-      <div class="card">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15a2.25 2.25 0 012.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"/></svg>
         </div>
         <h3>Home Preparation Checklist</h3>
-        <p>A step-by-step guide to getting your home show-ready and maximizing curb appeal.</p>
+        <p>A comprehensive, room-by-room checklist to prepare your home for listing, from decluttering to staging to final touch-ups.</p>
       </div>
-      <div class="card">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"/></svg>
         </div>
         <h3>Negotiation Scripts</h3>
-        <p>Word-for-word scripts and strategies for handling offers, counteroffers, and concessions.</p>
+        <p>Tested negotiation frameworks and scripts to help you handle offers, counteroffers, inspection requests, and closing terms with confidence.</p>
       </div>
-      <div class="card">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"/></svg>
         </div>
         <h3>Expert Insights</h3>
-        <p>Professional tips from top-performing Charlotte agents on timing, staging, and marketing.</p>
+        <p>Market commentary and strategic advice from experienced Charlotte-area real estate professionals to help you make informed decisions.</p>
       </div>
     </div>
   </div>
@@ -381,84 +1082,144 @@ img{max-width:100%;display:block}
 <!-- SUCCESS STORIES -->
 <section class="section section-alt">
   <div class="section-inner fade-in">
-    <div class="section-heading">
+    <div class="section-header">
       <h2>Success Stories</h2>
     </div>
     <div class="testimonials-grid">
-      <div class="testimonial">
-        <div class="testimonial-header">
-          <span class="testimonial-name">Jennifer Martinez</span>
-          <span class="testimonial-hood">Myers Park</span>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>"The market analysis and pricing strategy were spot-on. We received multiple offers within the first week and sold above asking price."</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">JM</div>
+          <div class="testimonial-info">
+            <h4>Jennifer Martinez</h4>
+            <span>Myers Park</span>
+          </div>
         </div>
         <div class="testimonial-stats">
-          <span>Sold: <strong>$1,250,000</strong></span>
-          <span>DOM: <strong>7 days</strong></span>
+          <div class="testimonial-stat">
+            <div class="label">Sale Price</div>
+            <div class="value">$1,250,000</div>
+          </div>
+          <div class="testimonial-stat">
+            <div class="label">Days on Market</div>
+            <div class="value">7</div>
+          </div>
         </div>
-        <q>Ashley guided us through every step of selling our home. Her expertise in the Myers Park market was invaluable, and we couldn't be happier with the results.</q>
       </div>
-      <div class="testimonial">
-        <div class="testimonial-header">
-          <span class="testimonial-name">David &amp; Lisa Chen</span>
-          <span class="testimonial-hood">South End</span>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>"The neighborhood comparison tool helped us understand our position in the market. We felt confident and informed throughout the entire process."</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">DC</div>
+          <div class="testimonial-info">
+            <h4>David &amp; Lisa Chen</h4>
+            <span>South End</span>
+          </div>
         </div>
         <div class="testimonial-stats">
-          <span>Sold: <strong>$525,000</strong></span>
-          <span>DOM: <strong>6 days</strong></span>
+          <div class="testimonial-stat">
+            <div class="label">Sale Price</div>
+            <div class="value">$525,000</div>
+          </div>
+          <div class="testimonial-stat">
+            <div class="label">Days on Market</div>
+            <div class="value">6</div>
+          </div>
         </div>
-        <q>We were nervous about selling in a competitive market, but the team made everything seamless. Their marketing strategy brought in multiple offers within days.</q>
       </div>
-      <div class="testimonial">
-        <div class="testimonial-header">
-          <span class="testimonial-name">Robert Johnson</span>
-          <span class="testimonial-hood">Plaza Midwood</span>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>"The home preparation checklist was invaluable. Small improvements made a huge difference in how buyers perceived our home."</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">RJ</div>
+          <div class="testimonial-info">
+            <h4>Robert Johnson</h4>
+            <span>Plaza Midwood</span>
+          </div>
         </div>
         <div class="testimonial-stats">
-          <span>Sold: <strong>$425,000</strong></span>
-          <span>DOM: <strong>4 days</strong></span>
+          <div class="testimonial-stat">
+            <div class="label">Sale Price</div>
+            <div class="value">$425,000</div>
+          </div>
+          <div class="testimonial-stat">
+            <div class="label">Days on Market</div>
+            <div class="value">4</div>
+          </div>
         </div>
-        <q>Brenda's marketing strategy was incredible. The professional photos and targeted advertising attracted the perfect buyers for our Plaza Midwood bungalow.</q>
       </div>
-      <div class="testimonial">
-        <div class="testimonial-header">
-          <span class="testimonial-name">Amanda &amp; Chris Wilson</span>
-          <span class="testimonial-hood">Elizabeth</span>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>"The negotiation scripts gave us the confidence to handle multiple offers. We ended up selling for well above our asking price."</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">AW</div>
+          <div class="testimonial-info">
+            <h4>Amanda &amp; Chris Wilson</h4>
+            <span>Elizabeth</span>
+          </div>
         </div>
         <div class="testimonial-stats">
-          <span>Sold: <strong>$575,000</strong></span>
-          <span>DOM: <strong>5 days</strong></span>
+          <div class="testimonial-stat">
+            <div class="label">Sale Price</div>
+            <div class="value">$575,000</div>
+          </div>
+          <div class="testimonial-stat">
+            <div class="label">Days on Market</div>
+            <div class="value">5</div>
+          </div>
         </div>
-        <q>Taylor made selling our first home stress-free. From staging advice to closing day, she was there for us every step of the way.</q>
       </div>
-      <div class="testimonial">
-        <div class="testimonial-header">
-          <span class="testimonial-name">Patricia Rodriguez</span>
-          <span class="testimonial-hood">NoDa</span>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>"The real-time market data helped us time our listing perfectly. We sold faster than any other home on our street this year."</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">PR</div>
+          <div class="testimonial-info">
+            <h4>Patricia Rodriguez</h4>
+            <span>NoDa</span>
+          </div>
         </div>
         <div class="testimonial-stats">
-          <span>Sold: <strong>$395,000</strong></span>
-          <span>DOM: <strong>8 days</strong></span>
+          <div class="testimonial-stat">
+            <div class="label">Sale Price</div>
+            <div class="value">$395,000</div>
+          </div>
+          <div class="testimonial-stat">
+            <div class="label">Days on Market</div>
+            <div class="value">8</div>
+          </div>
         </div>
-        <q>The Home Selling Score assessment was eye-opening! It helped us prioritize improvements that added real value before listing.</q>
       </div>
-      <div class="testimonial">
-        <div class="testimonial-header">
-          <span class="testimonial-name">Sarah &amp; Michael Thompson</span>
-          <span class="testimonial-hood">Dilworth</span>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>"From staging advice to closing day, this guide covered everything. The selling timeline kept us organized and stress-free."</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">ST</div>
+          <div class="testimonial-info">
+            <h4>Sarah &amp; Michael Thompson</h4>
+            <span>Dilworth</span>
+          </div>
         </div>
         <div class="testimonial-stats">
-          <span>Sold: <strong>$685,000</strong></span>
-          <span>DOM: <strong>3 days</strong></span>
+          <div class="testimonial-stat">
+            <div class="label">Sale Price</div>
+            <div class="value">$685,000</div>
+          </div>
+          <div class="testimonial-stat">
+            <div class="label">Days on Market</div>
+            <div class="value">3</div>
+          </div>
         </div>
-        <q>The Home Grown team helped us sell our Dilworth home in just three days for above asking price. Their local knowledge is unmatched.</q>
       </div>
     </div>
   </div>
 </section>
 
-<!-- RECENT SALES -->
+<!-- SOLD IN YOUR NEIGHBORHOOD -->
 <section class="section">
   <div class="section-inner fade-in">
-    <div class="section-heading">
+    <div class="section-header">
       <h2>Recent Home Sales in Charlotte</h2>
       <p>Sold in Your Neighborhood</p>
     </div>
@@ -475,57 +1236,81 @@ img{max-width:100%;display:block}
     </div>
     <div class="sales-grid" id="salesGrid">
       <div class="sale-card" data-zip="28209">
-        <div class="sale-price">$550,000</div>
-        <div class="sale-address">258 Spruce Boulevard, Charlotte, NC 28209</div>
-        <div class="sale-details">
-          <span>4 bd</span><span>3 ba</span><span>2,650 sqft</span>
+        <div class="sale-card-header">
+          <div class="sale-price">$550,000</div>
+          <div class="sale-dom">14 DOM</div>
         </div>
-        <div class="sale-dom">14 days on market</div>
+        <div class="sale-address">258 Spruce Boulevard, Charlotte NC 28209</div>
+        <div class="sale-details">
+          <span>4 bd</span>
+          <span>3 ba</span>
+          <span>2,650 sqft</span>
+        </div>
         <div class="sale-date">Sold 1/19/2026</div>
       </div>
       <div class="sale-card" data-zip="28208">
-        <div class="sale-price">$365,000</div>
-        <div class="sale-address">147 Willow Road, Charlotte, NC 28208</div>
-        <div class="sale-details">
-          <span>3 bd</span><span>2 ba</span><span>1,650 sqft</span>
+        <div class="sale-card-header">
+          <div class="sale-price">$365,000</div>
+          <div class="sale-dom">22 DOM</div>
         </div>
-        <div class="sale-dom">22 days on market</div>
+        <div class="sale-address">147 Willow Road, Charlotte NC 28208</div>
+        <div class="sale-details">
+          <span>3 bd</span>
+          <span>2 ba</span>
+          <span>1,650 sqft</span>
+        </div>
         <div class="sale-date">Sold 1/18/2026</div>
       </div>
       <div class="sale-card" data-zip="28207">
-        <div class="sale-price">$725,000</div>
-        <div class="sale-address">987 Cedar Way, Charlotte, NC 28207</div>
-        <div class="sale-details">
-          <span>4 bd</span><span>4 ba</span><span>3,500 sqft</span>
+        <div class="sale-card-header">
+          <div class="sale-price">$725,000</div>
+          <div class="sale-dom">10 DOM</div>
         </div>
-        <div class="sale-dom">10 days on market</div>
+        <div class="sale-address">987 Cedar Way, Charlotte NC 28207</div>
+        <div class="sale-details">
+          <span>4 bd</span>
+          <span>4 ba</span>
+          <span>3,500 sqft</span>
+        </div>
         <div class="sale-date">Sold 1/15/2026</div>
       </div>
       <div class="sale-card" data-zip="28206">
-        <div class="sale-price">$445,000</div>
-        <div class="sale-address">654 Birch Court, Charlotte, NC 28206</div>
-        <div class="sale-details">
-          <span>4 bd</span><span>3 ba</span><span>2,250 sqft</span>
+        <div class="sale-card-header">
+          <div class="sale-price">$445,000</div>
+          <div class="sale-dom">18 DOM</div>
         </div>
-        <div class="sale-dom">18 days on market</div>
+        <div class="sale-address">654 Birch Court, Charlotte NC 28206</div>
+        <div class="sale-details">
+          <span>4 bd</span>
+          <span>3 ba</span>
+          <span>2,250 sqft</span>
+        </div>
         <div class="sale-date">Sold 1/12/2026</div>
       </div>
       <div class="sale-card" data-zip="28205">
-        <div class="sale-price">$615,000</div>
-        <div class="sale-address">321 Pine Lane, Charlotte, NC 28205</div>
-        <div class="sale-details">
-          <span>5 bd</span><span>4 ba</span><span>3,200 sqft</span>
+        <div class="sale-card-header">
+          <div class="sale-price">$615,000</div>
+          <div class="sale-dom">6 DOM</div>
         </div>
-        <div class="sale-dom">6 days on market</div>
+        <div class="sale-address">321 Pine Lane, Charlotte NC 28205</div>
+        <div class="sale-details">
+          <span>5 bd</span>
+          <span>4 ba</span>
+          <span>3,200 sqft</span>
+        </div>
         <div class="sale-date">Sold 1/10/2026</div>
       </div>
       <div class="sale-card" data-zip="28204">
-        <div class="sale-price">$395,000</div>
-        <div class="sale-address">789 Maple Drive, Charlotte, NC 28204</div>
-        <div class="sale-details">
-          <span>3 bd</span><span>2 ba</span><span>1,850 sqft</span>
+        <div class="sale-card-header">
+          <div class="sale-price">$395,000</div>
+          <div class="sale-dom">15 DOM</div>
         </div>
-        <div class="sale-dom">15 days on market</div>
+        <div class="sale-address">789 Maple Drive, Charlotte NC 28204</div>
+        <div class="sale-details">
+          <span>3 bd</span>
+          <span>2 ba</span>
+          <span>1,850 sqft</span>
+        </div>
         <div class="sale-date">Sold 1/5/2026</div>
       </div>
     </div>
@@ -534,31 +1319,26 @@ img{max-width:100%;display:block}
 
 <!-- BOTTOM CTA -->
 <section class="bottom-cta">
-  <h2>Ready to Get Started?</h2>
-  <p>Unlock your free guide now and take the first step toward a successful home sale.</p>
-  <a href="/home-selling-score">Get Your Home Score</a>
+  <div class="fade-in">
+    <h2>Ready to Get Started?</h2>
+    <a href="/home-selling-score" class="btn-navy">Get Your Home Score &rarr;</a>
+  </div>
 </section>
 
 <!-- FOOTER -->
 <footer class="footer">
-  <div class="footer-inner">
-    <img src="https://charlotte-sell-iluh5wd7.manus.space/homegrown-logo.png" alt="Home Grown Property Group">
-    <h3>2026 Charlotte Seller's Guide</h3>
-    <div class="footer-areas">
-      Charlotte &middot; Fort Mill &middot; Indian Land &middot; Waxhaw &middot; Pineville &middot; Huntersville &middot; Cornelius &middot; Matthews &middot; Ballantyne
-    </div>
-    <div class="footer-contact">
-      <a href="tel:7046779191">(704) 677-9191</a>
-    </div>
-    <div class="footer-copy">
-      &copy; 2026 Home Grown Property Group. All rights reserved.
-    </div>
-  </div>
+  <img src="https://charlotte-sell-iluh5wd7.manus.space/homegrown-logo.png" alt="Home Grown Property Group" class="footer-logo">
+  <h3>2026 Charlotte Seller's Guide</h3>
+  <p class="footer-areas">Charlotte &middot; Fort Mill &middot; Indian Land &middot; Waxhaw &middot; Pineville &middot; Huntersville &middot; Cornelius &middot; Matthews &middot; Ballantyne</p>
+  <p class="footer-phone"><a href="tel:7046779191">(704) 677-9191</a></p>
+  <p class="footer-copy">&copy; 2026 Home Grown Property Group. All rights reserved.</p>
 </footer>
 
 <script>
-// Sticky nav scroll effect
-var nav = document.getElementById('nav');
+/* Last Updated: 2026-04-10 */
+
+// Nav scroll effect
+const nav = document.getElementById('nav');
 window.addEventListener('scroll', function() {
   if (window.scrollY > 20) {
     nav.classList.add('scrolled');
@@ -567,30 +1347,30 @@ window.addEventListener('scroll', function() {
   }
 });
 
-// Hamburger menu
-var hamburger = document.getElementById('hamburger');
-var navLinks = document.getElementById('navLinks');
+// Hamburger toggle
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
 hamburger.addEventListener('click', function() {
   hamburger.classList.toggle('open');
-  navLinks.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
 });
 
-// Close menu on link click
-navLinks.querySelectorAll('a').forEach(function(link) {
+// Close mobile menu on link click
+mobileMenu.querySelectorAll('a').forEach(function(link) {
   link.addEventListener('click', function() {
     hamburger.classList.remove('open');
-    navLinks.classList.remove('open');
+    mobileMenu.classList.remove('open');
   });
 });
 
 // Zip code filter
-var zipFilter = document.getElementById('zipFilter');
-var salesGrid = document.getElementById('salesGrid');
-var saleCards = salesGrid.querySelectorAll('.sale-card');
+const zipFilter = document.getElementById('zipFilter');
+const salesGrid = document.getElementById('salesGrid');
 zipFilter.addEventListener('change', function() {
-  var val = this.value;
-  saleCards.forEach(function(card) {
-    if (val === 'all' || card.getAttribute('data-zip') === val) {
+  var zip = this.value;
+  var cards = salesGrid.querySelectorAll('.sale-card');
+  cards.forEach(function(card) {
+    if (zip === 'all' || card.getAttribute('data-zip') === zip) {
       card.style.display = '';
     } else {
       card.style.display = 'none';
@@ -598,16 +1378,20 @@ zipFilter.addEventListener('change', function() {
   });
 });
 
-// Scroll fade-in animations
+// Fade-in on scroll (IntersectionObserver)
 var fadeEls = document.querySelectorAll('.fade-in');
 var observer = new IntersectionObserver(function(entries) {
   entries.forEach(function(entry) {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
     }
   });
-}, { threshold: 0.15 });
-fadeEls.forEach(function(el) { observer.observe(el); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+fadeEls.forEach(function(el) {
+  observer.observe(el);
+});
 </script>
 </body>
 </html>
